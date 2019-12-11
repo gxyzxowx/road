@@ -1,0 +1,61 @@
+[
+  {
+    "title": "设备ID",
+    "key": "mDevID",
+    "width": 80
+  }, {
+    "title": "设备编号",
+    "key": "mDevSn"
+  }, {
+    "title": "设备类型",
+    "key": "mDevTypeName"
+  }, {
+    "title": "设备名称",
+    "key": "mDevName"
+  }, {
+    "title": "设备联系电话",
+    "key": "mDevPhoneNo"
+  }, {
+    "title": "经度",
+    "key": "mDevGpsX"
+  }, {
+    "title": "纬度",
+    "key": "mDevGpsY"
+  }, {
+    "title": "设备状态",
+    "key": "mDevStatus"
+  }, {
+    "title": "项目ID",
+    "key": "mItemID"
+  }, {
+    "title": "项目名称",
+    "key": "mItemDes"
+  }, {
+    "title": "项目标段",
+    "key": "mItemBid"
+  }, {
+    "title": "温度预警标准",
+    "key": "mTempStandard"
+  }, {
+    "title": "温度 1 级预警阈值",
+    "key": "mTempAL1Max"
+  }, {
+    "title": "温度 2 级预警阈值",
+    "key": "mTempAL2Max"
+  }, {
+    "title": "温度 3 级预警阈值",
+    "key": "mTempAL3Max"
+  }, {
+    "title": "速度预警标准",
+    "key": "mSpeedStandard"
+  }, {
+    "title": "速度 1 级预警阈值",
+    "key": "mSpeedAL1Max"
+  }, {
+    "title": "速度 2 级预警阈值",
+    "key": "mSpeedAL2Max"
+  }, {
+    "title": "速度 3 级预警阈值",
+    "key": "mSpeedAL3Max"
+  }
+]

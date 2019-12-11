@@ -1,0 +1,67 @@
+[
+  {
+    "title": "矿料用量比",
+    "key": "mKlYLB",
+    "width": 100
+  },
+  {
+    "title": "37.5筛孔率",
+    "key": "mJP375",
+    "width": 110
+  },
+  {
+    "title": "31.5筛孔率",
+    "key": "mJP315",
+    "width": 110
+  },
+  {
+    "title": "26.5筛孔率",
+    "key": "mJP265",
+    "width": 110
+  },
+  {
+    "title": "19.0筛孔率",
+    "key": "mJP190",
+    "width": 110
+  },
+  {
+    "title": "0.95筛孔率",
+    "key": "mJP095",
+    "width": 110
+  },
+  {
+    "title": "0.475筛孔率",
+    "key": "mJP0475",
+    "width": 110
+  },
+  {
+    "title": "0.263筛孔率",
+    "key": "mJP0236",
+    "width": 110
+  },
+  {
+    "title": "0.118筛孔率",
+    "key": "mJP0118",
+    "width": 110
+  },
+  {
+    "title": "0.06筛孔率",
+    "key": "mJP006",
+    "width": 110
+  },
+  {
+    "title": "0.03筛孔率",
+    "key": "mJP003",
+    "width": 110
+  },
+  {
+    "title": "0.015筛孔率",
+    "key": "mJP0015",
+    "width": 110
+  },
+  {
+    "title": "0.0075筛孔率",
+    "key": "mJP00075",
+    "width": 110
+  }
+]

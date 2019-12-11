@@ -1,0 +1,36 @@
+.demo-spin-icon-load {
+  animation: ani-demo-spin 1s linear infinite;
+  font-size: 0.28rem;
+}
+@keyframes ani-demo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.demo-spin-col {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #eee;
+}
+.ivu-spin-fix {
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+}
+.ivu-row {
+  height: 4.5rem;
+}
+.newform {
+  width: 95%;
+  height: 6.5rem;
+  margin: 0.5rem auto;
+  overflow-y: scroll;
+}

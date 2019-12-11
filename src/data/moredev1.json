@@ -1,0 +1,166 @@
+[
+  {
+    "title": "设备ID",
+    "key": "mDevID",
+    "width": 80
+  }, {
+    "title": "设备编号",
+    "key": "mDevSn"
+  }, {
+    "title": "设备类型",
+    "key": "mDevTypeName"
+  }, {
+    "title": "设备名称",
+    "key": "mDevName"
+  }, {
+    "title": "设备联系电话",
+    "key": "mDevPhoneNo"
+  }, {
+    "title": "经度",
+    "key": "mDevGpsX"
+  }, {
+    "title": "纬度",
+    "key": "mDevGpsY"
+  }, {
+    "title": "设备状态",
+    "key": "mDevStatus"
+  }, {
+    "title": "项目ID",
+    "key": "mItemID"
+  }, {
+    "title": "项目名称",
+    "key": "mItemDes"
+  }, {
+    "title": "项目标段",
+    "key": "mItemBid"
+  }, {
+    "title": "温度预警标准",
+    "key": "mTempStandard"
+  }, {
+    "title": "温度 1 级预警阈值",
+    "key": "mTempAL1Max"
+  }, {
+    "title": "温度 2 级预警阈值",
+    "key": "mTempAL2Max"
+  }, {
+    "title": "温度 3 级预警阈值",
+    "key": "mTempAL3Max"
+  }, {
+    "title": "油石比 1 级预警阈值 ",
+    "key": "mYsbAL1Max"
+  }, {
+    "title": "油石比 2 级预警阈值 ",
+    "key": "mYsbAL2Max"
+  }, {
+    "title": "油石比 3 级预警阈值 ",
+    "key": "mYsbAL3Max"
+  }, {
+    "title": "级配 375 1 级预警阈值",
+    "key": "mJp375L1Max"
+  }, {
+    "title": "级配 375 2 级预警阈值",
+    "key": "mJp375L2Max"
+  }, {
+    "title": "级配 375 3 级预警阈值",
+    "key": "mJp375L3Max"
+  }, {
+    "title": "级配 315 1 级预警阈值",
+    "key": "mJp315L1Max"
+  }, {
+    "title": "级配 315 2 级预警阈值",
+    "key": "mJp315L2Max"
+  }, {
+    "title": "级配 315 3 级预警阈值",
+    "key": "mJp315L3Max"
+  }, {
+    "title": "级配 265 1 级预警阈值",
+    "key": "mJp265L1Max"
+  }, {
+    "title": "级配 265 2 级预警阈值",
+    "key": "mJp265L2Max"
+  }, {
+    "title": "级配 265 3 级预警阈值",
+    "key": "mJp265L3Max"
+  }, {
+    "title": "级配 190 1 级预警阈值",
+    "key": "mJp190L1Max"
+  }, {
+    "title": "级配 190 2 级预警阈值",
+    "key": "mJp190L2Max"
+  }, {
+    "title": "级配 190 3 级预警阈值",
+    "key": "mJp190L3Max"
+  }, {
+    "title": "级配 095 1 级预警阈值",
+    "key": "mJp095L1Max"
+  }, {
+    "title": "级配 095 2 级预警阈值",
+    "key": "mJp095L2Max"
+  }, {
+    "title": "级配 095 3 级预警阈值",
+    "key": "mJp095L3Max"
+  }, {
+    "title": "级配 0475 1 级预警阈值",
+    "key": "mJp0475L1Max"
+  }, {
+    "title": "级配 0475 2 级预警阈值",
+    "key": "mJp0475L2Max"
+  }, {
+    "title": "级配 0475 3 级预警阈值",
+    "key": "mJp0475L3Max"
+  }, {
+    "title": "级配 0236 1 级预警阈值",
+    "key": "mJp0236L1Max"
+  }, {
+    "title": "级配 0236 2 级预警阈值",
+    "key": "mJp0236L2Max"
+  }, {
+    "title": "级配 0236 3 级预警阈值",
+    "key": "mJp0236L3Max"
+  }, {
+    "title": "级配 0118 1 级预警阈值 ",
+    "key": "mJp0118L1Max"
+  }, {
+    "title": "级配 0118 2 级预警阈值 ",
+    "key": "mJp0118L2Max"
+  }, {
+    "title": "级配 0118 3 级预警阈值 ",
+    "key": "mJp0118L3Max"
+  }, {
+    "title": "级配 006 1 级预警阈值 ",
+    "key": "mJp006L1Max"
+  }, {
+    "title": "级配 006 2 级预警阈值 ",
+    "key": "mJp006L2Max"
+  }, {
+    "title": "级配 006 3 级预警阈值 ",
+    "key": "mJp006L3Max"
+  }, {
+    "title": "级配 003 1 级预警阈值",
+    "key": "mJp003L1Max"
+  }, {
+    "title": "级配 003 2 级预警阈值",
+    "key": "mJp003L2Max"
+  }, {
+    "title": "级配 003 3 级预警阈值",
+    "key": "mJp003L3Max"
+  }, {
+    "title": "级配 0015 1 级预警阈值",
+    "key": "mJp0015L1Max"
+  }, {
+    "title": "级配 0015 2 级预警阈值",
+    "key": "mJp0015L2Max"
+  }, {
+    "title": "级配 0015 3 级预警阈值",
+    "key": "mJp0015L3Max"
+  }, {
+    "title": "级配 00075 1 级预警阈值 ",
+    "key": "mJp00075L1Max"
+  }, {
+    "title": "级配 00075 2 级预警阈值 ",
+    "key": "mJp00075L2Max"
+  }, {
+    "title": "级配 00075 3 级预警阈值 ",
+    "key": "mJp00075L3Max"
+  }
+]

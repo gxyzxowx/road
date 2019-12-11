@@ -1,0 +1,75 @@
+.scmain,
+.managemain {
+  display: flex;
+  margin: 0 0.4rem;
+  height: 100%;
+  border: 0.02rem solid rgba(32, 64, 129, 0.71);
+  box-shadow: 0rem 0rem 0.3rem #366486 inset;
+}
+.scmain .nav,
+.managemain .nav {
+  width: 4.3rem;
+  height: 8.08rem;
+  background: #060B36;
+}
+.scmain .nav .title,
+.managemain .nav .title {
+  background: linear-gradient(to right, rgba(54, 94, 165, 0), rgba(34, 136, 214, 0.7), rgba(54, 94, 165, 0));
+  height: 0.82rem;
+  line-height: 0.82rem;
+  text-align: center;
+  color: #9FC9F7;
+  font-size: 0.3rem;
+}
+.scmain .nav ul,
+.managemain .nav ul {
+  margin-top: 0.3rem;
+}
+.scmain .nav ul li,
+.managemain .nav ul li {
+  display: flex;
+  height: 0.78rem;
+  line-height: 0.78rem;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 0.27rem;
+  padding: 0 0.4rem;
+  border-bottom: #112A5D solid 0.01rem;
+  cursor: pointer;
+}
+.scmain .nav ul li .left,
+.managemain .nav ul li .left {
+  display: flex;
+}
+.scmain .nav ul li .left span.icon,
+.managemain .nav ul li .left span.icon {
+  width: 0.3rem;
+  line-height: 0.88rem;
+}
+.scmain .nav ul li .left span.icon img,
+.managemain .nav ul li .left span.icon img {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+.scmain .nav ul li .left span:nth-of-type(2),
+.managemain .nav ul li .left span:nth-of-type(2) {
+  width: 1.15rem;
+  text-align: justify;
+  text-align-last: justify;
+  margin-left: 0.3rem;
+}
+.scmain .nav ul li:last-of-type,
+.managemain .nav ul li:last-of-type {
+  border-bottom: none;
+}
+.scmain .nav ul li.actived,
+.managemain .nav ul li.actived {
+  background: #3377FE;
+}
+.scmain .content,
+.managemain .content {
+  flex: 1;
+}
+li {
+  list-style: none;
+}

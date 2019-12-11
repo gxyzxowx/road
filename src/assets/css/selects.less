@@ -1,0 +1,81 @@
+.schome,.scdata,.scquality,.scgrade,.scwarn {
+  background: #fff;
+  height: 100%;
+  padding:.40rem;
+  .title{
+    display: flex;
+    .selects{
+      width: 9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      // 选择器样式修改
+      .ivu-select-single .ivu-select-selection{
+        height: .50rem;
+        line-height: .50rem;
+        background: #00C4C0FF;
+        .ivu-select-placeholder{
+          line-height: .50rem;
+          height: .50rem;
+          color:#fff;
+          font-size: .24rem;
+        }
+        .ivu-select-selected-value{
+          height: .50rem;
+          color:#fff;
+          font-size: .24rem;
+          line-height: .50rem;
+        }
+        .ivu-select{
+          color:#fff;
+          font-size: .24rem;
+        }
+        // 箭头
+        .ivu-select-arrow{
+          font-size: .28rem;
+          color:#fff;
+        }
+      }
+      // 选择日期样式修改
+      .ivu-input{
+        background: #00C4C0FF;
+        color:#fff;
+         height: .50rem;
+         font-size: .24rem;
+
+      }
+      input::-webkit-input-placeholder{color:#fff!important;}
+      .ivu-input-suffix{
+        margin-right: .10rem;
+      }
+      .ivu-input-suffix i{
+        font-size: .28rem;
+        color:#fff;
+        line-height: .50rem;
+      }
+    }
+    .btn{
+      width:1.60rem;
+      box-sizing: border-box;
+      height:.55rem;
+      background:rgba(28,106,171,1);
+      border-radius:.30rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding:.18rem .22rem;
+      margin-left: .60rem;
+      cursor: pointer;
+      img{
+        margin-top: .05rem;
+        width: .40rem;
+        height: .40rem;
+      }
+      span{
+        font-size: .25rem;
+        color:#fff;
+        margin-top: .04rem;
+      }
+    }
+  }
+}
