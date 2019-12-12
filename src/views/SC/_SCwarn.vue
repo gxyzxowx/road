@@ -1,37 +1,33 @@
-<style lang="less">
-.scwarn{
+<style scoped>
   .top{
-    width: 100%;
+    margin-top: .40rem;
+    margin-bottom: .30rem;
+    display:flex;
+    justify-content: space-around;
   }
   .top .chart{
     height:2.50rem;
     width:5rem;
-    margin: .2rem auto;
-    margin-bottom:0;
   }
-// .ivu-btn-primary{
-//   background: #6996F3;
-//   border-color: rgba(105, 151, 243, 0.76);
-// }
-}
-
 </style>
 <template>
   <div class="scwarn">
 <Search v-on:getData="getData"></Search>
 <div class="content">
   <div class="top">
+    <div class="left">
       <!-- <div class="title">预警按类型分类统计</div> -->
-          <PieChart :id="'pie1'" :data="dataPie1" class = "chart"   ref ="header"></PieChart>
+          <PieChart :id="'pie1'" :data="dataPie1" class = "chart"></PieChart>
+    </div>
+    <div class="right">
+      <!-- <div class="title">预警按预警级别分类统计</div> -->
+          <PieChart :id="'pie2'" :data="dataPie2" class = "chart"></PieChart>
+    </div>
   </div>
   <div class="bottom">
             <!-- 预警列表 -->
-<h3 class="title">预警列表</h3>
-<Table :loading="loading" max-height="280" border :columns="listTitle" :data="datalist" size="small"  :width="tableWidth" stripe>
-  <template slot-scope="{ row, index }" slot="action">
-    <Button type="primary" size="small" style="margin-right: .05rem" @click="handleWarn(index)">处理</Button>
-  </template>
-</Table>
+<div class="title">预警列表</div>
+<Table :loading="loading" height="500" border :columns="listTitle" :data="datalist"></Table>
 <Switch v-model="loading"></Switch>
 <div style="margin: .1rem;overflow: hidden">
         <div style="float: right;">
@@ -43,7 +39,7 @@
   </div>
 </template>
 <script>
-import Search from '@/components/SC/WarnSearch.vue'
+import Search from '@/components/Search.vue'
 import PieChart from '@/components/PieChart.vue'
 export default {
   data () {
@@ -51,7 +47,6 @@ export default {
       loading: true,
       dataPie1: null,
       dataPie2: null,
-      tableWidth: '1200',
       page: {
         // 数据总条数
         totaldata: 1,
@@ -69,19 +64,19 @@ export default {
       },
       listTitle: [
         {
-          title: '预警时间',
+          title: '时间',
           key: 'mDateTime',
           width: 169
         },
         {
-          title: '项目名称',
+          title: '项目标段',
           key: 'mItemBid',
           width: 70
         },
         {
-          title: '标段名称',
-          key: 'mItemBid',
-          width: 70
+          title: '设备类型',
+          key: 'mDevType',
+          width: 130
         },
         {
           title: '预警等级',
@@ -104,21 +99,13 @@ export default {
           width: 70
         },
         {
-          title: '详情',
-          key: 'mAlarmDec',
-          width: 750
-        },
-        {
-          title: '状态',
-          key: 'status',
+          title: '速度',
+          key: 'mAlarmType_speed',
           width: 70
         },
         {
-          title: '操作',
-          slot: 'action',
-          align: 'center',
-          width: 75,
-          fixed: 'right'
+          title: '预警描述',
+          key: 'mAlarmDec'
         }
       ],
       datalist: []
@@ -126,10 +113,6 @@ export default {
   },
   mounted () {
     this.getData()
-    console.log(this.$refs.header.offsetWidth)
-    this.$nextTick(() => { // 页面渲染完成后的回调
-      this.tableWidth = this.$refs.header.offsetWidth
-    })
   },
   methods: {
     getData (emitobj) {
@@ -145,9 +128,9 @@ export default {
         // console.log('是emit过来的参数:' + JSON.stringify(emitobj))
       }
       obj = { ...obj, ...this.emitobj }
-      // console.log(JSON.stringify(obj))
+      console.log(JSON.stringify(obj))
       this.comFun.post('/Produce_J_G/getAlarmData', obj, this).then((rs) => {
-        // console.log(JSON.stringify(rs))
+        console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 总页数
           this.page.totaldata = rs.total
@@ -163,7 +146,7 @@ export default {
           // 预警类型饼图
           this.dataPie1 = this.handlePieData(rs.result.AlarmData.data, 'type_name', 'rep', '预警类型分类统计')
           // 预警级别分类饼图
-          // this.dataPie2 = this.handlePieData(rs.result.AlarmLevelData.data, 'level_name', 'rep', '预警级别分类统计')
+          this.dataPie2 = this.handlePieData(rs.result.AlarmLevelData.data, 'level_name', 'rep', '预警级别分类统计')
         }
       }, (err) => { console.log(err) })
     },
@@ -224,16 +207,6 @@ export default {
       // 更换页数
       this.getData()
       console.log('切换page:' + this.page.current)
-    },
-    // 处理预警
-    handleWarn () {
-      // 跳转
-      this.$router.push({
-        path: '/sc/SCwarnHandle',
-        query: {
-          id: 123
-        }
-      })
     }
   },
   components: {

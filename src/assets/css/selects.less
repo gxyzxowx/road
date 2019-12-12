@@ -1,19 +1,27 @@
 .schome,.scdata,.scquality,.scgrade,.scwarn {
   background: #fff;
   height: 100%;
+  width: 100%;
+  box-sizing: border-box;
   padding:.40rem;
+  width: 16.2rem;
   .title{
     display: flex;
     .selects{
       width: 9rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
+      // 统一修改样式box
+      .box{
+        margin-right: .3rem;
+      }
       // 选择器样式修改
       .ivu-select-single .ivu-select-selection{
         height: .50rem;
         line-height: .50rem;
-        background: #00C4C0FF;
+        background: #6996F3;
+        border-radius: 0;
         .ivu-select-placeholder{
           line-height: .50rem;
           height: .50rem;
@@ -38,10 +46,11 @@
       }
       // 选择日期样式修改
       .ivu-input{
-        background: #00C4C0FF;
+        background: #6996F3;
         color:#fff;
          height: .50rem;
          font-size: .24rem;
+         border-radius: 0;
 
       }
       input::-webkit-input-placeholder{color:#fff!important;}
@@ -58,7 +67,7 @@
       width:1.60rem;
       box-sizing: border-box;
       height:.55rem;
-      background:rgba(28,106,171,1);
+      background:#14C6CA;
       border-radius:.30rem;
       display: flex;
       justify-content: space-around;

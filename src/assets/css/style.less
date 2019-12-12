@@ -1,3 +1,13 @@
+.rect(@w, @h){
+  height: @h;
+  width: @w;
+}
+.bgimg(@url){
+  background-image: url(@url);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .demo-spin-icon-load{
   animation: ani-demo-spin 1s linear infinite;
   font-size: .28rem;
@@ -28,4 +38,20 @@ height: 4.50rem;
   height:6.5rem;
   margin: .50rem auto;
   overflow-y: scroll;
+}
+.ivu-btn-primary{
+  background: #6996F3;
+  border-color: rgba(105, 151, 243, 0.76);
+}
+// 生产页面二级页面公共样式
+.scpage{
+  position: relative;
+  padding: .3rem;
+}
+// 返回键公共样式
+.road-back{
+  position: absolute;
+  right: .35rem;
+  .rect(.4rem, .4rem);
+  .bgimg('../img/sc/sctab/back.png')
 }

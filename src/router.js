@@ -48,8 +48,13 @@ const routes = [
             path: '/sc/SCgrade',
             component: () => import('./views/SC/SCgrade.vue')
           }, {
+            // 预警管理
             path: '/sc/SCwarn',
             component: () => import('./views/SC/SCwarn.vue')
+          }, {
+            // 预警管理处理
+            path: '/sc/SCwarnHandle',
+            component: () => import('./views/SC/SCwarnHandle.vue')
           }
 
         ]

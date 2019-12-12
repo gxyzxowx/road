@@ -1,4 +1,5 @@
 <style lang="less" scoped>
+// 首页.项目总览
 .control {
   margin: 0 .40rem;
   display: flex;
@@ -12,7 +13,7 @@
       .content{
         .body{
           .name{
-            font-size: .13rem;
+            font-size: .18rem;
             margin-bottom: .12rem;
             span{
               color:#FEAB67;
@@ -26,15 +27,15 @@
     flex: 1;
     margin: 0 .15rem;
     .map{
-      height:8.10rem;
+      height:8.03rem;
     }
   }
   .col {
     position: relative;
     width: 4.30rem;
-    height: 2.60rem;
+    height: 3.94rem;
     box-sizing: border-box;
-    padding:.19rem .20rem;
+    padding:.36rem .38rem;
     border: 0.02rem solid rgba(32, 64, 129, .71);
     box-shadow: 0rem 0rem .30rem rgb(54, 100, 134) inset;
     margin-bottom: .15rem;
@@ -42,10 +43,10 @@
        color:#9FC9F7;
         .title{
           margin-bottom: .18rem;
-          font-size: .16rem;
+          font-size: .24rem;
         }
         .chart {
-          height:1.80rem;
+          height:2.50rem;
         }
     }
     .L{
@@ -116,7 +117,7 @@
         </div>
 
       </div>
-      <div class="pie col">
+      <!-- <div class="pie col">
         <div class="kuang">
           <div class="L"></div>
           <div class="L"></div>
@@ -127,7 +128,7 @@
           <div class="title">预警按预警级别分类统计</div>
           <PieChart :id="'pie2'" :data="dataPie2" class = "chart"></PieChart>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="mid">
       <Map class="map" :data="datas.DevData"></Map>
@@ -141,7 +142,7 @@
           <div class="L"></div>
         </div>
         <div class="content">
-          <div class="title">拌合站产量统计（kg）</div>
+          <div class="title">总体进度</div>
           <BarChart :id="'bar1'" :data="dataBar1" class = "chart"></BarChart>
         </div>
       </div>
@@ -157,7 +158,7 @@
           <CurveChart :id="'curve1'" :data="dataCurve1" class = "chart"></CurveChart>
         </div>
       </div>
-      <div class="columnar col">
+      <!-- <div class="columnar col">
         <div class="kuang">
           <div class="L"></div>
           <div class="L"></div>
@@ -168,7 +169,7 @@
           <div class="title">摊铺和碾压里程统计（km）</div>
           <CurveChart :id="'bar2'" :data="dataBar2" class = "chart"></CurveChart>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -207,9 +208,9 @@ export default {
       this.ifdisplayItem = true
     }
     this.timer = setInterval(() => {
-      console.log('请求了')
+      // console.log('请求了')
       this.displayItem()
-    }, 30000)
+    }, 60000)
   },
   beforeDestroy () {
     clearInterval(this.timer)
@@ -248,13 +249,13 @@ export default {
             // 预警类型饼图
             this.dataPie1 = this.handlePieData(rs.data.AlarmData.data, 'type_name', 'rep', '预警类型分类统计')
             // 预警级别分类饼图
-            this.dataPie2 = this.handlePieData(rs.data.AlarmLevelData.data, 'level_name', 'rep', '预警级别分类统计')
+            // this.dataPie2 = this.handlePieData(rs.data.AlarmLevelData.data, 'level_name', 'rep', '预警级别分类统计')
             // 各个标段总量统计柱状图
             this.dataBar1 = this.handleBarData(rs.data.BhBidData, 'name', 'value')
             // 每日生产总量统计
             this.dataCurve1 = this.handleCurveData(rs.data.BhDayData.data, 'time', 'value')
             // 摊铺和碾压统计
-            this.dataBar2 = this.handleBarData(rs.data.TpData, 'name', 'value')
+            // this.dataBar2 = this.handleBarData(rs.data.TpData, 'name', 'value')
             // 设备状态（地图）
             this.datas.DevData = rs.data.DevData
             // console.log(JSON.stringify(rs.data))
@@ -297,10 +298,12 @@ export default {
             name: title,
             type: 'pie',
             label: {
-              formatter: '{b}: {@2012} ({d}%)'
+              formatter: '{b}: ({d}%)'
             },
-            radius: ['24%', '55%'],
-            center: ['55%', '50%'],
+            // 饼图大小
+            radius: ['24%', '50%'],
+            // 饼图位置左右/上下
+            center: ['52%', '65%'],
             data: seriesdata,
             itemStyle: {
               emphasis: {

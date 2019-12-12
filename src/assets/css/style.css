@@ -34,3 +34,21 @@
   margin: 0.5rem auto;
   overflow-y: scroll;
 }
+.ivu-btn-primary {
+  background: #6996F3;
+  border-color: rgba(105, 151, 243, 0.76);
+}
+.scpage {
+  position: relative;
+  padding: 0.3rem;
+}
+.road-back {
+  position: absolute;
+  right: 0.35rem;
+  height: 0.4rem;
+  width: 0.4rem;
+  background-image: url('../img/sc/sctab/back.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}

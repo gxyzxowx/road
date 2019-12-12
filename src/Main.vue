@@ -193,9 +193,9 @@ export default {
     }
   },
   created () {
-    // this.$router.push('/control')
+    this.$router.push('/control')
     // 测试
-    this.$router.push('/sg')
+    // this.$router.push('/sg')
     // 测试完毕
     setInterval(() => {
       this.getCurrentDate()
