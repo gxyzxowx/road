@@ -5,7 +5,7 @@
       <!-- <div class="title">拌合站总监管</div> -->
       <ul>
         <li v-for="(item, index) in items" :key="index" :class="{actived :item.isActive}" @click="handler(index, item.routePath )">
-            <span class="icon"></span>
+            <span class="icon sc"></span>
             <span class="name">{{item.name}}</span>
         </li>
       </ul>
@@ -32,7 +32,7 @@ export default {
           isActive: false
         },
         {
-          routePath: '/sc/SCquality',
+          routePath: '/sc/SCspeed',
           name: '进度监管',
           isActive: false
         },
@@ -42,7 +42,7 @@ export default {
           isActive: false
         },
         {
-          routePath: '/sc/SCwarn',
+          routePath: '/sc/SCsearch',
           name: '综合查询',
           isActive: false
         }

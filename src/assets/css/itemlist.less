@@ -1,3 +1,4 @@
+// 左边导航条
 .scmain,.managemain {
   display: flex;
   margin: 0 .40rem;
@@ -38,19 +39,35 @@
           background-repeat: no-repeat;
           background-size: 100% 100%;
           background-position: center;
+        }
+        // 生产列表
+        &:nth-of-type(1) .icon.sc{
           background-image: url(../img/sc/sctab/current0.png);
         }
-        &:nth-of-type(2) .icon{
+        &:nth-of-type(2) .icon.sc{
           background-image: url(../img/sc/sctab/data0.png);
         }
-        &:nth-of-type(3) .icon{
+        &:nth-of-type(3) .icon.sc{
           background-image: url(../img/sc/sctab/speed0.png);
         }
-        &:nth-of-type(4) .icon{
+        &:nth-of-type(4) .icon.sc{
           background-image: url(../img/sc/sctab/warn0.png);
         }
-        &:nth-of-type(5) .icon{
+        &:nth-of-type(5) .icon.sc{
           background-image: url(../img/sc/sctab/search0.png);
+        }
+        // 管理列表
+        &:nth-of-type(1) .icon.ma{
+          background-image: url(../img/ma/project0.png);
+        }
+        &:nth-of-type(2) .icon.ma{
+          background-image: url(../img/ma/dev0.png);
+        }
+        &:nth-of-type(3) .icon.ma{
+          background-image: url(../img/ma/recipe0.png);
+        }
+        &:nth-of-type(4) .icon.ma{
+          background-image: url(../img/ma/user0.png);
         }
         span.name{
           line-height: .35rem;
@@ -62,20 +79,34 @@
           background: #6996F3;
           color:#fff;
         }
-        &:nth-of-type(1).actived .icon{
+        // 生产列表
+        &:nth-of-type(1).actived .icon.sc{
           background-image: url(../img/sc/sctab/current1.png);
         }
-        &:nth-of-type(2).actived .icon{
+        &:nth-of-type(2).actived .icon.sc{
           background-image: url(../img/sc/sctab/data1.png);
         }
-        &:nth-of-type(3).actived .icon{
+        &:nth-of-type(3).actived .icon.sc{
           background-image: url(../img/sc/sctab/speed1.png);
         }
-        &:nth-of-type(4).actived .icon{
+        &:nth-of-type(4).actived .icon.sc{
           background-image: url(../img/sc/sctab/warn1.png);
         }
-        &:nth-of-type(5).actived .icon{
+        &:nth-of-type(5).actived .icon.sc{
           background-image: url(../img/sc/sctab/search1.png);
+        }
+        // 管理列表
+        &:nth-of-type(1).actived .icon.ma{
+          background-image: url(../img/ma/project1.png);
+        }
+        &:nth-of-type(2).actived .icon.ma{
+          background-image: url(../img/ma/dev1.png);
+        }
+        &:nth-of-type(3).actived .icon.ma{
+          background-image: url(../img/ma/recipe1.png);
+        }
+        &:nth-of-type(4).actived .icon.ma{
+          background-image: url(../img/ma/user1.png);
         }
 
       }

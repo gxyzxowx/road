@@ -7,14 +7,14 @@
   }
 </style>
 <template>
-<!-- 条件：标段，开始时间， 结束时间-->
+<!-- 条件：层位，标段，开始时间， 结束时间-->
   <div class="title">
     <div class="selects">
-        <!-- <Select v-model="select.mClTypeValue" class="box" placeholder="材料类型">
-          <Option v-for="item in show.mClTypeValueList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </Select> -->
-        <Select v-model="select.mItemBid" class="box" placeholder="工程标段">
+      <Select v-model="select.mItemBid" class="box" placeholder="工程标段">
           <Option v-for="item in show.mItemBidList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        </Select>
+        <Select v-model="select.mClTypeValue" class="box" placeholder="层位">
+          <Option v-for="item in show.mClTypeValueList" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
         <DatePicker type="date" placeholder="开始时间" class="box" v-model="select.start_time" @on-change="changeType0"></DatePicker>
         <DatePicker type="date" placeholder="结束时间" class="box" v-model="select.end_time" @on-change="changeType1"></DatePicker>

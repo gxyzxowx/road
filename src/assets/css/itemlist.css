@@ -32,23 +32,42 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
+}
+.scmain .nav ul li:nth-of-type(1) .icon.sc,
+.managemain .nav ul li:nth-of-type(1) .icon.sc {
   background-image: url(../img/sc/sctab/current0.png);
 }
-.scmain .nav ul li:nth-of-type(2) .icon,
-.managemain .nav ul li:nth-of-type(2) .icon {
+.scmain .nav ul li:nth-of-type(2) .icon.sc,
+.managemain .nav ul li:nth-of-type(2) .icon.sc {
   background-image: url(../img/sc/sctab/data0.png);
 }
-.scmain .nav ul li:nth-of-type(3) .icon,
-.managemain .nav ul li:nth-of-type(3) .icon {
+.scmain .nav ul li:nth-of-type(3) .icon.sc,
+.managemain .nav ul li:nth-of-type(3) .icon.sc {
   background-image: url(../img/sc/sctab/speed0.png);
 }
-.scmain .nav ul li:nth-of-type(4) .icon,
-.managemain .nav ul li:nth-of-type(4) .icon {
+.scmain .nav ul li:nth-of-type(4) .icon.sc,
+.managemain .nav ul li:nth-of-type(4) .icon.sc {
   background-image: url(../img/sc/sctab/warn0.png);
 }
-.scmain .nav ul li:nth-of-type(5) .icon,
-.managemain .nav ul li:nth-of-type(5) .icon {
+.scmain .nav ul li:nth-of-type(5) .icon.sc,
+.managemain .nav ul li:nth-of-type(5) .icon.sc {
   background-image: url(../img/sc/sctab/search0.png);
+}
+.scmain .nav ul li:nth-of-type(1) .icon.ma,
+.managemain .nav ul li:nth-of-type(1) .icon.ma {
+  background-image: url(../img/ma/project0.png);
+}
+.scmain .nav ul li:nth-of-type(2) .icon.ma,
+.managemain .nav ul li:nth-of-type(2) .icon.ma {
+  background-image: url(../img/ma/dev0.png);
+}
+.scmain .nav ul li:nth-of-type(3) .icon.ma,
+.managemain .nav ul li:nth-of-type(3) .icon.ma {
+  background-image: url(../img/ma/recipe0.png);
+}
+.scmain .nav ul li:nth-of-type(4) .icon.ma,
+.managemain .nav ul li:nth-of-type(4) .icon.ma {
+  background-image: url(../img/ma/user0.png);
 }
 .scmain .nav ul li span.name,
 .managemain .nav ul li span.name {
@@ -63,25 +82,41 @@
   background: #6996F3;
   color: #fff;
 }
-.scmain .nav ul li:nth-of-type(1).actived .icon,
-.managemain .nav ul li:nth-of-type(1).actived .icon {
+.scmain .nav ul li:nth-of-type(1).actived .icon.sc,
+.managemain .nav ul li:nth-of-type(1).actived .icon.sc {
   background-image: url(../img/sc/sctab/current1.png);
 }
-.scmain .nav ul li:nth-of-type(2).actived .icon,
-.managemain .nav ul li:nth-of-type(2).actived .icon {
+.scmain .nav ul li:nth-of-type(2).actived .icon.sc,
+.managemain .nav ul li:nth-of-type(2).actived .icon.sc {
   background-image: url(../img/sc/sctab/data1.png);
 }
-.scmain .nav ul li:nth-of-type(3).actived .icon,
-.managemain .nav ul li:nth-of-type(3).actived .icon {
+.scmain .nav ul li:nth-of-type(3).actived .icon.sc,
+.managemain .nav ul li:nth-of-type(3).actived .icon.sc {
   background-image: url(../img/sc/sctab/speed1.png);
 }
-.scmain .nav ul li:nth-of-type(4).actived .icon,
-.managemain .nav ul li:nth-of-type(4).actived .icon {
+.scmain .nav ul li:nth-of-type(4).actived .icon.sc,
+.managemain .nav ul li:nth-of-type(4).actived .icon.sc {
   background-image: url(../img/sc/sctab/warn1.png);
 }
-.scmain .nav ul li:nth-of-type(5).actived .icon,
-.managemain .nav ul li:nth-of-type(5).actived .icon {
+.scmain .nav ul li:nth-of-type(5).actived .icon.sc,
+.managemain .nav ul li:nth-of-type(5).actived .icon.sc {
   background-image: url(../img/sc/sctab/search1.png);
+}
+.scmain .nav ul li:nth-of-type(1).actived .icon.ma,
+.managemain .nav ul li:nth-of-type(1).actived .icon.ma {
+  background-image: url(../img/ma/project1.png);
+}
+.scmain .nav ul li:nth-of-type(2).actived .icon.ma,
+.managemain .nav ul li:nth-of-type(2).actived .icon.ma {
+  background-image: url(../img/ma/dev1.png);
+}
+.scmain .nav ul li:nth-of-type(3).actived .icon.ma,
+.managemain .nav ul li:nth-of-type(3).actived .icon.ma {
+  background-image: url(../img/ma/recipe1.png);
+}
+.scmain .nav ul li:nth-of-type(4).actived .icon.ma,
+.managemain .nav ul li:nth-of-type(4).actived .icon.ma {
+  background-image: url(../img/ma/user1.png);
 }
 .scmain .content,
 .managemain .content {

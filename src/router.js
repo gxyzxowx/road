@@ -6,91 +6,108 @@ import comFun from './assets/js/comfun.js'
 Vue.use(Router)
 
 // 定义路由
-const routes = [
-  {
-    path: '/login',
-    name: 'login',
-    meta: {
-      title: 'Login - 登录',
-      hideInMenu: true
-    },
-    component: () => import('./Login.vue')
+const routes = [{
+  path: '/login',
+  name: 'login',
+  meta: {
+    title: 'Login - 登录',
+    hideInMenu: true
   },
-  // Main.vue(HeaderR + router-view)
-  {
-    path: '/',
-    name: 'main',
-    component: () => import('./Main.vue'),
-    // router-view
-    children: [
-      // 控制台control项目总览
-      {
-        path: '/control',
-        name: 'control',
-        component: () => import('./views/Control.vue')
-      },
-      // 生产监管大区
-      {
-        path: '/sc',
-        name: 'sc',
-        component: () => import('./views/SC/Home.vue'),
-        children: [
-          {
-            path: '/sc/home',
-            component: () => import('./views/SC/SChome.vue')
-          }, {
-            path: '/sc/SCdata',
-            component: () => import('./views/SC/SCdata.vue')
-          }, {
-            path: '/sc/SCquality',
-            component: () => import('./views/SC/SCquality.vue')
-          }, {
-            path: '/sc/SCgrade',
-            component: () => import('./views/SC/SCgrade.vue')
-          }, {
-            // 预警管理
-            path: '/sc/SCwarn',
-            component: () => import('./views/SC/SCwarn.vue')
-          }, {
-            // 预警管理处理
-            path: '/sc/SCwarnHandle',
-            component: () => import('./views/SC/SCwarnHandle.vue')
-          }
-
+  component: () => import('./Login.vue')
+},
+// Main.vue(HeaderR + router-view)
+{
+  path: '/',
+  name: 'main',
+  component: () => import('./Main.vue'),
+  // router-view
+  children: [
+    // 控制台control项目总览
+    {
+      path: '/control',
+      name: 'control',
+      component: () => import('./views/Control.vue')
+    },
+    // 生产监管大区
+    {
+      path: '/sc',
+      name: 'sc',
+      component: () => import('./views/SC/Home.vue'),
+      children: [{
+        // （一级）实时信息
+        path: '/sc/home',
+        component: () => import('./views/SC/SChome.vue')
+      }, {
+        // （一级）质量监管
+        path: '/sc/SCdata',
+        component: () => import('./views/SC/SCdata.vue'),
+        children: [{
+          // 质量 --- 温度
+          path: '/sc/SCdata/wd',
+          component: () => import('./views/SC/SCdataWD.vue')
+        },
+        {
+          // 质量 --- 油石比
+          path: '/sc/SCdata/ysb',
+          component: () => import('./views/SC/SCdataYSB.vue')
+        },
+        {
+          // 质量 --- 级配
+          path: '/sc/SCdata/jp',
+          component: () => import('./views/SC/SCdataJP.vue')
+        }
         ]
-      },
-      // 施工监管大区
-      {
-        path: '/sg',
-        name: 'sg',
-        component: () => import('./views/SG/Home.vue')
-      },
-      // 管理大区
-      {
-        path: '/manage',
-        name: 'manage',
-        component: () => import('./views/manage/Home.vue'),
-        children: [
-          {
-            path: '/manage/item',
-            component: () => import('./views/manage/Mitem.vue')
-          },
-          {
-            path: '/manage/equip',
-            component: () => import('./views/manage/Mequip.vue')
-          },
-          {
-            path: '/manage/recipe',
-            component: () => import('./views/manage/Mrecipe.vue')
-          },
-          {
-            path: '/manage/user',
-            component: () => import('./views/manage/Muser.vue')
-          }
-        ]
+      }, {
+        // （一级）进度监管
+        path: '/sc/SCspeed',
+        component: () => import('./views/SC/SCspeed.vue')
+      }, {
+        // （一级）预警管理
+        path: '/sc/SCwarn',
+        component: () => import('./views/SC/SCwarn.vue')
+      }, {
+        // 预警管理处理
+        path: '/sc/SCwarnHandle',
+        component: () => import('./views/SC/SCwarnHandle.vue')
+      }, {
+        // （一级）综合查询
+        path: '/sc/SCsearch',
+        component: () => import('./views/SC/SCsearch.vue')
       }
-    ]
-  }
+
+      ]
+    },
+    // 施工监管大区
+    {
+      path: '/sg',
+      name: 'sg',
+      component: () => import('./views/SG/Home.vue')
+    },
+    // 管理大区
+    {
+      path: '/manage',
+      name: 'manage',
+      component: () => import('./views/manage/Home.vue'),
+      children: [{
+        path: '/manage/item',
+        component: () => import('./views/manage/Mitem.vue')
+      },
+      {
+        path: '/manage/equip',
+        component: () => import('./views/manage/Mequip.vue')
+      },
+      {
+        path: '/manage/recipe',
+        component: () => import('./views/manage/Mrecipe.vue')
+      },
+      {
+        path: '/manage/user',
+        component: () => import('./views/manage/Muser.vue')
+      }
+      ]
+    }
+  ]
+}
 
 ]
 

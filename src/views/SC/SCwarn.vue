@@ -1,5 +1,6 @@
 <style lang="less">
 .scwarn{
+  padding:.40rem;
   .top{
     width: 100%;
   }

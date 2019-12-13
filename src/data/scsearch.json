@@ -1,0 +1,287 @@
+[
+  {
+    "title": "时间",
+    "key": "abcc",
+    "width": 85
+  },
+  {
+    "title": "标段",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "层位",
+    "key": "abcc",
+    "width": 85
+  },
+  {
+    "title": "材料类型",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "产量",
+    "key": "abcc",
+    "width": 85
+  },
+  {
+    "title": "生产周期",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "骨料1",
+    "key": "abcc",
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "abc",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "bcd",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "cde",
+        "align": "center",
+        "width": 80
+      }
+    ]
+  },
+  {
+    "title": "骨料2",
+    "key": "abcc",
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "abc",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "bcd",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "cde",
+        "align": "center",
+        "width": 80
+      }
+    ]
+  },
+  {
+    "title": "骨料3",
+    "key": "abcc",
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "abc",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "bcd",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "cde",
+        "align": "center",
+        "width": 80
+      }
+    ]
+  },
+  {
+    "title": "骨料4",
+    "key": "abcc",
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "abc",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "bcd",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "cde",
+        "align": "center",
+        "width": 80
+      }
+    ]
+  },
+  {
+    "title": "骨料5",
+    "key": "abcc",
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "abc",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "bcd",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "cde",
+        "align": "center",
+        "width": 80
+      }
+    ]
+  },
+  {
+    "title": "骨料6",
+    "key": "abcc",
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "abc",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "bcd",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "cde",
+        "align": "center",
+        "width": 80
+      }
+    ]
+  },
+  {
+    "title": "矿粉1",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "矿粉2",
+    "key": "abcc",
+    "width": 85
+  },
+  {
+    "title": "矿粉3",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "沥青",
+    "key": "abcc",
+    "width": 85
+  },
+  {
+    "title": "温度",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "是否预警",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "油石比",
+    "key": "abcc",
+    "width": 85
+  },
+  {
+    "title": "是否预警",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "0.075筛孔率",
+    "key": "title",
+    "width": 85
+  },
+  {
+    "title": "0.15筛孔率",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "0.3筛孔率",
+    "key": "mItemBid",
+    "width": 85
+  },
+  {
+    "title": "0.6筛孔率",
+    "key": "mItemBid",
+    "width": 85
+  },
+  {
+    "title": "1.18筛孔率",
+    "key": "mAlarmLevel",
+    "width": 85
+  },
+  {
+    "title": "2.36筛孔率",
+    "key": "title",
+    "width": 85
+  },
+  {
+    "title": "4.75筛孔率",
+    "key": "mDateTime",
+    "width": 85
+  },
+  {
+    "title": "9.5筛孔率",
+    "key": "mItemBid",
+    "width": 85
+  },
+  {
+    "title": "19.0筛孔率",
+    "key": "mItemBid",
+    "width": 85
+  },
+  {
+    "title": "26.5筛孔率",
+    "key": "mAlarmLevel",
+    "width": 85
+  },
+  {
+    "title": "31.5筛孔率",
+    "key": "mItemBid",
+    "width": 85
+  },
+  {
+    "title": "37.5筛孔率",
+    "key": "mAlarmLevel",
+    "width": 85
+  },
+  {
+    "title": "级配预警",
+    "key": "mAlarmLevel",
+    "width": 85
+  }
+]

@@ -32,6 +32,22 @@ export default {
     drawCurve (id, data) {
       let myChart = echarts.init(document.getElementById(id))
       let option = data
+      // 测试
+      // option = {
+      //   xAxis: {
+      //     type: 'category',
+      //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      //   },
+      //   yAxis: {
+      //     type: 'value'
+      //   },
+      //   series: [{
+      //     data: [820, 932, 901, 934, 1290, 1330, 1320],
+      //     type: 'line',
+      //     smooth: true
+      //   }]
+      // }
+      // 测试完毕
       this.chartCurve = myChart.setOption(option, true)
     }
   },
