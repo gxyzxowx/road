@@ -1,6 +1,6 @@
 <style scoped>
     .box{
-        margin: .20rem 0;
+        margin: 20px 0;
     }
     .item{
         display: flex;
@@ -8,12 +8,12 @@
         align-items:center;
     }
     .item:first-child{
-        margin-bottom: .20rem;
+        margin-bottom: 20px;
     }
   .login .card{
-  width:3.20rem;
-  height:2.50rem;
-  margin: 1.50rem auto;
+  width:320px;
+  height:250px;
+  margin: 150px auto;
   }
 </style>
 <template>
@@ -25,10 +25,10 @@
                 <p slot="title">欢迎登陆道路管控系统</p>
                 <div class="box">
                     <div class="item">
-                        <span>用户名：</span><Input v-model="username" placeholder="Enter something..." clearable style="width: 2rem" />
+                        <span>用户名：</span><Input v-model="username" placeholder="Enter something..." clearable style="width: 200px" />
                     </div>
                     <div class="item">
-                        <span>密码：</span><Input type="password" v-model="password" placeholder="Enter something..." clearable style="width: 2rem" />
+                        <span>密码：</span><Input type="password" v-model="password" placeholder="Enter something..." clearable style="width: 200px" />
                     </div>
                 </div>
                 <Button type="primary" long @click="login()">登陆</Button>

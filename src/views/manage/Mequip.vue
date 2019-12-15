@@ -1,8 +1,9 @@
 <!-- 设备管理 -->
-<style lang="less">
+<style lang="less" scoped>
   .equip{
     display: flex;
-    ul{
+    height: 100%;
+    .ul{
       width: 1.5rem;
       li{
         width: 100%;
@@ -11,20 +12,35 @@
         font-size: .18rem;
         color:#333;
         text-align: center;
+        &.active{
+          color:#6996F3;
+          background: #F0F4FE;
+        }
+      }
+    }
+    .list{
+      background: #F0F4FE;
+      width: 100%;
+      height: 100%;
+      padding: .39rem;
+      h3{
+        margin-bottom: .4rem;
       }
     }
   }
 </style>
 <template>
   <div class="equip">
-    <ul>
+    <ul class="ul">
       <li>项目1简称</li>
+      <li>项目1简称</li>
+      <li class="active">项目1简称</li>
     </ul>
     <div class="list">
       <h3>所有设备</h3>
       <Table  height="82" :loading="loading" border :columns="listTitle" :data="datalist" size="small"  stripe></Table>
       <Switch v-model="loading"></Switch>
-<div style="margin: .1rem;overflow: hidden">
+      <div style="margin: .1rem;overflow: hidden">
         <div style="float: right;">
             <Page :total="page.totaldata" :current.sync="page.current" :page-size="page.rows" @on-change="changePage"></Page>
         </div>
