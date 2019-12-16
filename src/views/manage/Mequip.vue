@@ -19,12 +19,21 @@
       }
     }
     .list{
+      position: relative;
       background: #F0F4FE;
       width: 100%;
       height: 100%;
       padding: .39rem;
+      .table{
+        width: 14.2rem;
+      }
       h3{
         margin-bottom: .4rem;
+      }
+      .addbtn{
+        position: absolute;
+        top:.5rem;
+        right: .6rem;
       }
     }
   }
@@ -38,8 +47,26 @@
     </ul>
     <div class="list">
       <h3>所有设备</h3>
-      <Table  height="82" :loading="loading" border :columns="listTitle" :data="datalist" size="small"  stripe></Table>
-      <Switch v-model="loading"></Switch>
+       <Button  class="addbtn" size="large" type="primary" @click="add()">+ 添加</Button>
+      <Table  class="table" border :columns="listTitle" :data="datalist" size="small"  stripe>
+        <template slot-scope="{ row, index }" slot="action">
+        <Button type="primary" size="small" style="margin-right: .05rem" @click="modify(index)">修改</Button>
+        <Button type="error" size="small" @click="remove(index)">删除</Button>
+        <Modal v-model="delectmodal" width="360">
+          <p slot="header" style="color:#f60;text-align:center">
+            <Icon type="ios-information-circle"></Icon>
+            <span>删除用户:{{delectItemDes}}</span>
+          </p>
+          <div style="text-align:center">
+            <p>删除后不可恢复</p>
+            <p>你确定删除吗?</p>
+          </div>
+          <div slot="footer">
+            <Button type="error" size="large" long :loading="modal_loading" @click="delItem">删除</Button>
+          </div>
+        </Modal>
+      </template>
+      </Table>
       <div style="margin: .1rem;overflow: hidden">
         <div style="float: right;">
             <Page :total="page.totaldata" :current.sync="page.current" :page-size="page.rows" @on-change="changePage"></Page>
@@ -53,6 +80,7 @@ export default {
   data () {
     return {
       loading: true,
+      delectmodal: false,
       page: {
         // 数据总条数
         totaldata: 1,
@@ -64,35 +92,44 @@ export default {
       listTitle: [
         {
           title: '设备名称',
+          width: 160,
           key: 'title'
         },
         {
           title: '类型',
+          width: 160,
           key: 'title'
         },
         {
           title: '编号',
+          width: 160,
           key: 'mDateTime'
         },
         {
           title: '项目简称',
+          width: 160,
           key: 'mItemBid'
         },
         {
           title: '标段简称',
+          width: 160,
           key: 'mItemBid'
         },
         {
           title: '状态',
+          width: 160,
           key: 'mItemBid'
         },
         {
           title: '物联卡号',
+          width: 160,
           key: 'mAlarmLevel'
         },
         {
           title: '操作',
-          key: 'mAlarmLevel'
+          slot: 'action',
+          width: 160,
+          align: 'center'
         }
       ],
       datalist: [
@@ -107,6 +144,14 @@ export default {
       // 更换页数
       // this.getData()
       console.log('切换page:' + this.page.current)
+    },
+    add () {
+      this.$router.push({
+        path: '/manage/equip/new',
+        query: {
+          id: 5
+        }
+      })
     }
   }
 }

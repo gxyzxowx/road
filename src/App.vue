@@ -13,10 +13,12 @@ export default {
 <style>
 
 html,body{
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 0;
   padding: 0;
-  height: 100%;
+  /* height: 100%; */
+  height: 10.7rem;
+  background: #050926;
 }
 #app{
   height: 100%;

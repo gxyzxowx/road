@@ -59,3 +59,28 @@ height: 4.50rem;
   .rect(.4rem, .4rem);
   .bgimg('../img/sc/sctab/back.png')
 }
+
+// 新建页面的表格样式
+.newuser, .newrecipe{
+  input {
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: rgba(0, 0, 0, 0);
+    font-size: 0.16rem;
+    outline: none;
+    color: #666; //光标离开的颜色
+    border: none;
+  }
+
+  //光标在输入的颜色
+  input[type="text"]:focus {
+    color: #666;
+  }
+
+  //placehoder的颜色
+  input::-webkit-input-placeholder {
+    color: #bbb !important;
+  }
+}

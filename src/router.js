@@ -66,7 +66,7 @@ const routes = [{
         path: '/sc/SCwarn',
         component: () => import('./views/SC/SCwarn.vue')
       }, {
-        // 预警管理处理
+        // （二级）预警管理处理
         path: '/sc/SCwarnHandle',
         component: () => import('./views/SC/SCwarnHandle.vue')
       }, {
@@ -89,20 +89,43 @@ const routes = [{
       name: 'manage',
       component: () => import('./views/manage/Home.vue'),
       children: [{
+        // （一级）项目管理
         path: '/manage/item',
         component: () => import('./views/manage/Mitem.vue')
       },
       {
+        // （二级）项目管理--新建项目
+        path: '/manage/item/new',
+        component: () => import('./views/manage/MitemNew.vue')
+      },
+      {
+        // （一级）设备管理
         path: '/manage/equip',
         component: () => import('./views/manage/Mequip.vue')
       },
       {
-        path: '/manage/recipe',
-        component: () => import('./views/manage/Mrecipe.vue')
+        // （二级）设备管理 --新建设备
+        path: '/manage/equip/new',
+        component: () => import('./views/manage/MequipNew.vue')
       },
       {
+        // （一级）生产管理
+        path: '/manage/recipe',
+        component: () => import('./views/manage/Mrecipe.vue')
+      }, {
+        // （二级）生产管理--新建材料/配方
+        path: '/manage/recipe/new',
+        component: () => import('./views/manage/MrecipeNew.vue')
+      },
+      {
+        // （一级）用户管理
         path: '/manage/user',
         component: () => import('./views/manage/Muser.vue')
+      },
+      {
+        // （二级）用户管理--新建用户
+        path: '/manage/user/new',
+        component: () => import('./views/manage/MuserNew.vue')
       }
       ]
     }

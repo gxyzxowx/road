@@ -4,16 +4,18 @@
   var html = doc.getElementsByTagName('html')[0]
   // orientationchange->手机屏幕转屏事件
   // resize->页面大小改变事件(一边pc端有用)
-  var reEvt = 'orientationchange' in win ? 'orientationchange' : 'resize'
+  // var reEvt = 'orientationchange' in win ? 'orientationchange' : 'resize'
   var reFontSize = function () {
     var clientW = doc.documentElement.clientWidth || doc.body.clientWidth
     // console.log(clientW)
     if (!clientW) {
       return
     }
+    // 按照目前设备浏览器宽度为1093来设置的1rem = 100px
     html.style.fontSize = 100 * (clientW / 1903) + 'px'
   }
-  win.addEventListener(reEvt, reFontSize)
+  // 取消监听页面窗口变化重新渲染事件（7，18行）
+  // win.addEventListener(reEvt, reFontSize)
   // DOMContentLoaded->dom加载完就执行,onload要dom/css/js都加载完才执行
   doc.addEventListener('DOMContentLoaded', reFontSize)
 })(document, window)

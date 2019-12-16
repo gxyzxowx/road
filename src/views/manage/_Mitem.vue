@@ -19,7 +19,7 @@
   <div class="mitem">
     <div class="title" ref="header">
       <div class="left">
-        <Button type="success" size="large" icon="md-add" @click="add()">新建项目</Button>
+        <Button type="success" size="large" icon="md-add" @click="createNewItem()">新建项目</Button>
       </div>
       <div class="right">
         <Input
@@ -340,15 +340,6 @@ export default {
       // this.$nextTick(() => {
       // this.showView = true // DOM更新后再通过v-if添加router-view节点
       // })
-    },
-    // 增加项目页面
-    add () {
-      this.$router.push({
-        path: '/manage/item/new',
-        query: {
-          id: 5
-        }
-      })
     }
   },
   components: {

@@ -18,7 +18,6 @@
     width: 4.70rem;
     margin-top: .1rem;
     span{
-
       margin-left: 1.30rem;
       // background:rgba(24,56,98,1);
       // border:.01rem solid rgba(32, 64, 129, 1);
