@@ -115,8 +115,8 @@ export default {
       showModifyProject: false,
       itemTitle: [
         {
-          title: '项目描述',
-          key: 'mItemDes',
+          title: '项目简称',
+          key: 'mItemJC',
           width: 180,
           fixed: 'left'
         },
@@ -126,69 +126,53 @@ export default {
         //   width: 80
         // },
         {
-          title: '标段数量',
-          key: 'mItemBidSun',
+          title: '项目名称',
+          key: 'mItemMC',
           width: 100
         },
         {
           title: '项目总长度',
           key: 'mItemTotalLength',
           width: 110
-        },
-        {
-          title: '项目状态',
-          key: 'mItemActive',
-          width: 100
-        },
-        {
-          title: '项目负责人',
-          key: 'mItemAdmin',
+        }, {
+          title: '路面宽度',
+          key: 'mItemLMKD',
           width: 110
         },
         {
-          title: '项目联系电话',
-          key: 'mItemPhoneNo',
-          width: 130
+          title: '项目状态',
+          key: 'mItemZT',
+          width: 110
+        },
+        {
+          title: '公路名称',
+          key: 'mItemGLMC',
+          width: 100
+        },
+        {
+          title: '公路等级',
+          key: 'mItemGLDJ',
+          width: 110
         },
         {
           title: '建设单位',
-          key: 'mItemSGUint',
+          key: 'mItemJSDW',
           width: 150
         },
         {
-          title: '咨询单位',
-          key: 'mItemJGUint',
+          title: '监管单位',
+          key: 'mItemJGDW',
           width: 150
         },
         {
-          title: '一级预警联系人',
-          key: 'mAlarmLev1Name',
+          title: '起止桩号',
+          key: 'mItemQZZH',
           width: 100
         },
         {
-          title: '一级预警联系电话',
-          key: 'mAlarmLev1PhoneNo',
+          title: '工程概况',
+          key: 'mItemGCGK',
           width: 150
-        },
-        {
-          title: '二级预警联系人',
-          key: 'mAlarmLev2Name',
-          width: 100
-        },
-        {
-          title: '二级预警联系电话',
-          key: 'mAlarmLev2PhoneNo',
-          width: 150
-        },
-        {
-          title: '三级预警联系人',
-          key: 'mAlarmLev3Name',
-          width: 100
-        },
-        {
-          title: '三级预警联系电话',
-          key: 'mAlarmLev3PhoneNo',
-          width: 100
         },
         {
           title: '操作',
@@ -273,7 +257,7 @@ export default {
         if (rs.code === 0) {
           this.page.totaldata = rs.total
           rs.data.map((item, index, arr) => {
-            rs.data[index]['mItemActive'] = item['mItemActive'] ? '进行中' : '完结'
+            rs.data[index]['mItemZT'] = item['mItemZT'] ? '进行中' : '完结'
           })
           this.itemlist = rs.data
         }
@@ -283,8 +267,14 @@ export default {
     modify (index) {
       this.selectIndex = index
       this.selectItemID = this.itemlist[this.selectIndex].mItemID
-      this.$store.commit('selectItemID', this.selectItemID)
-      this.showModifyProject = true
+      // this.$store.commit('selectItemID', this.selectItemID)
+      // this.showModifyProject = true
+      this.$router.push({
+        path: '/manage/item/new',
+        query: {
+          id: this.selectItemID
+        }
+      })
     },
     // 新建项目
     createNewItem () {
@@ -346,7 +336,7 @@ export default {
       this.$router.push({
         path: '/manage/item/new',
         query: {
-          id: 5
+          id: -1
         }
       })
     }

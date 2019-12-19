@@ -1,61 +1,22 @@
 <!-- 设备管理 -->
 <style lang="less" scoped>
-  .equip{
-    display: flex;
-    height: 100%;
-    .ul{
-      width: 1.5rem;
-      li{
-        width: 100%;
-        height: .46rem;
-        line-height: .46rem;
-        font-size: .18rem;
-        color:#333;
-        text-align: center;
-        &.active{
-          color:#6996F3;
-          background: #F0F4FE;
-        }
-      }
-    }
-    .list{
-      position: relative;
-      background: #F0F4FE;
-      width: 100%;
-      height: 100%;
-      padding: .39rem;
-      .table{
-        width: 14.2rem;
-      }
-      h3{
-        margin-bottom: .4rem;
-      }
-      .addbtn{
-        position: absolute;
-        top:.5rem;
-        right: .6rem;
-      }
-    }
-  }
 </style>
 <template>
   <div class="equip">
     <ul class="ul">
-      <li>项目1简称</li>
-      <li>项目1简称</li>
-      <li class="active">项目1简称</li>
+      <li v-for="(item, index) in itemlist" :key="index" :class="{active:index==isactive}" @click="choseItem(index)">{{item.mItemJC}}</li>
     </ul>
     <div class="list">
       <h3>所有设备</h3>
-       <Button  class="addbtn" size="large" type="primary" @click="add()">+ 添加</Button>
+       <Button  class="addbtn" size="large" type="primary" @click="linktoPage(-1)">+ 添加</Button>
       <Table  class="table" border :columns="listTitle" :data="datalist" size="small"  stripe>
         <template slot-scope="{ row, index }" slot="action">
-        <Button type="primary" size="small" style="margin-right: .05rem" @click="modify(index)">修改</Button>
+        <Button type="primary" size="small" style="margin-right: .05rem" @click="linktoPage(index)">修改</Button>
         <Button type="error" size="small" @click="remove(index)">删除</Button>
         <Modal v-model="delectmodal" width="360">
           <p slot="header" style="color:#f60;text-align:center">
             <Icon type="ios-information-circle"></Icon>
-            <span>删除用户:{{delectItemDes}}</span>
+            <span>删除设备:{{delectText}}</span>
           </p>
           <div style="text-align:center">
             <p>删除后不可恢复</p>
@@ -67,91 +28,160 @@
         </Modal>
       </template>
       </Table>
-      <div style="margin: .1rem;overflow: hidden">
-        <div style="float: right;">
-            <Page :total="page.totaldata" :current.sync="page.current" :page-size="page.rows" @on-change="changePage"></Page>
-        </div>
-    </div>
     </div>
   </div>
 </template>
 <script>
+import '@/assets/css/equiplist.css'
 export default {
   data () {
     return {
+      isactive: 0,
+      mUserID: 0,
+      mItemID: 0,
+      delectText: '',
+      selectIndex: 0,
       loading: true,
+      modal_loading: false,
       delectmodal: false,
-      page: {
-        // 数据总条数
-        totaldata: 1,
-        // 当前页数
-        current: 1,
-        // 每页条数
-        rows: 7
-      },
+      itemlist: [],
       listTitle: [
         {
           title: '设备名称',
           width: 160,
-          key: 'title'
+          key: 'mDevName'
         },
         {
           title: '类型',
           width: 160,
-          key: 'title'
+          key: 'mDevType'
         },
         {
           title: '编号',
           width: 160,
-          key: 'mDateTime'
+          key: 'mDevSn'
         },
         {
           title: '项目简称',
           width: 160,
-          key: 'mItemBid'
+          key: 'mItemJC'
         },
         {
           title: '标段简称',
           width: 160,
-          key: 'mItemBid'
+          key: 'mItemBDJC'
         },
         {
           title: '状态',
           width: 160,
-          key: 'mItemBid'
+          key: 'mDevStatus'
         },
         {
           title: '物联卡号',
           width: 160,
-          key: 'mAlarmLevel'
+          key: 'mDevPhoneNo'
         },
         {
           title: '操作',
           slot: 'action',
           width: 160,
+          fixed: 'right',
           align: 'center'
         }
       ],
       datalist: [
-        {
-          title: 'abc'
-        }
       ]
     }
   },
+  mounted () {
+    this.mUserID = this.comFun.getCookie('roadmUserID')
+    this.getItemlist()
+  },
   methods: {
-    changePage () {
-      // 更换页数
-      // this.getData()
-      console.log('切换page:' + this.page.current)
+    choseItem (_index) {
+      // 改变样式
+      this.isactive = _index
+      this.mItemID = this.itemlist[_index]['mItemID']
+      let obj = {
+        mUserID: this.mUserID,
+        mItemID: this.mItemID
+      }
+      // 弹出设备列表datalist
+      this.comFun.post('/Dev/getDevList', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          let _data = rs.data
+          _data = this.devType(_data)
+          this.datalist = _data
+        }
+      }, (err) => { console.log(err) })
     },
-    add () {
+    linktoPage (index) {
+      let _id = index
+      if (index !== -1) {
+        _id = this.datalist[index]['mDevID']
+      }
+
       this.$router.push({
         path: '/manage/equip/new',
         query: {
-          id: 5
+          id: _id,
+          mItemID: this.mItemID
         }
       })
+    },
+    getItemlist () {
+      let obj = {
+        mUserID: this.mUserID
+      }
+      this.comFun.post('/Item/getItemList', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.itemlist = rs.data
+          // 默认出来第一个
+          this.choseItem(0)
+        }
+      }, (err) => { console.log(err) })
+    },
+    // 准备删除
+    remove (index) {
+      this.delectText = this.datalist[index].mDevName
+      this.delectmodal = true
+      this.selectIndex = index
+    },
+    // 确认删除
+    delItem () {
+      let mDevID = this.datalist[this.selectIndex].mDevID
+      let obj = {
+        mUserID: this.mUserID,
+        mItemID: this.mItemID,
+        mDevID: mDevID
+      }
+      this.comFun.post('/Dev/userDeleteDev', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.modal_loading = true
+          setTimeout(() => {
+            this.modal_loading = false
+            this.delectmodal = false
+            this.datalist.splice(this.selectIndex, 1)
+            this.$Message.success('成功删除设备')
+          }, 1000)
+        }
+      }, (err) => { console.log(err) })
+    },
+    // 拌和站209，碾压机211，摊铺机210
+    devType (_data) {
+      _data.map((item, index, arr) => {
+        if (item['mDevType'] === 209) {
+          arr[index]['mDevType'] = '拌和站'
+        } else if (item['mDevType'] === 211) {
+          arr[index]['mDevType'] = '碾压机'
+        } else if (item['mDevType'] === 210) {
+          arr[index]['mDevType'] = '摊铺机'
+        }
+      })
+      return _data
     }
   }
 }

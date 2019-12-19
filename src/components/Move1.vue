@@ -99,20 +99,23 @@ export default {
     }
   },
   props: ['id', 'data'],
-  // watch: {
-  //   data: {
-  //     handler (newVal, oldVal) {
-  //       this.XYdata = newVal
-  //       console.log(JSON.stringify(newVal))
-  //       // 真实数据
-  //       this.initCanvas()
-  //     }
-  //   },
-  //   deep: true
-  // },
+  watch: {
+    data: {
+      handler (newVal, oldVal) {
+        this.XYdata = newVal
+        console.log(JSON.stringify(newVal))
+        // 真实数据
+        this.initCanvas()
+      }
+    },
+    deep: true
+  },
+  created () {
+    console.log(123)
+  },
   mounted () {
     // 测试时打开
-    this.initCanvas()
+    // this.initCanvas()
     // window.addEventListener('mousewheel', this.handleScroll, false)
 
     // 处理颜色条样式
@@ -128,12 +131,10 @@ export default {
   methods: {
     initCanvas () {
       // 测试数据obj是一个数组
-      let obj = this.testarr
-      // let obj = this.testarr.concat(this.testarr)
-      // obj = obj.concat(obj)
+      // let obj = this.testarr
       // 真实坐标数据data
-      // let obj = this.XYdata
-      // console.log(JSON.stringify(obj, null, 2))
+      let obj = this.XYdata
+      console.log(JSON.stringify(obj, null, 2))
       let canvas = document.getElementById('myCanvas')
       let ctx = canvas.getContext('2d')
       // ctx.globalAlpha = this.step / 255

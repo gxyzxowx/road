@@ -1,0 +1,38 @@
+.equip {
+  display: flex;
+  height: 100%;
+}
+.equip .ul {
+  width: 1.5rem;
+}
+.equip .ul li {
+  width: 100%;
+  height: 0.46rem;
+  line-height: 0.46rem;
+  font-size: 0.18rem;
+  color: #333;
+  text-align: center;
+  cursor: pointer;
+}
+.equip .ul li.active {
+  color: #6996F3;
+  background: #F0F4FE;
+}
+.equip .list {
+  position: relative;
+  background: #F0F4FE;
+  width: 100%;
+  height: 100%;
+  padding: 0.39rem;
+}
+.equip .list .table {
+  width: 14.2rem;
+}
+.equip .list h3 {
+  margin-bottom: 0.4rem;
+}
+.equip .list .addbtn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+}

@@ -5,7 +5,7 @@
     background: #fff;
     height: 100%;
     width: 100%;
-    padding-right:.40rem;
+    padding-right:.30rem;
     width: 16.2rem;
     .left{
       flex: 1;
@@ -15,8 +15,20 @@
       padding-left: .2rem;
       padding-top: .4rem;
       .list{
+        .table{
+          width:10.8rem;
+        }
 
       }
+      .list2{
+        width: auto;
+        .table{
+          width: 3.5rem;
+          height: 2.5rem;
+          overflow: auto;
+        }
+
+        }
       .curves {
         display: flex;
         flex-wrap: wrap;
@@ -24,7 +36,7 @@
         .curve{
           width: 3.5rem;
           height: 2.5rem;
-          border:2px solid #333;
+          // border:2px solid #333;
             }
       }
     }
@@ -36,10 +48,10 @@
     <!-- 地图（） -->
     <Map class="map" :data="datas.DevData"></Map>
   </div>
-  <div class="right" ref = "right">
+  <div class="right">
     <!-- 列表 -->
     <div class="list">
-      <Table :loading="loading" height="140" border :columns="listTitle" :data="datalist" size="small"  :width="tableWidth" stripe></Table>
+      <Table class="table" :loading="loading"  border :columns="listTitle" :data="datalist" size="small"  stripe></Table>
     </div>
     <!-- 图表 -->
     <div class="curves">
@@ -47,20 +59,20 @@
         <CurveChart :id="'curve1'" :data="datacurve1" class = "chart"></CurveChart>
       </div>
       <div class="curve">
-        <CurveChart :id="'curve2'" :data="datacurve1" class = "chart"></CurveChart>
+        <CurveChart :id="'curve2'" :data="datacurve2" class = "chart"></CurveChart>
       </div>
       <div class="curve">
-        <CurveChart :id="'curve3'" :data="datacurve1" class = "chart"></CurveChart>
+        <CurveChart :id="'curve3'" :data="datacurve3" class = "chart"></CurveChart>
       </div>
       <div class="curve">
-        <CurveChart :id="'curve4'" :data="datacurve1" class = "chart"></CurveChart>
+        <CurveChart :id="'curve4'" :data="datacurve4" class = "chart"></CurveChart>
       </div>
-      <div class="curve" ref = "tableheight2">
-        <CurveChart :id="'curve5'" :data="datacurve1" class = "chart"></CurveChart>
+      <div class="curve" ref="curve">
+        <CurveChart :id="'curve5'" :data="datacurve5" class = "chart"></CurveChart>
       </div>
-      <div class="curve list">
+      <div class="curve list2">
         <!-- 预警信息列表 -->
-        <Table :loading="loading" :height="tableheight2" border :columns="listTitle2" :data="datalist2" size="small"  :width="tableWidth2" stripe></Table>
+        <Table class="table"  :height="curve.H" :width="curve.W" :loading="loading" border :columns="listTitle2" :data="datalist2" size="small"  stripe></Table>
       </div>
     </div>
   </div>
@@ -73,124 +85,177 @@ import Map from '@/components/Map.vue'
 export default {
   data () {
     return {
+      curve: { H: '', W: '' },
+      mUserID: '',
+      mItemID: '',
       loading: true,
-      tableWidth: '1000',
-      tableWidth2: '500',
-      tableheight2: '160',
+      // 温度曲线
       datacurve1: null,
+      // 油石比曲线
+      datacurve2: null,
+      // 级配曲线
+      datacurve3: null,
+      // 关键筛孔率曲线
+      datacurve4: null,
+      // 拌和周期曲线
+      datacurve5: null,
+      str: 'cdfsadfcc',
       datas: {
         DevData: []
       },
       listTitle: [
         {
-          title: '生产数据',
+          title: '实时信息',
           key: 'title',
           width: 90
         },
         {
           title: '骨料1',
-          key: 'mDateTime'
+          key: 'n1'
         },
         {
           title: '骨料2',
-          key: 'mItemBid'
+          key: 'n2'
         },
         {
           title: '骨料3',
-          key: 'mItemBid'
+          key: 'n3'
         },
         {
           title: '骨料4',
-          key: 'mAlarmLevel'
+          key: 'n4'
         },
         {
           title: '骨料5',
-          key: 'mAlarmType_temp'
+          key: 'n5'
         },
         {
           title: '骨料6',
-          key: 'mAlarmType_ysb'
+          key: 'n6'
         },
         {
           title: '矿粉1',
-          key: 'mAlarmType_jp'
+          key: 'n7'
         },
         {
           title: '矿粉2',
-          key: 'mAlarmDec'
+          key: 'n8'
         },
         {
           title: '矿粉3',
-          key: 'status'
+          key: 'n9'
         },
         {
           title: '沥青',
-          key: 'status'
+          key: 'n10'
         }
       ],
       listTitle2: [
         {
           title: '预警时间',
-          key: 'title',
+          key: 'mDateTime',
+          ellipsis: true,
           width: 90
         },
         {
           title: '预警等级',
-          key: 'mDateTime'
+          width: 90,
+          key: 'mAlarmLevel'
         }, {
           title: '拌合楼名称',
-          key: 'title',
-          width: 90
+          key: 'mDevName',
+          width: 100
         }, {
           title: '预警内容',
-          key: 'title',
+          key: 'mAlarmDec',
+          ellipsis: true,
           width: 90
         }, {
           title: '处理状态',
-          key: 'title',
+          key: 'ClStatus',
           width: 90
         }],
       datalist: [
-        { 'title': '目标(kg)' },
+        { 'title': '目标(kg)', 'n1': '...' },
         { 'title': '实际(kg)' },
         { 'title': '误差(%)' }
       ],
       datalist2: [
-        { 'title': '目标(kg)' }
       ]
     }
   },
+  created () {
+    this.mUserID = this.comFun.getCookie('roadmUserID')
+    this.mItemID = this.$store.state.itemInfo.id
+  },
   mounted () {
-    this.display()
+    // this.display()
     this.getData()
-    this.$nextTick(() => {
-      this.tableWidth = this.$refs.right.offsetWidth
-      this.tableWidth2 = this.$refs.tableheight2.offsetWidth
-      this.tableheight2 = this.$refs.tableheight2.offsetHeight
+    this.$nextTick(() => { // 页面渲染完成后的回调
+      this.curve.W = this.$refs.curve.offsetWidth
+      this.curve.H = this.$refs.curve.offsetHeight
     })
   },
   methods: {
-    getData (emitobj) {
+    getData () {
       let obj = {
-        mUserID: this.comFun.getCookie('roadmUserID'),
-        mItemID: this.$store.state.itemInfo.id
+        mUserID: this.mUserID,
+        mItemID: this.mItemID
       }
-      // 有emitobj是子组件点击搜索的时候
-      if (emitobj) {
-        this.emitobj = emitobj
-        // console.log('是emit过来的参数:' + JSON.stringify(emitobj))
-      }
-      obj = { ...obj, ...this.emitobj }
-      console.log(JSON.stringify(obj))
-      this.comFun.post('/Produce_J_G/productQuality', obj, this).then((rs) => {
-        // console.log(JSON.stringify(rs))
+      // console.log(JSON.stringify(obj))
+      // 实时信息
+      this.comFun.post('/Produce_J_G/realTimeInfo', obj, this).then((rs) => {
+        // console.log(JSON.stringify(rs.data.TempData))
         if (rs.code === 0) {
-          // rs.data.map((item, index, arr) => {
-          //   arr[index].mBhItemTemp = item.mBhItemTemp + '℃'
-          //   arr[index].mBnYSB = item.mBnYSB + '%'
-          // })
-          // 出料温度曲线
-          this.dataCurve1 = this.handleCurveData(rs.data, 'mBhDateTime', 'mBhItemTemp', '℃', '出料温度曲线图')
+          // 处理头部列表数据
+          let datalist = rs.data.NewestInfo
+          // 目标值
+          let Recipe = []
+          // 实际值
+          let Actual = []
+          // 误差百分比
+          let Rep = []
+          for (let item in datalist) {
+            if (item.indexOf('Recipe') !== -1) {
+              Recipe.push(datalist[item])
+            }
+            if (item.indexOf('Actual') !== -1) {
+              Actual.push(datalist[item])
+            }
+            if (item.indexOf('Rep') !== -1) {
+              Rep.push((datalist[item] * 100).toFixed(2) + '%')
+            }
+          }
+          Recipe.map((item, index, arr) => {
+            this.datalist[0]['n' + (index + 1)] = item
+          })
+          Actual.map((item, index, arr) => {
+            this.datalist[1]['n' + (index + 1)] = item
+          })
+          Rep.map((item, index, arr) => {
+            this.datalist[2]['n' + (index + 1)] = item
+          })
+          // 处理头部列表数据结束
+          // 处理温度曲线
+          this.dataTemp(rs.data.TempData)
+
+          // 处理油石比曲线
+          this.dataYSB(rs.data.ScYSBData)
+
+          // 处理级配曲线
+          this.dataJP(rs.data.ScJpData)
+
+          // 处理关键筛孔率曲线
+          this.dataSKL(rs.data.SKLData)
+
+          // 处理dataPeroid拌和周期曲线
+          this.dataPeroid(rs.data.PeroidData)
+
+          // 处理地图
+          this.datas.DevData = rs.data.DevData
+
+          // 处理预警数据
+          this.datalist2 = rs.data.AlarmData
           // 油石比曲线
           // this.dataCurve2 = this.handleCurveData(rs.data, 'mBhDateTime', 'mBnYSB', '%', '油石比曲线图')
           // // 级配曲线9
@@ -198,28 +263,139 @@ export default {
         }
       }, (err) => { console.log(err) })
     },
-    display () {
-      this.itemId = this.$store.state.itemInfo.id
-      // 取得数据
-      let obj = {
-        mUserID: this.comFun.getCookie('roadmUserID'),
-        mItemID: this.itemId
+    // 处理温度曲线数据
+    dataTemp (data) {
+      let xdata = []
+      // 三条曲线arr
+      let arr1 = []
+      let arr2 = []
+      let arr3 = []
+      data.map((item, index, arr) => {
+        xdata.push(item['mBhDateTime'])
+        arr1.push(item['mClTemp_Up1'])
+        arr2.push(item['mBhItemTemp'])
+        arr3.push(item['mClTemp_Down1'])
+      })
+      let arr = [arr1, arr2, arr3]
+      this.datacurve1 = this.handleCurveData(arr, xdata, '出料温度曲线图')
+    },
+    // 处理油石比曲线
+    dataYSB (data) {
+      let xdata = []
+      // 三条曲线arr
+      let arr1 = []
+      let arr2 = []
+      let arr3 = []
+      data.map((item, index, arr) => {
+        xdata.push(item['mBhDateTime'])
+        arr1.push(item['mClYSB_Up1'])
+        arr2.push(item['mBnYSB'])
+        arr3.push(item['mClYSB_Down1'])
+      })
+      let arr = [arr1, arr2, arr3]
+      this.datacurve2 = this.handleCurveData(arr, xdata, '油石比曲线图')
+    },
+    // 处理级配曲线
+    dataJP (data) {
+      let xdata = []
+      // 三条曲线arr
+      let arr1 = []
+      let arr2 = []
+      let arr3 = []
+      data.map((item, index, arr) => {
+        xdata.push(item['mBhDateTime'])
+        arr1.push(item['mClYSB_Up1'])
+        arr2.push(item['mBnYSB'])
+        arr3.push(item['mClYSB_Down1'])
+      })
+      let arr = [arr1, arr2, arr3]
+      this.datacurve3 = this.handleCurveData(arr, xdata, '级配曲线图')
+    },
+    // 处理关键塞孔率曲线
+    dataSKL (data) {
+      let xdata = []
+      // 三条曲线arr
+      let arr1 = []
+      let arr2 = []
+      let arr3 = []
+      data.map((item, index, arr) => {
+        xdata.push(item['mBhDateTime'])
+        arr1.push(item['mBhSKL0475'])
+        arr2.push(item['mBhSKL0236'])
+        arr3.push(item['mBhSKL00075'])
+      })
+      let arr = [arr1, arr2, arr3]
+      this.datacurve4 = this.handleCurveData(arr, xdata, '关键塞孔率曲线图', true)
+    },
+    // 拌和周期曲线
+    dataPeroid (data) {
+      let xdata = []
+      // 三条曲线arr
+      let arr1 = []
+      let arr2 = []
+      let arr3 = []
+      data.map((item, index, arr) => {
+        xdata.push(item['mBhDateTime'])
+        arr1.push(item['mClBHPeriod_Up1'])
+        arr2.push(item['mBhScPeriod'])
+        arr3.push(item['mClBHPeriod_Down1'])
+      })
+      let arr = [arr1, arr2, arr3]
+      this.datacurve5 = this.handleCurveData(arr, xdata, '拌和周期曲线图')
+    },
+    // 处理曲线数据
+    handleCurveData (arr, xdata, title, type) {
+      let legendData = ['上限', '实际值', '下限']
+      if (type) {
+        legendData = ['4.75', '2.36', '0.075']
       }
-      // console.log(obj)
-      this.comFun.post('/Index/getHomePageData', obj, this).then(
-        rs => {
-          // console.log(JSON.stringify(rs.data.DevData, null, 2))
-          if (rs.code === 0) {
-            // 设备状态（地图）
-            this.datas.DevData = rs.data.DevData
-            // console.log(JSON.stringify(rs.data))
-          } else {
+      let option = {
+        title: {
+          text: title,
+          textStyle: {
+            fontSize: 15
           }
         },
-        err => {
-          console.log(err)
-        }
-      )
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: legendData,
+          padding: [25, 0, 0, 0]
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: xdata
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: '上限',
+            type: 'line',
+            data: arr[0]
+          },
+          {
+            name: '实际值',
+            type: 'line',
+            data: arr[1]
+          },
+          {
+            name: '下限',
+            type: 'line',
+            data: arr[2]
+          }
+        ]
+      }
+      return option
     }
   },
   components: {

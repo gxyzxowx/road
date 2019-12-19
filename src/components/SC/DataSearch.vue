@@ -13,7 +13,7 @@
       <Select v-model="select.mItemBid" class="box" placeholder="工程标段">
           <Option v-for="item in show.mItemBidList" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
-        <Select v-model="select.mClTypeValue" class="box" placeholder="层位">
+        <Select v-model="select.mClCW" class="box" placeholder="层位">
           <Option v-for="item in show.mClTypeValueList" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
         <DatePicker type="date" placeholder="开始时间" class="box" v-model="select.start_time" @on-change="changeType0"></DatePicker>

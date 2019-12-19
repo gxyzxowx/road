@@ -242,16 +242,20 @@ export default {
       // console.log(obj)
       this.comFun.post('/Index/getHomePageData', obj, this).then(
         rs => {
-          console.log(JSON.stringify(rs.data))
+          // console.log(JSON.stringify(rs.data.DevData, null, 2))
           if (rs.code === 0) {
           //  项目信息
             this.datas.ItemData = rs.data.ItemData
             // 预警类型饼图
             this.dataPie1 = this.handlePieData(rs.data.AlarmData.data, 'type_name', 'rep', '预警类型分类统计')
-            // 进度柱状图
-            this.dataBar1 = this.handleBarData(rs.data.ScRate, 'name', 'rep')
-            // 每日生产总量统计曲线图
+            // 预警级别分类饼图
+            // this.dataPie2 = this.handlePieData(rs.data.AlarmLevelData.data, 'level_name', 'rep', '预警级别分类统计')
+            // 各个标段总量统计柱状图
+            this.dataBar1 = this.handleBarData(rs.data.BhBidData, 'name', 'value')
+            // 每日生产总量统计
             this.dataCurve1 = this.handleCurveData(rs.data.BhDayData.data, 'time', 'value')
+            // 摊铺和碾压统计
+            // this.dataBar2 = this.handleBarData(rs.data.TpData, 'name', 'value')
             // 设备状态（地图）
             this.datas.DevData = rs.data.DevData
             // console.log(JSON.stringify(rs.data))

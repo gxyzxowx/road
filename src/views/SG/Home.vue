@@ -36,6 +36,7 @@ export default {
         // console.log('我是施工页面' + JSON.stringify(rs))
         // console.log(rs)
         this.chartsdata = this.handleChartsData(rs.data)
+
         if (rs.code === 0) {
           // 处理数据
           this.chartsdata = this.handleChartsData(rs.data)

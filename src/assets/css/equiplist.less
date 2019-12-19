@@ -1,0 +1,39 @@
+// 设备列表，用户列表，生产材料列表公用css
+.equip{
+  display: flex;
+  height: 100%;
+  .ul{
+    width: 1.5rem;
+    li{
+      width: 100%;
+      height: .46rem;
+      line-height: .46rem;
+      font-size: .18rem;
+      color:#333;
+      text-align: center;
+      cursor: pointer;
+      &.active{
+        color:#6996F3;
+        background: #F0F4FE;
+      }
+    }
+  }
+  .list{
+    position: relative;
+    background: #F0F4FE;
+    width: 100%;
+    height: 100%;
+    padding: .39rem;
+    .table{
+      width: 14.2rem;
+    }
+    h3{
+      margin-bottom: .4rem;
+    }
+    .addbtn{
+      position: absolute;
+      top:.5rem;
+      right: .6rem;
+    }
+  }
+}

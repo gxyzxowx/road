@@ -1,66 +1,23 @@
 <!-- 用户管理 -->
 <style lang="less" scoped>
-  .equip{
-    display: flex;
-    height: 100%;
-    .ul{
-      width: 1.5rem;
-      li{
-        width: 100%;
-        height: .46rem;
-        line-height: .46rem;
-        font-size: .18rem;
-        color:#333;
-        text-align: center;
-        &.active{
-          color:#6996F3;
-          background: #F0F4FE;
-        }
-      }
-    }
-    .main{
-      background: #F0F4FE;
-      width: 100%;
-    }
-    .list{
-      position: relative;
-      width: 14.86rem;
-      height: 100%;
-      padding: .39rem;
-      overflow-x: auto;
-      .table{
-        width: 14.2rem;
-      }
-      h3{
-        margin-bottom: .4rem;
-      }
-      .addbtn{
-        position: absolute;
-        top:.5rem;
-        right: .6rem;
-      }
-    }
-  }
 </style>
 <template>
   <div class="equip">
     <ul class="ul">
-      <li>项目1简称</li>
-      <li>项目1简称</li>
-      <li class="active">项目1简称</li>
+      <li v-for="(item, index) in itemlist" :key="index" :class="{active:index==isactive}" @click="choseItem(index)">{{item.mItemJC}}</li>
     </ul>
     <div class="main">
     <div class="list">
       <h3>用户列表</h3>
-      <Button  class="addbtn" size="large" type="primary" @click="add()">+ 添加</Button>
+      <Button  class="addbtn" size="large" type="primary" @click="linktoPage(-1)">+ 添加</Button>
       <Table class="table" border :columns="listTitle" :data="datalist" size="small" stripe>
       <template slot-scope="{ row, index }" slot="action">
-        <Button type="primary" size="small" style="margin-right: .05rem" @click="modify(index)">修改</Button>
+        <Button type="primary" size="small" style="margin-right: .05rem" @click="linktoPage(index)">修改</Button>
         <Button type="error" size="small" @click="remove(index)">删除</Button>
         <Modal v-model="delectmodal" width="360">
           <p slot="header" style="color:#f60;text-align:center">
             <Icon type="ios-information-circle"></Icon>
-            <span>删除用户:{{delectItemDes}}</span>
+            <span>删除用户:{{delectText}}</span>
           </p>
           <div style="text-align:center">
             <p>删除后不可恢复</p>
@@ -72,103 +29,167 @@
         </Modal>
       </template>
       </Table>
-      <div style="margin: .1rem;overflow: hidden">
-        <div style="float: right;">
-            <Page :total="page.totaldata" :current.sync="page.current" :page-size="page.rows" @on-change="changePage"></Page>
-        </div>
-    </div>
     </div>
     </div>
 
   </div>
 </template>
 <script>
+import '@/assets/css/equiplist.css'
 export default {
   data () {
     return {
+      // 默认选中第一个项目
+      isactive: 0,
+      mItemID: 0,
+      mUserID: 0,
       loading: true,
-      page: {
-        // 数据总条数
-        totaldata: 1,
-        // 当前页数
-        current: 1,
-        // 每页条数
-        rows: 7
-      },
+      modal_loading: false,
+      delectmodal: false,
+      selectIndex: 0,
+      itemlist: [],
+      delectText: '',
       listTitle: [
         {
           title: '用户名',
           width: 160,
-          key: 'title'
+          fixed: 'left',
+          key: 'mUserName'
         },
         {
           title: '密码',
           width: 160,
-          key: 'title'
+          key: 'mUserPwd'
         },
         {
           title: '姓名',
           width: 160,
-          key: 'mDateTime'
+          key: 'mUserXM'
         },
         {
           title: '电话',
           width: 160,
-          key: 'mItemBid'
+          key: 'mUserDHHM'
+        },
+        {
+          title: '微信号',
+          width: 160,
+          key: 'mUserWXHM'
         },
         {
           title: '单位',
           width: 160,
-          key: 'mItemBid'
+          key: 'mUserDW'
         },
         {
           title: '权限',
           width: 160,
-          key: 'mItemBid'
+          key: 'mUserLevel'
         },
         {
           title: '预警等级',
           width: 160,
-          key: 'mAlarmLevel'
+          key: 'mUserYJDJ'
         },
         {
-          title: '短信',
+          title: '短信通知',
           width: 160,
-          key: 'mAlarmLevel'
+          key: 'mUserDXTZ'
         },
         {
-          title: '微信',
+          title: '微信通知',
           width: 160,
-          key: 'mAlarmLevel'
+          key: 'mUserWXTZ'
         },
         {
           title: '操作',
           slot: 'action',
           width: 160,
+          fixed: 'right',
           align: 'center'
         }
       ],
       datalist: [
-        {
-          title: 'abc'
-        }
       ]
     }
   },
+  mounted () {
+    this.mUserID = this.comFun.getCookie('roadmUserID')
+    this.getItemlist()
+  },
   methods: {
-    changePage () {
-      // 更换页数
-      // this.getData()
-      console.log('切换page:' + this.page.current)
+    choseItem (_index) {
+      // 改变样式
+      this.isactive = _index
+      this.mItemID = this.itemlist[_index]['mItemID']
+      let obj = {
+        mUserID: this.mUserID,
+        mItemID: this.mItemID
+      }
+      // 弹出用户列表datalist
+      this.comFun.post('/User/getUserList', obj, this).then((rs) => {
+        // console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          let _data = rs.data
+          _data.map((item, index, arr) => {
+            // if(item['mUserLevel'])
+          })
+          this.datalist = rs.data
+        }
+      }, (err) => { console.log(err) })
     },
-    // 增加用户页面
-    add () {
+    linktoPage (index) {
+      let _id = index
+      if (index !== -1) {
+        _id = this.datalist[index]['mUserID']
+      }
+
       this.$router.push({
         path: '/manage/user/new',
         query: {
-          id: 5
+          id: _id,
+          mItemID: this.mItemID
         }
       })
+    },
+    // 准备删除
+    remove (index) {
+      this.delectText = this.datalist[index].mUserName
+      this.delectmodal = true
+      this.selectIndex = index
+    },
+    // 确认删除
+    delItem () {
+      let _mUserID = this.datalist[this.selectIndex].mUserID
+      let obj = {
+        mUserID: this.mUserID,
+        delUserID: _mUserID
+      }
+      this.comFun.post('/User/userDeleteAdmin', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.modal_loading = true
+          setTimeout(() => {
+            this.modal_loading = false
+            this.delectmodal = false
+            this.datalist.splice(this.selectIndex, 1)
+            this.$Message.success('成功删除用户')
+          }, 1000)
+        }
+      }, (err) => { console.log(err) })
+    },
+    getItemlist () {
+      let obj = {
+        mUserID: this.mUserID
+      }
+      this.comFun.post('/Item/getItemList', obj, this).then((rs) => {
+        // console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.itemlist = rs.data
+          // 默认出来第一个
+          this.choseItem(0)
+        }
+      }, (err) => { console.log(err) })
     }
   }
 }
