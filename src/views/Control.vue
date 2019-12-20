@@ -242,7 +242,7 @@ export default {
       // console.log(obj)
       this.comFun.post('/Index/getHomePageData', obj, this).then(
         rs => {
-          console.log(JSON.stringify(rs.data))
+          // console.log(JSON.stringify(rs.data))
           if (rs.code === 0) {
           //  项目信息
             this.datas.ItemData = rs.data.ItemData

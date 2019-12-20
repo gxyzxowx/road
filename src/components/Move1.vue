@@ -1,14 +1,35 @@
-<style scoped>
+<style scoped lang="less">
 .canvas {
   background: #fff;
 }
   .warp{
     position: relative;
+    .button{
+      .info{
+        display: flex;
+        .tex{
+          height: .4rem;
+          line-height: .4rem;
+          display: flex;
+          width: 7rem;
+          justify-content: space-between;
+          p:first-of-type{
+            margin-left: .2rem;
+          }
+        }
+      }
+    }
+    .out-canvas{
+      width: 16rem;
+      height: 7.5rem;
+      // border:1px solid red;
+      overflow-x:scroll;
+    }
   }
   .warp .colors{
     position: absolute;
-    left: 9rem;
-    top: 2rem;
+    right: .6rem;
+    top: .35rem;
   }
   .warp .colors ul{
     list-style: none;
@@ -23,29 +44,33 @@
   }
 </style>
 <template>
-  <div class="warp">
+  <div class="warp" ref = "move">
     <div class="button">
-      <Button @click = "handleScale(1)">放大</Button>
-    <Button @click = "handleScale(-1)">缩小</Button>
-    <Card :bordered="false"  style="width:350px">
-            <p slot="title">当前点击坐标遍数： {{currentTimes}}</p>
-            <p>当前坐标 X：{{Xlocation}}， Y:{{Ylocation}}</p>
-        </Card>
-    <div class="colors">
-    <ul>
-      <li v-for="(item, index) in colors" :style="'background: ' + item.col" :key = "index">{{item.index}}遍</li>
-    </ul>
-  </div>
+      <div class="info">
+        <Button @click = "handleScale(1)">放大</Button>
+        <Button @click = "handleScale(-1)">缩小</Button>
+        <div class="tex">
+          <p slot="title">当前点击坐标遍数： {{currentTimes}}</p>
+          <p>当前坐标 X：{{Xlocation}}， Y:{{Ylocation}}</p>
+        </div>
+      </div>
+      <div class="colors">
+      <ul>
+        <li v-for="(item, index) in colors" :style="'background: ' + item.col" :key = "index">{{item.index}}遍</li>
+      </ul>
+      </div>
+    </div>
+    <div class="out-canvas">
+        <canvas
+          class="canvas"
+          id="myCanvas"
+          width="3500"
+          height="3500"
+          style="border:1px solid #999;"
+          @click="getXY"
+        ></canvas>
     </div>
 
-    <canvas
-      class="canvas"
-      id="myCanvas"
-      width="888"
-      height="6300"
-      style="border:1px solid #000000;"
-      @click="getXY"
-    ></canvas>
   </div>
 </template>
 <script>
@@ -53,11 +78,17 @@ import mockdata from '@/data/mockdata.json'
 export default {
   data () {
     return {
+      canvasW: 1200,
+      canvasH: 1000,
       colors: [],
       currentTimes: 0,
       Xlocation: 0,
       Ylocation: 0,
       ctx: null,
+      // 碾压坐标信息
+      XYdata: [],
+      // 道路坐标信息
+      road_data: [],
       // 单层的透明度（0-255)
       step: 25.5,
       // 坐标点
@@ -67,7 +98,6 @@ export default {
       testarr: mockdata,
       // 25遍颜色rgb值
       colorArr: [
-
         [196, 211, 244],
         [164, 188, 238],
         [131, 170, 243],
@@ -102,16 +132,20 @@ export default {
   watch: {
     data: {
       handler (newVal, oldVal) {
-        this.XYdata = newVal
+        this.XYdata = newVal.data
+        this.road_data = newVal.road_data
         console.log(JSON.stringify(newVal))
         // 真实数据
         this.initCanvas()
+
+        // 画道路
+        this.initRoad()
       }
     },
     deep: true
   },
   created () {
-    console.log(123)
+    // console.log(123)
   },
   mounted () {
     // 测试时打开
@@ -127,8 +161,34 @@ export default {
         col: 'rgb(' + this.colorArr[i][0] + ',' + this.colorArr[i][1] + ',' + this.colorArr[i][2] + ')'
       })
     }
+
+    // canvans宽度自适应
+    this.canvasW = this.$refs.move.offsetWidth - 50
+    this.canvasH = this.$refs.move.offsetHeight - 200
   },
   methods: {
+    initRoad () {
+      let road = this.road_data
+      let ctx = this.ctx
+      // ctx.globalAlpha = this.step / 255
+      for (var i = 0; i < road.length; i++) {
+        ctx.beginPath()
+        ctx.strokeStyle = 'rgba(209,123,238,1)'
+        ctx.lineWidth = 0.1
+        ctx.fillStyle = 'rgba(209,123,238,1)'
+
+        // 真实数据
+        ctx.moveTo(road[i][0]['x'], road[i][0]['y'])
+        ctx.lineTo(road[i][1]['x'], road[i][1]['y'])
+        ctx.lineTo(road[i][3]['x'], road[i][3]['y'])
+        ctx.lineTo(road[i][2]['x'], road[i][2]['y'])
+
+        ctx.fill()
+        ctx.closePath()
+        ctx.stroke()
+        this.ctx = ctx
+      }
+    },
     initCanvas () {
       // 测试数据obj是一个数组
       // let obj = this.testarr
@@ -244,7 +304,7 @@ export default {
     waitTime () {
       setTimeout(() => {
         this.flag = true
-      }, 1500)
+      }, 300)
     },
     handleScale (scale) {
       if (!this.flag) {
@@ -258,11 +318,13 @@ export default {
         this.ctx.scale(1.5, 1.5)
         this.ctx.clearRect(0, 0, 32766, 32766)
         this.initCanvas()
+        this.initRoad()
       } else {
         console.log('缩小')
         this.ctx.scale(0.5, 0.5)
         this.ctx.clearRect(0, 0, 32766, 32766)
         this.initCanvas()
+        this.initRoad()
       }
     }
   }

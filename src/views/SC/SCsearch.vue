@@ -72,6 +72,7 @@ export default {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           this.datalist = rs.data
+          this.page.totaldata = rs.total
         } else {
           this.$Message.error(rs.message)
         }

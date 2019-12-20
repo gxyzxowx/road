@@ -76,12 +76,12 @@ export default {
         },
         {
           title: '项目名称',
-          key: 'mItemBid',
+          key: 'mItemJC',
           width: 70
         },
         {
           title: '标段名称',
-          key: 'mItemBid',
+          key: 'mItemBDJC',
           width: 70
         },
         {
@@ -111,7 +111,7 @@ export default {
         },
         {
           title: '状态',
-          key: 'status',
+          key: 'mAlarmCLStatus',
           width: 70
         },
         {
@@ -148,17 +148,17 @@ export default {
       obj = { ...obj, ...this.emitobj }
       // console.log(JSON.stringify(obj))
       this.comFun.post('/Produce_J_G/getAlarmData', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs))
+        // console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 总页数
           this.page.totaldata = rs.total
-          console.log(this.page.totaldata)
           // 处理单位(是否)
           rs.data.map((item, index, arr) => {
             arr[index].mAlarmType_temp = item.mAlarmType_temp ? '是' : '否'
             arr[index].mAlarmType_ysb = item.mAlarmType_ysb ? '是' : '否'
             arr[index].mAlarmType_jp = item.mAlarmType_jp ? '是' : '否'
             arr[index].mAlarmType_speed = item.mAlarmType_speed ? '是' : '否'
+            arr[index].mAlarmCLStatus = item.mAlarmCLStatus ? '已处理' : '未处理'
           })
           this.datalist = rs.data
           // 预警类型饼图
@@ -227,12 +227,17 @@ export default {
       console.log('切换page:' + this.page.current)
     },
     // 处理预警
-    handleWarn () {
+    handleWarn (_index) {
+      let text = this.datalist[_index].mAlarmDec
+      let _id = this.datalist[_index].mAlarmID
+      let result = this.datalist[_index].mAlarmCLDec
       // 跳转
       this.$router.push({
         path: '/sc/SCwarnHandle',
         query: {
-          id: 123
+          id: _id,
+          result: result,
+          text: text
         }
       })
     }

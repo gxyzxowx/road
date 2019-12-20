@@ -191,6 +191,10 @@ export default {
   mounted () {
     // this.display()
     this.getData()
+    // 1分钟刷新一次
+    setTimeout(() => {
+      this.getData()
+    }, 60000)
     this.$nextTick(() => { // 页面渲染完成后的回调
       this.curve.W = this.$refs.curve.offsetWidth
       this.curve.H = this.$refs.curve.offsetHeight
@@ -205,7 +209,7 @@ export default {
       // console.log(JSON.stringify(obj))
       // 实时信息
       this.comFun.post('/Produce_J_G/realTimeInfo', obj, this).then((rs) => {
-        // console.log(JSON.stringify(rs.data.TempData))
+        console.log(JSON.stringify(rs.data.SKLData))
         if (rs.code === 0) {
           // 处理头部列表数据
           let datalist = rs.data.NewestInfo
@@ -303,10 +307,10 @@ export default {
       let arr2 = []
       let arr3 = []
       data.map((item, index, arr) => {
-        xdata.push(item['mBhDateTime'])
-        arr1.push(item['mClYSB_Up1'])
-        arr2.push(item['mBnYSB'])
-        arr3.push(item['mClYSB_Down1'])
+        xdata.push(item['mBhSKL'])
+        arr1.push(item['Up'])
+        arr2.push(item['Aver'])
+        arr3.push(item['Down'])
       })
       let arr = [arr1, arr2, arr3]
       this.datacurve3 = this.handleCurveData(arr, xdata, '级配曲线图')
@@ -325,7 +329,7 @@ export default {
         arr3.push(item['mBhSKL00075'])
       })
       let arr = [arr1, arr2, arr3]
-      this.datacurve4 = this.handleCurveData(arr, xdata, '关键塞孔率曲线图', true)
+      this.datacurve4 = this.handleCurveData(arr, xdata, '关键塞孔率曲线图', 1)
     },
     // 拌和周期曲线
     dataPeroid (data) {
@@ -345,9 +349,11 @@ export default {
     },
     // 处理曲线数据
     handleCurveData (arr, xdata, title, type) {
-      let legendData = ['上限', '实际值', '下限']
+      let legendData
       if (type) {
-        legendData = ['4.75', '2.36', '0.075']
+        legendData = ['我', '的', '额']
+      } else {
+        legendData = ['上限', '实际值', '下限']
       }
       let option = {
         title: {

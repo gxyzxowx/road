@@ -81,7 +81,18 @@ const routes = [{
     {
       path: '/sg',
       name: 'sg',
-      component: () => import('./views/SG/Home.vue')
+      component: () => import('./views/SG/Home.vue'),
+      children: [
+        {
+          // （一级）摊铺轨迹
+          path: '/sg/SGtanpu',
+          component: () => import('./views/SG/SGtanpu.vue')
+        }, {
+          // （一级）压实轨迹
+          path: '/sg/SGyashi',
+          component: () => import('./views/SG/SGyashi.vue')
+        }
+      ]
     },
     // 管理大区
     {

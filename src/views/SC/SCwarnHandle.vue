@@ -1,13 +1,14 @@
 <!-- 预警处理页面 -->
 <style scoped lang="less">
+
   .form{
-    width: 8rem;
+    width: 12rem;
     .title{
-      display: flex;
-      h3{
-        margin-bottom: .2rem;
-      }
+      margin-bottom: .15rem;
     }
+     h3{
+        margin-bottom: .05rem;
+      }
   }
 </style>
 <template>
@@ -16,13 +17,13 @@
     <div class="form">
       <div class="title">
         <h3>预警详情：</h3>
-        <p class="dec">从后端传过来的数据</p>
+        <p class="dec">{{text}}</p>
       </div>
       <h3>预警处理方案：</h3>
     <Form>
       <FormItem>
         <Input
-          v-model="textarea"
+          v-model="mAlarmCLDec"
           type="textarea"
           :autosize="{minRows: 20,maxRows: 400}"
           placeholder="请输入预警处理方案..."
@@ -41,18 +42,41 @@
 export default {
   data () {
     return {
-      textarea: ''
+      mUserID: '',
+      mItemID: '',
+      mAlarmCLDec: '',
+      text: this.$route.query.text,
+      mAlarmID: this.$route.query.id
     }
   },
   mounted () {
-
+    this.mAlarmCLDec = this.$route.query.result
+    console.log(this.mAlarmCLDec)
+    this.mUserID = this.comFun.getCookie('roadmUserID')
+    this.mItemID = this.$store.state.itemInfo.id
   },
   methods: {
     go () {
       this.$router.push('/sc/SCwarn')
     },
     submit () {
-      console.log(this.$route.query.id)
+      let obj = {
+        mUserID: this.mUserID,
+        mItemID: this.mItemID,
+        mAlarmCLDec: this.mAlarmCLDec,
+        mAlarmID: this.mAlarmID
+      }
+      this.comFun.post('/User/userClAlarm', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.$Message.success(rs.message)
+          setTimeout(() => {
+            this.$router.push('/sc/SCwarn')
+          }, 1000)
+        } else {
+          this.$Message.error(rs.message)
+        }
+      }, (err) => { console.log(err) })
     }
   }
 }

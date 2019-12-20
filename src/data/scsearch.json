@@ -6,49 +6,48 @@
   },
   {
     "title": "标段",
-    "key": "mDateTime",
+    "key": "mItemBDJC",
     "width": 85
   },
   {
     "title": "层位",
-    "key": "abcc",
+    "key": "mClCW",
     "width": 85
   },
   {
     "title": "材料类型",
-    "key": "mDateTime",
+    "key": "mClName",
     "width": 85
   },
   {
     "title": "产量",
-    "key": "abcc",
+    "key": "mBhItemNO",
     "width": 85
   },
   {
     "title": "生产周期",
-    "key": "mDateTime",
+    "key": "mBhScPeriod",
     "width": 85
   },
   {
     "title": "骨料1",
-    "key": "abcc",
     "align": "center",
     "children": [
       {
         "title": "预计量",
-        "key": "abc",
+        "key": "mBhActualSN1",
         "align": "center",
         "width": 80
       },
       {
         "title": "实际量",
-        "key": "bcd",
+        "key": "mBhActualSN1",
         "align": "center",
         "width": 80
       },
       {
         "title": "误差",
-        "key": "cde",
+        "key": "mBhErrorSN1Rep",
         "align": "center",
         "width": 80
       }
@@ -56,24 +55,23 @@
   },
   {
     "title": "骨料2",
-    "key": "abcc",
     "align": "center",
     "children": [
       {
         "title": "预计量",
-        "key": "abc",
+        "key": "mBhRecipeSN2",
         "align": "center",
         "width": 80
       },
       {
         "title": "实际量",
         "key": "bcd",
-        "align": "center",
+        "align": "mBhActualSN2",
         "width": 80
       },
       {
         "title": "误差",
-        "key": "cde",
+        "key": "mBhErrorSN2Rep",
         "align": "center",
         "width": 80
       }
@@ -81,24 +79,23 @@
   },
   {
     "title": "骨料3",
-    "key": "abcc",
     "align": "center",
     "children": [
       {
         "title": "预计量",
-        "key": "abc",
+        "key": "mBhRecipeSN3",
         "align": "center",
         "width": 80
       },
       {
         "title": "实际量",
-        "key": "bcd",
+        "key": "mBhActualSN3",
         "align": "center",
         "width": 80
       },
       {
         "title": "误差",
-        "key": "cde",
+        "key": "mBhErrorSN3Rep",
         "align": "center",
         "width": 80
       }
@@ -106,24 +103,23 @@
   },
   {
     "title": "骨料4",
-    "key": "abcc",
     "align": "center",
     "children": [
       {
         "title": "预计量",
-        "key": "abc",
+        "key": "mBhRecipeSN4",
         "align": "center",
         "width": 80
       },
       {
         "title": "实际量",
-        "key": "bcd",
+        "key": "mBhActualSN4",
         "align": "center",
         "width": 80
       },
       {
         "title": "误差",
-        "key": "cde",
+        "key": "mBhErrorSN4Rep",
         "align": "center",
         "width": 80
       }
@@ -131,24 +127,23 @@
   },
   {
     "title": "骨料5",
-    "key": "abcc",
     "align": "center",
     "children": [
       {
         "title": "预计量",
-        "key": "abc",
+        "key": "mBhRecipeSN5",
         "align": "center",
         "width": 80
       },
       {
         "title": "实际量",
-        "key": "bcd",
+        "key": "mBhActualSN5",
         "align": "center",
         "width": 80
       },
       {
         "title": "误差",
-        "key": "cde",
+        "key": "mBhErrorSN5Rep",
         "align": "center",
         "width": 80
       }
@@ -156,24 +151,23 @@
   },
   {
     "title": "骨料6",
-    "key": "abcc",
     "align": "center",
     "children": [
       {
         "title": "预计量",
-        "key": "abc",
+        "key": "mBhRecipeSN6",
         "align": "center",
         "width": 80
       },
       {
         "title": "实际量",
-        "key": "bcd",
+        "key": "mBhActualSN6",
         "align": "center",
         "width": 80
       },
       {
         "title": "误差",
-        "key": "cde",
+        "key": "mBhErrorSN6Rep",
         "align": "center",
         "width": 80
       }
@@ -181,107 +175,183 @@
   },
   {
     "title": "矿粉1",
-    "key": "mDateTime",
-    "width": 85
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "mBhRecipeSN7",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "mBhActualSN7",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "mBhErrorSN7Rep",
+        "align": "center",
+        "width": 80
+      }
+    ]
   },
   {
     "title": "矿粉2",
-    "key": "abcc",
-    "width": 85
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "mBhRecipeSN8",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "mBhActualSN8",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "mBhErrorSN8Rep",
+        "align": "center",
+        "width": 80
+      }
+    ]
   },
   {
     "title": "矿粉3",
-    "key": "mDateTime",
-    "width": 85
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "mBhRecipeSN9",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "mBhActualSN9",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "mBhErrorSN9Rep",
+        "align": "center",
+        "width": 80
+      }
+    ]
   },
   {
     "title": "沥青",
-    "key": "abcc",
-    "width": 85
+    "align": "center",
+    "children": [
+      {
+        "title": "预计量",
+        "key": "mBhRecipeDSL",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "实际量",
+        "key": "mBhActualDSL",
+        "align": "center",
+        "width": 80
+      },
+      {
+        "title": "误差",
+        "key": "mBhErrorDSLRep",
+        "align": "center",
+        "width": 80
+      }
+    ]
   },
   {
     "title": "温度",
-    "key": "mDateTime",
+    "key": "mBhItemTemp",
     "width": 85
   },
   {
     "title": "是否预警",
-    "key": "mDateTime",
+    "key": "mBhItemTempAlarm",
     "width": 85
   },
   {
     "title": "油石比",
-    "key": "abcc",
+    "key": "mBnYSB",
     "width": 85
   },
   {
     "title": "是否预警",
-    "key": "mDateTime",
+    "key": "mBhYSBAlarm",
     "width": 85
   },
   {
     "title": "0.075筛孔率",
-    "key": "title",
+    "key": "mBhSKL00075",
     "width": 85
   },
   {
     "title": "0.15筛孔率",
-    "key": "mDateTime",
+    "key": "mBhSKL0015",
     "width": 85
   },
   {
     "title": "0.3筛孔率",
-    "key": "mItemBid",
+    "key": "mBhSKL003",
     "width": 85
   },
   {
     "title": "0.6筛孔率",
-    "key": "mItemBid",
+    "key": "mBhSKL006",
     "width": 85
   },
   {
     "title": "1.18筛孔率",
-    "key": "mAlarmLevel",
+    "key": "mBhSKL0118",
     "width": 85
   },
   {
     "title": "2.36筛孔率",
-    "key": "title",
+    "key": "mBhSKL0236",
     "width": 85
   },
   {
     "title": "4.75筛孔率",
-    "key": "mDateTime",
+    "key": "mBhSKL0475",
     "width": 85
   },
   {
     "title": "9.5筛孔率",
-    "key": "mItemBid",
+    "key": "mBhSKL095",
     "width": 85
   },
   {
     "title": "19.0筛孔率",
-    "key": "mItemBid",
+    "key": "mBhSKL190",
     "width": 85
   },
   {
     "title": "26.5筛孔率",
-    "key": "mAlarmLevel",
+    "key": "mBhSKL265",
     "width": 85
   },
   {
     "title": "31.5筛孔率",
-    "key": "mItemBid",
+    "key": "mBhSKL315",
     "width": 85
   },
   {
     "title": "37.5筛孔率",
-    "key": "mAlarmLevel",
+    "key": "mBhSKL375",
     "width": 85
   },
   {
     "title": "级配预警",
-    "key": "mAlarmLevel",
+    "key": "mBhSKLAlarm",
     "width": 85
   }
 ]
