@@ -110,7 +110,7 @@ export default {
       // trainIcon:`image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7`
     };
   },
-  props: ["data"],
+  props: ["data","colorType"],
   watch: {
     data: {
       handler(newVal, oldVal) {
@@ -238,9 +238,17 @@ export default {
         .getModel()
         .getComponent("bmap")
         .getBMap();
-      this.bmap.setMapStyleV2({
+        if(this.colorType === 1 ){
+          // 2b374d2c0e734558c2d30833e38775c6
+          this.bmap.setMapStyleV2({
+        styleId: "2b374d2c0e734558c2d30833e38775c6"
+      });
+        }else{
+          this.bmap.setMapStyleV2({
         styleId: "21b4d884a2b1cd35fc79647a94a86a94"
       });
+        }
+      
       this.bmap.setMinZoom(6); // 设置地图最小缩放比例
       this.bmap.setMaxZoom(12); // 设置地图最大缩放比例
       // this.bmap.addControl(new BMap.MapTypeControl({ mapTypes: [] })) // 不显示地图右上方的控件

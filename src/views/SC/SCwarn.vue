@@ -148,7 +148,7 @@ export default {
       obj = { ...obj, ...this.emitobj }
       // console.log(JSON.stringify(obj))
       this.comFun.post('/Produce_J_G/getAlarmData', obj, this).then((rs) => {
-        // console.log(JSON.stringify(rs))
+        console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 总页数
           this.page.totaldata = rs.total

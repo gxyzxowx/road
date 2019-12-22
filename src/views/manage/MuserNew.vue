@@ -72,7 +72,9 @@
             <div class="info-cel cel">
               <div class="info-cel-title">权限级别</div>
               <div class="info-cel-input">
-                <input type="number" v-model="dataobj.mUserLevel"/>
+                <Select  v-model="dataobj.mUserLevel" style="width:200px" size="small">
+                  <Option v-for="item in userLevelList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
@@ -102,7 +104,9 @@
             <div class="info-cel cel">
               <div class="info-cel-title">预警等级</div>
               <div class="info-cel-input">
-                <input type="text" v-model="dataobj.mUserYJDJ" />
+                <Select v-model="dataobj.mUserYJDJ" style="width:200px" size="small">
+                  <Option v-for="item in mUserYJDJList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
@@ -139,6 +143,10 @@ export default {
       itemlist: [],
       // 被选中的id组合
       items: [],
+      // 管理员权限列表
+      userLevelList: [{ value: 0, label: '客户' }, { value: 1, label: '普通管理员' }],
+      // 管理员预警等级列表
+      mUserYJDJList: [{ value: 1, label: '一级预警' }, { value: 2, label: '二级预警' }, { value: 3, label: '三级预警' }],
       dataobj: {
         'mUserID': '',
         'mUserName': '',
@@ -174,12 +182,20 @@ export default {
         mUserID: this.mUserID,
         editUserID: this.editUserID
       }
-      console.log(JSON.stringify(obj))
+      // console.log(JSON.stringify(obj))
       this.comFun.post('/User/getAdminInfo', obj, this).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
+          for (let i in rs.data) {
+            if (i === 'mUserDXTZ') {
+              rs.data[i] = !!rs.data[i]
+            }
+            if (i === 'mUserWXTZ') {
+              rs.data[i] = !!rs.data[i]
+            }
+          }
           this.dataobj = rs.data
-
+          console.log(this.dataobj.mUserDXTZ)
           let _items = []
           rs.data.itemList.map((item, index, arr) => {
             _items.push(item.mItemID)
@@ -208,6 +224,14 @@ export default {
       obj['mUserID'] = this.mUserID
       // 注入项目集合
       obj['itemID'] = this.items.join(',')
+      for (let i in obj) {
+        if (i === 'mUserDXTZ') {
+          obj[i] = obj[i] ? 1 : 0
+        }
+        if (i === 'mUserWXTZ') {
+          obj[i] = obj[i] ? 1 : 0
+        }
+      }
       if (this.editUserID === -1) {
         // 新建用户
         console.log(JSON.stringify(obj))
@@ -222,6 +246,7 @@ export default {
       } else {
         // 编辑
         obj['editUserID'] = this.editUserID
+        console.log(JSON.stringify(obj))
         this.comFun.post('/User/editAdminInfo', obj, this).then((rs) => {
           console.log(JSON.stringify(rs))
           if (rs.code === 0) {

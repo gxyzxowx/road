@@ -46,7 +46,7 @@
   <div class="schome">
   <div class="left">
     <!-- 地图（） -->
-    <Map class="map" :data="datas.DevData"></Map>
+    <Map class="map" :data="datas.DevData"  :colorType='1'></Map>
   </div>
   <div class="right">
     <!-- 列表 -->
@@ -209,7 +209,7 @@ export default {
       // console.log(JSON.stringify(obj))
       // 实时信息
       this.comFun.post('/Produce_J_G/realTimeInfo', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs.data.SKLData))
+        console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 处理头部列表数据
           let datalist = rs.data.NewestInfo
@@ -281,7 +281,7 @@ export default {
         arr3.push(item['mClTemp_Down1'])
       })
       let arr = [arr1, arr2, arr3]
-      this.datacurve1 = this.handleCurveData(arr, xdata, '出料温度曲线图')
+      this.datacurve1 = this.handleCurveData(arr, xdata, '出料温度曲线图', '', '℃')
     },
     // 处理油石比曲线
     dataYSB (data) {
@@ -297,7 +297,7 @@ export default {
         arr3.push(item['mClYSB_Down1'])
       })
       let arr = [arr1, arr2, arr3]
-      this.datacurve2 = this.handleCurveData(arr, xdata, '油石比曲线图')
+      this.datacurve2 = this.handleCurveData(arr, xdata, '油石比曲线图', '', '%')
     },
     // 处理级配曲线
     dataJP (data) {
@@ -313,7 +313,7 @@ export default {
         arr3.push(item['Down'])
       })
       let arr = [arr1, arr2, arr3]
-      this.datacurve3 = this.handleCurveData(arr, xdata, '级配曲线图')
+      this.datacurve3 = this.handleCurveData(arr, xdata, '级配曲线图', '', '%')
     },
     // 处理关键塞孔率曲线
     dataSKL (data) {
@@ -329,7 +329,7 @@ export default {
         arr3.push(item['mBhSKL00075'])
       })
       let arr = [arr1, arr2, arr3]
-      this.datacurve4 = this.handleCurveData(arr, xdata, '关键塞孔率曲线图', 1)
+      this.datacurve4 = this.handleCurveData(arr, xdata, '关键塞孔率曲线图', 1, '%')
     },
     // 拌和周期曲线
     dataPeroid (data) {
@@ -348,10 +348,10 @@ export default {
       this.datacurve5 = this.handleCurveData(arr, xdata, '拌和周期曲线图')
     },
     // 处理曲线数据
-    handleCurveData (arr, xdata, title, type) {
+    handleCurveData (arr, xdata, title, type, sign) {
       let legendData
       if (type) {
-        legendData = ['我', '的', '额']
+        legendData = ['0475', '0236', '00075']
       } else {
         legendData = ['上限', '实际值', '下限']
       }
@@ -381,21 +381,30 @@ export default {
           data: xdata
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          axisLabel: {
+            formatter: function (arr, sign) {
+              if (sign) {
+                return arr + sign
+              } else {
+                return arr
+              }
+            }
+          }
         },
         series: [
           {
-            name: '上限',
+            name: legendData[0],
             type: 'line',
             data: arr[0]
           },
           {
-            name: '实际值',
+            name: legendData[1],
             type: 'line',
             data: arr[1]
           },
           {
-            name: '下限',
+            name: legendData[2],
             type: 'line',
             data: arr[2]
           }

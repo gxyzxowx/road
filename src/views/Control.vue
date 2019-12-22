@@ -131,7 +131,7 @@
       </div> -->
     </div>
     <div class="mid">
-      <Map class="map" :data="datas.DevData"></Map>
+      <Map class="map" :data="datas.DevData" :colorType="0"></Map>
     </div>
     <div class="right">
       <div class="columnar col">

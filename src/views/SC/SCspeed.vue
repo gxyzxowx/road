@@ -16,7 +16,7 @@
 <template>
   <div class="scspeed">
     <!-- 条件 -->
-      <Search :getData="getData"></Search>
+      <Search v-on:getData="getData"></Search>
 
     <div class="content">
       <div class="bars">

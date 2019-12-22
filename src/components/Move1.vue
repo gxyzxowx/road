@@ -20,10 +20,14 @@
       }
     }
     .out-canvas{
+      position: relative;
       width: 16rem;
       height: 7.5rem;
       // border:1px solid red;
       overflow-x:scroll;
+      .mousemove{
+        position: absolute;
+      }
     }
   }
   .warp .colors{
@@ -67,8 +71,12 @@
           width="3500"
           height="3500"
           style="border:1px solid #999;"
-          @click="getXY"
+          @mousemove="getXY"
         ></canvas>
+        <div class="mousemove" :style=" {left: this.Xlocation + 'px', top: this.Ylocation + 'px' }">
+          <div class="top">x:{{Xlocation}},y:{{Ylocation}}</div>
+          <div class="botm">{{currentTimes}}遍</div>
+        </div>
     </div>
 
   </div>
@@ -186,6 +194,12 @@ export default {
         ctx.fill()
         ctx.closePath()
         ctx.stroke()
+        // 为道路添加桩号
+        // 设置字体
+        ctx.font = '18px bold 黑体'
+        // 设置颜色
+        ctx.fillStyle = '#ff0'
+        ctx.fillText('要写的文字', 100, 100)
         this.ctx = ctx
       }
     },
@@ -280,6 +294,7 @@ export default {
       console.log('x:' + x + ';y:' + y)
       this.Xlocation = x
       this.Ylocation = y
+
       this.getXYColor(x, y)
     },
     getXYColor (x, y) {

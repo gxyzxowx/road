@@ -2,7 +2,7 @@
   {
     "title": "时间",
     "key": "mBhDateTime",
-    "width": 85
+    "width": 100
   },
   {
     "title": "标段",
@@ -65,8 +65,8 @@
       },
       {
         "title": "实际量",
-        "key": "bcd",
-        "align": "mBhActualSN2",
+        "key": "mBhActualSN2",
+        "align": "center",
         "width": 80
       },
       {
@@ -270,22 +270,22 @@
     ]
   },
   {
-    "title": "温度",
+    "title": "温度 ℃",
     "key": "mBhItemTemp",
     "width": 85
   },
   {
-    "title": "是否预警",
+    "title": "温度预警",
     "key": "mBhItemTempAlarm",
     "width": 85
   },
   {
-    "title": "油石比",
+    "title": "油石比 %",
     "key": "mBnYSB",
     "width": 85
   },
   {
-    "title": "是否预警",
+    "title": "油石比预警",
     "key": "mBhYSBAlarm",
     "width": 85
   },

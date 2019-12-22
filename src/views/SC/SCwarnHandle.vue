@@ -31,7 +31,7 @@
       </FormItem>
       <FormItem>
         <Button type="primary" @click="submit()">提交</Button>
-        <Button style="margin-left: 8px">返回</Button>
+        <Button style="margin-left: 8px" @click="go()">返回</Button>
       </FormItem>
     </Form>
     </div>

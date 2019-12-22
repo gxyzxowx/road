@@ -183,23 +183,6 @@ export default {
         }
       ],
       itemlist: [
-        {
-          'mItemID': 1,
-          'mItemBidSun': 1,
-          'mItemTotalLength': 0,
-          'mItemActive': 1,
-          'mItemDes': 'AAA',
-          'mItemAdmin': 'AAA',
-          'mItemPhoneNo': '123456',
-          'mItemSGUint': 'BBB',
-          'mItemJGUint': 'BBB',
-          'mAlarmLev1Name': '13629731011',
-          'mAlarmLev1PhoneNo': '13629731011',
-          'mAlarmLev2Name': null,
-          'mAlarmLev2PhoneNo': null,
-          'mAlarmLev3Name': null,
-          'mAlarmLev3PhoneNo': null
-        }
       ]
     }
   },
@@ -282,7 +265,7 @@ export default {
     },
     // 准备删除
     remove (index) {
-      this.delectItemDes = this.itemlist[index].mItemDes
+      this.delectItemDes = this.itemlist[index].mItemJC
       this.delectmodal = true
       this.selectIndex = index
     },

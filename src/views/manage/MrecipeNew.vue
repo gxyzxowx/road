@@ -156,7 +156,9 @@
             <div class="info-cel cel">
               <div class="info-cel-title">层位</div>
               <div class="info-cel-input">
-                <input type="text" v-model="dataobj.mClCW" />
+                <Select v-model="dataobj.mClCW" style="width:200px" size="small">
+                    <Option v-for="item in mClCWList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
@@ -535,7 +537,8 @@ export default {
       text: '新建',
       model1: '测试',
       jpArr: ['级配标准', 37.5, 31.5, 26.5, 19.0, 9.5, 4.75, 2.36, 1.18, 0.6, 0.3, 0.15, 0.075],
-      pfArr: ['矿料ID', '矿料名称', '用量比', 37.5, 31.5, 26.5, 19.0, 9.5, 4.75, 2.36, 1.18, 0.6, 0.3, 0.15, 0.075, '操作']
+      pfArr: ['矿料ID', '矿料名称', '用量比', 37.5, 31.5, 26.5, 19.0, 9.5, 4.75, 2.36, 1.18, 0.6, 0.3, 0.15, 0.075, '操作'],
+      mClCWList: [{ value: 1, label: '上层面' }, { value: 2, label: '中层面' }, { value: 3, label: '下层面' }]
     }
   },
   mounted () {

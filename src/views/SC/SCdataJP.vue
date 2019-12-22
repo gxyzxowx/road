@@ -17,7 +17,7 @@
   <div>
     <div class="search">
       <!-- 条件 -->
-      <Search></Search>
+      <Search v-on:getData="getData"></Search>
     </div>
     <div class="content">
       <div class="curve">
@@ -409,13 +409,19 @@ export default {
     this.getData()
   },
   methods: {
-    getData () {
+    getData (emitobj) {
       let obj = {
         mUserID: this.mUserID,
         mItemID: this.mItemID,
         // 温度1， 油石比2， 级配3
         type: 3
       }
+      // 有emitobj是子组件点击搜索的时候
+      if (emitobj) {
+        this.emitobj = emitobj
+        console.log('是emit过来的参数:' + JSON.stringify(emitobj))
+      }
+      obj = { ...obj, ...this.emitobj }
       this.comFun.post('/Produce_J_G/qualityStatic', obj, this).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {

@@ -60,7 +60,7 @@ export default {
     this.getData()
   },
   methods: {
-    getData () {
+    getData (emitobj) {
       // 默认显示标段1，层位1的数据
       let obj = {
         mUserID: this.mUserID,
@@ -68,10 +68,40 @@ export default {
         page: this.page.current,
         rows: this.page.rows
       }
+      // 有emitobj是子组件点击搜索的时候
+      if (emitobj) {
+        this.emitobj = emitobj
+        console.log('是emit过来的参数:' + JSON.stringify(emitobj))
+        obj = { ...obj, ...this.emitobj }
+      }
+
+      console.log(JSON.stringify(obj))
       this.comFun.post('/Produce_J_G/dataSearch', obj, this).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
-          this.datalist = rs.data
+          // 处理数据
+          let _data = rs.data
+          _data.map((item, index, arr) => {
+            // 层位
+            if (item['mClCW'] === 1) {
+              _data[index].mClCW = '上层位'
+            } else if (item['mClCW'] === 2) {
+              _data[index].mClCW = '中层位'
+            } else if (item['mClCW'] === 3) {
+              _data[index].mClCW = '下层位'
+            }
+            // 误差百分数
+            for (let i in item) {
+              if (i.indexOf('Rep') !== -1) {
+                _data[index][i] = parseFloat(item[i]).toFixed(2) + '%'
+              }
+            }
+            // 是否预警
+            _data[index].mBhItemTempAlarm = item.mBhItemTempAlarm ? '是' : '否'
+            _data[index].mBhYSBAlarm = item.mBhYSBAlarm ? '是' : '否'
+            _data[index].mBhSKLAlarm = item.mBhSKLAlarm ? '是' : '否'
+          })
+          this.datalist = _data
           this.page.totaldata = rs.total
         } else {
           this.$Message.error(rs.message)

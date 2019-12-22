@@ -3,8 +3,8 @@
   .scdata{
     .ul{
       display: flex;
-      height: .8rem;
-      font-size: .26rem;
+      height: .6rem;
+      font-size: .24rem;
       text-align: center;
       a{
         height: 100%;
@@ -12,8 +12,8 @@
       }
       .li{
         width: 2.22rem;
-        height: .8rem;
-        line-height: .8rem;
+        height: .55rem;
+        line-height: .55rem;
 
       }
       .router-link-active{

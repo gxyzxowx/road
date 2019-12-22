@@ -50,13 +50,17 @@
             <div class="info-cel cel">
               <div class="info-cel-title">项目</div>
               <div class="info-cel-input">
-                <input type="text" v-model="dataobj.mItemID"/>
+                <Select v-model="dataobj.mItemID" @on-change="getItemBid(dataobj.mItemID)" style="width:200px" size="small">
+                    <Option v-for="item in itemlist" :value="item.mItemID" :key="item.mItemID">{{ item.ItemDes }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
               <div class="info-cel-title">标段</div>
               <div class="info-cel-input">
-                <input type="text"  v-model="dataobj.mItemBid"/>
+                <Select v-model="dataobj.mItemBid" style="width:200px" size="small">
+                    <Option v-for="item in bdlist" :value="item.mItemBid" :key="item.mItemBid">{{ item.mItemBDJC }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
@@ -126,6 +130,8 @@ export default {
       mItemID: this.$route.query.mItemID,
       mUserID: 0,
       mDevID: this.$route.query.id,
+      itemlist: [],
+      bdlist: [],
       text: '新建',
       single: false,
       // v-model的数据
@@ -157,6 +163,8 @@ export default {
       this.text = '修改'
     }
     this.getData()
+    // 获得该用户所有项目，一遍修改项目
+    this.getUserItem()
   },
   methods: {
     go () {
@@ -172,6 +180,33 @@ export default {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           this.dataobj = rs.data
+          // 得到该项目所有标段
+          this.getItemBid(rs.data.mItemID)
+        }
+      }, (err) => { console.log(err) })
+    },
+    // 得到某个项目的所有标段
+    getItemBid (mItemID) {
+      let obj = {
+        mUserID: this.mUserID,
+        mItemID: mItemID
+      }
+      this.comFun.post('/Item/getItemBid', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.bdlist = rs.data
+        }
+      }, (err) => { console.log(err) })
+    },
+    // 得到所有项目
+    getUserItem () {
+      let obj = {
+        mUserID: this.mUserID
+      }
+      this.comFun.post('/User/getUserItem', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.itemlist = rs.data
         }
       }, (err) => { console.log(err) })
     },

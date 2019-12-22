@@ -11,7 +11,7 @@
   <div class="title">
     <div class="selects">
       <Select v-model="select.mItemBid" class="box" placeholder="工程标段">
-          <Option v-for="item in show.mItemBidList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+          <Option v-for="item in show.mItemBidList" :value="item.mItemBid" :key="item.mItemBid">{{ item.mItemBDJC }}</Option>
         </Select>
         <Select v-model="select.mClCW" class="box" placeholder="层位">
           <Option v-for="item in show.mClTypeValueList" :value="item.value" :key="item.value">{{ item.label }}</Option>
@@ -35,12 +35,21 @@ export default {
       select: {
         start_time: '',
         end_time: '',
-        mClTypeValue: '',
+        mClCW: '',
         mItemBid: ''
       },
       show: {
         mItemBidList: [],
-        mClTypeValueList: []
+        mClTypeValueList: [{
+          value: 1,
+          label: '上层面'
+        }, {
+          value: 2,
+          label: '中层面'
+        }, {
+          value: 3,
+          label: '下层面'
+        }]
       }
     }
   },
@@ -51,29 +60,12 @@ export default {
       mUserID: this.comFun.getCookie('roadmUserID'),
       mItemID: this.$store.state.itemInfo.id
     }
-    // console.log(JSON.stringify(obj))
-    this.comFun.post('/Cl/getClTypeList', obj, this).then((rs) => {
-      // console.log(JSON.stringify(rs))
-      if (rs.code === 0) {
-        rs.data.map((item, index, arr) => {
-          arr[index].label = item.mClTypeName
-          arr[index].value = item.mClTypeValue
-        })
-        this.show.mClTypeValueList = rs.data
-        this.show.mClTypeValueList.unshift({ label: '全部', value: '' })
-      }
-    }, (err) => { console.log(err) })
+
     this.comFun.post('/Item/getItemBid', obj, this).then((rs) => {
-      // console.log(JSON.stringify(rs))
+      console.log(JSON.stringify(rs))
       if (rs.code === 0) {
-        let num = rs.data.mItemBidSun
-        for (let i = num; i > 0; i--) {
-          this.show.mItemBidList.push({
-            value: i,
-            label: i
-          })
-        }
-        this.show.mItemBidList.unshift({ label: '全部', value: '' })
+        this.show.mItemBidList = rs.data
+        this.show.mItemBidList.unshift({ mItemBDJC: '全部', mItemBid: '' })
       }
     }, (err) => { console.log(err) })
   },
@@ -88,8 +80,8 @@ export default {
     },
     getData () {
       let obj = {
-        // 选择的材料
-        mClTypeValue: this.select.mClTypeValue,
+        // 选择的层位
+        mClCW: this.select.mClCW,
         // 选择的标段
         mItemBid: this.select.mItemBid,
         start_time: this.select.start_time,
