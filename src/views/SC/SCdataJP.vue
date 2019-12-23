@@ -419,9 +419,10 @@ export default {
       // 有emitobj是子组件点击搜索的时候
       if (emitobj) {
         this.emitobj = emitobj
-        console.log('是emit过来的参数:' + JSON.stringify(emitobj))
+        // console.log('是emit过来的参数:' + JSON.stringify(emitobj))
+        obj = { ...obj, ...this.emitobj }
       }
-      obj = { ...obj, ...this.emitobj }
+      console.log(JSON.stringify(obj))
       this.comFun.post('/Produce_J_G/qualityStatic', obj, this).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {

@@ -132,19 +132,25 @@
             <div class="info-cel cel">
               <div class="info-cel-title">项目名称</div>
               <div class="info-cel-input">
-                <input type="text" v-model="dataobj.mItemJC"/>
+                <Select v-model="dataobj.mItemID" @on-change="getItemBid(dataobj.mItemID)" style="width:200px" size="small">
+                    <Option v-for="item in itemlist" :value="item.mItemID" :key="item.mItemID">{{ item.mItemJC }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
               <div class="info-cel-title">标段</div>
               <div class="info-cel-input">
-                <input type="text" v-model="dataobj.mItemBDJC"/>
+                <Select v-model="dataobj.mItemBid" style="width:200px" size="small">
+                    <Option v-for="item in bdlist" :value="item.mItemBid" :key="item.mItemBid">{{ item.mItemBDJC }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
               <div class="info-cel-title">材料类型</div>
               <div class="info-cel-input">
-                <input type="text"  v-model="dataobj.mClType"/>
+                <Select v-model="dataobj.mClType" style="width:200px" size="small" @on-change="clChange"  :label-in-value="true">
+                    <Option v-for="item in cllist" :value="item.mClTypeValue" :key="item.mClTypeValue">{{ item.mClTypeName }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
@@ -221,7 +227,7 @@
             <div class="desc-cel cel">
               <div class="desc-cel-title">上限</div>
               <div class="desc-cel-input">
-                <input type="text" v-model="dataobj.mClTemp_Down1" />
+                <input type="text" v-model="dataobj.mClTemp_Up1" />
               </div>
             </div>
             <div class="desc-cel cel">
@@ -407,6 +413,7 @@
   </div>
 </template>
 <script>
+import recipenew from '@/data/recipenew.json'
 export default {
   data () {
     return {
@@ -414,13 +421,13 @@ export default {
       // 编辑的材料id
       mClID: this.$route.query.id,
       mUserID: 0,
-      // 级配数据6项指标
-      upObj: {},
-      downObj: {},
-      bd1Obj: {},
-      bd2Obj: {},
-      bd3Obj: {},
-      mbzObj: {},
+      // 级配数据6项指标,格式是obj
+      upObj: recipenew[0],
+      downObj: recipenew[1],
+      bd1Obj: recipenew[2],
+      bd2Obj: recipenew[3],
+      bd3Obj: recipenew[4],
+      mbzObj: recipenew[5],
       // 级配数据6项指标结束
       // 获取材料信息时得到的北方列表
       repice_list: [
@@ -429,19 +436,25 @@ export default {
       repice_list_ids: [],
       // 获取该材料还可以使用的矿料
       repice_list_active: [],
+      // 项目下拉框列表
+      itemlist: [],
+      // 标段下拉框列表
+      bdlist: [],
+      // 材料类型下拉框列表
+      cllist: [],
       dataobj: {
-        'mClID': 1,
-        'mItemID': 1,
+        'mClID': null,
+        'mItemID': null,
         'mItemJC': '项目简称',
         'mItemBid': 0,
         'mItemBDJC': '标段简称',
-        'mClType': 225,
+        'mClType': '',
         'mClName': null,
         'mClCW': '上层位',
-        'mClYJCL': 3200,
+        'mClYJCL': '',
         'mClYSB': 0,
-        'mClYSB_Up1': 5,
-        'mClYSB_Down1': 4,
+        'mClYSB_Up1': 0,
+        'mClYSB_Down1': 0,
         'mClYSB_Up2': 0,
         'mClYSB_Down2': 0,
         'mClYSB_Up3': 0,
@@ -546,10 +559,54 @@ export default {
     if (this.mClID !== -1) {
       this.text = '修改'
       this.getData()
-      this.getKlActive()
     }
+    // 获得全部矿料列表
+    this.getKlActive()
+
+    // 获得该用户所有项目，便于下拉选项修改项目
+    this.getUserItem()
+
+    // 得到材料类型下拉框列表
+    this.getClTypeList()
   },
   methods: {
+    // 得到材料类型下拉框列表
+    getClTypeList () {
+      let obj = {
+      }
+      this.comFun.post('/Cl/getClTypeList', obj, this).then((rs) => {
+        // console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.cllist = rs.data
+        }
+      }, (err) => { console.log(err) })
+    },
+    // 得到某个项目的所有标段
+    getItemBid (mItemID) {
+      let obj = {
+        mUserID: this.mUserID,
+        mItemID: mItemID
+      }
+      this.comFun.post('/Item/getItemBid', obj, this).then((rs) => {
+        // console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.bdlist = rs.data
+        }
+      }, (err) => { console.log(err) })
+    },
+    // 得到所有项目
+    getUserItem () {
+      let obj = {
+        mUserID: this.mUserID
+      }
+      this.comFun.post('/User/getItemList', obj, this).then((rs) => {
+        // console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          this.itemlist = rs.data
+          this.getItemBid(this.dataobj.mItemID)
+        }
+      }, (err) => { console.log(err) })
+    },
     go () {
       this.$router.push('/manage/recipe')
     },
@@ -561,7 +618,7 @@ export default {
       }
       // console.log(JSON.stringify(obj))
       this.comFun.post('/Cl/getBhClInfo', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs))
+        // console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           this.dataobj = rs.data
           let _data = rs.data
@@ -622,7 +679,7 @@ export default {
     saveBtn () {
       // 合并多个对象到obj
       let obj = Object.assign(this.dataobj, this.upObj, this.downObj, this.bd1Obj, this.bd2Obj, this.bd3Obj, this.bd4Obj, this.mbzObj)
-      obj['mItemID'] = this.mItemID
+      // obj['mItemID'] = this.mItemID
       obj['mUserID'] = this.mUserID
       if (this.mClID === -1) {
         // 新建材料
@@ -652,8 +709,8 @@ export default {
       let obj = this.repice_list[_index]
       obj['mClID'] = this.mClID
       obj['mUserID'] = this.mUserID
-      console.log(JSON.stringify(obj))
       let mKlID = obj['mKlID']
+      console.log(JSON.stringify(obj))
       if (this.repice_list_ids.indexOf(mKlID) === -1) {
         // 是新建的保存
         this.comFun.post('/Cl/addRepice', obj, this).then((rs) => {
@@ -707,7 +764,7 @@ export default {
         mClID: this.mClID
       }
       this.comFun.post('/Cl/getAvailableKlList', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs))
+        // console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           this.repice_list_active = rs.data
         } else {
@@ -723,6 +780,12 @@ export default {
           this.repice_list[index]['mKlName'] = e.label
         }
       })
+    },
+    // 选择材料切换的时候
+    clChange (e) {
+      console.log(e.value)
+      console.log(e.label)
+      this.dataobj.mClName = e.label
     }
   }
 }

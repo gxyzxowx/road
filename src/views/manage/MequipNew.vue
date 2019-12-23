@@ -51,7 +51,7 @@
               <div class="info-cel-title">项目</div>
               <div class="info-cel-input">
                 <Select v-model="dataobj.mItemID" @on-change="getItemBid(dataobj.mItemID)" style="width:200px" size="small">
-                    <Option v-for="item in itemlist" :value="item.mItemID" :key="item.mItemID">{{ item.ItemDes }}</Option>
+                    <Option v-for="item in itemlist" :value="item.mItemID" :key="item.mItemID">{{ item.mItemJC }}</Option>
                 </Select>
               </div>
             </div>
@@ -66,7 +66,9 @@
             <div class="info-cel cel">
               <div class="info-cel-title">设备类型</div>
               <div class="info-cel-input">
-                <input type="text"  v-model="dataobj.mDevType"/>
+                <Select v-model="dataobj.mDevType" style="width:200px" size="small">
+                    <Option v-for="item in devTypeList" :value="item.value" :key="item.label">{{ item.label }}</Option>
+                </Select>
               </div>
             </div>
             <div class="info-cel cel">
@@ -134,6 +136,10 @@ export default {
       bdlist: [],
       text: '新建',
       single: false,
+      // 设备类型下拉框列表// 拌和站209，碾压机211，摊铺机210
+      devTypeList: [
+        { value: 209, label: '拌和站' }, { value: 211, label: '碾压机' }, { value: 210, label: '摊铺机' }
+      ],
       // v-model的数据
       dataobj: {
         'mDevID': '',
@@ -163,7 +169,7 @@ export default {
       this.text = '修改'
     }
     this.getData()
-    // 获得该用户所有项目，一遍修改项目
+    // 获得该用户所有项目，便于下拉选项修改项目
     this.getUserItem()
   },
   methods: {
@@ -203,7 +209,7 @@ export default {
       let obj = {
         mUserID: this.mUserID
       }
-      this.comFun.post('/User/getUserItem', obj, this).then((rs) => {
+      this.comFun.post('/User/getItemList', obj, this).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           this.itemlist = rs.data

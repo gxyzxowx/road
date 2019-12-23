@@ -9,9 +9,9 @@
     <div class="list">
       <h3>所有设备</h3>
        <Button  class="addbtn" size="large" type="primary" @click="linktoPage(-1)">+ 添加</Button>
-      <Table  class="table" border :columns="listTitle" :data="datalist" size="small"  stripe>
+      <Table   :loading="loading" class="table" border :columns="listTitle" :data="datalist" size="small"  stripe>
         <template slot-scope="{ row, index }" slot="action">
-        <Button type="primary" size="small" style="margin-right: .05rem" @click="linktoPage(index)">修改</Button>
+        <Button type="primary" size="small" style="margin-right: .05rem" @click="linktoPage(index)">编辑</Button>
         <Button type="error" size="small" @click="remove(index)">删除</Button>
         <Modal v-model="delectmodal" width="360">
           <p slot="header" style="color:#f60;text-align:center">
@@ -111,7 +111,12 @@ export default {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           let _data = rs.data
+          // 更改设备类型名字
           _data = this.devType(_data)
+          // 更换设备状态 1 工作中， 0非工作中
+          _data.map((item, index, arr) => {
+            arr[index]['mDevStatus'] = item['mDevStatus'] ? '工作中' : '非工作中'
+          })
           this.datalist = _data
         }
       }, (err) => { console.log(err) })

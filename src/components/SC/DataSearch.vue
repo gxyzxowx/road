@@ -62,7 +62,7 @@ export default {
     }
 
     this.comFun.post('/Item/getItemBid', obj, this).then((rs) => {
-      console.log(JSON.stringify(rs))
+      // console.log(JSON.stringify(rs))
       if (rs.code === 0) {
         this.show.mItemBidList = rs.data
         this.show.mItemBidList.unshift({ mItemBDJC: '全部', mItemBid: '' })

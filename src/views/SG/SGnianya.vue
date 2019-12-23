@@ -1,4 +1,4 @@
-<!-- 施工监管--摊铺 -->
+<!-- 施工监管--碾压（重复遍数） -->
 <style scoped>
   .move{
     width: 100%;
@@ -9,13 +9,13 @@
 </style>
 <template>
   <div>
-    <Move class="move" :id="'move2'" :data="chartsdata"></Move>
+    <Move class="move" :id="'move1'" :data="chartsdata"></Move>
 
   </div>
 </template>
 <script>
 
-import Move from '@/components/Move2.vue'
+import Move from '@/components/Move1.vue'
 export default {
   data () {
     return {
@@ -30,11 +30,11 @@ export default {
       let obj = {
         mUserID: this.comFun.getCookie('roadmUserID'),
         mItemID: this.$store.state.itemInfo.id,
-        devType: 2
+        devType: 1
       }
       this.comFun.post('/Locus/nyData', obj, this).then((rs) => {
         // console.log('我是施工页面' + JSON.stringify(rs))
-        // console.log(rs)
+        console.log(rs)
         // this.chartsdata = this.handleChartsData(rs.data)
 
         if (rs.code === 0) {

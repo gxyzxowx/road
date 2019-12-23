@@ -160,7 +160,9 @@
           </div>
 
         </div>
+        <Button type="success" size="small" style="float:left;" @click="importExcel()">导入excel表格</Button>
       </div>
+
       <Button type="success" style="float:right;" @click="newBd()">添加标段</Button>
       <Button type="primary" style="float:right;" @click="saveItem()">保存{{text}}</Button>
 
@@ -189,12 +191,21 @@
         </div>
       </div>
     </main>
+    <!-- 导入数据模态框 -->
+      <Modal
+        v-model="showExcelModel"
+        title="导入数据">
+        <ImportExcel></ImportExcel>
+    <div slot="footer"></div>
+    </Modal>
   </div>
 </template>
 <script>
+import ImportExcel from '@/components/ImportExcel.vue'
 export default {
   data () {
     return {
+      showExcelModel: false,
       // 当前操作的项目id,0是新建
       mItemID: this.$route.query.id,
       // 用户id
@@ -244,6 +255,11 @@ export default {
     }
   },
   methods: {
+    // 导入EXCEL数据表打开
+    importExcel () {
+      this.$store.commit('selectItemID', this.mItemID)
+      this.showExcelModel = true
+    },
     // 得到项目信息
     getItemInfo () {
       let obj = {
@@ -328,6 +344,9 @@ export default {
         }
       }, (err) => { console.log(err) })
     }
+  },
+  components: {
+    ImportExcel
   }
 }
 </script>

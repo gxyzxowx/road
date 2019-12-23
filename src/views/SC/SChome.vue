@@ -258,12 +258,11 @@ export default {
           // 处理地图
           this.datas.DevData = rs.data.DevData
 
-          // 处理预警数据
+          // 处理预警列表数据
+          rs.data.AlarmData.map((item, index, arr) => {
+            arr[index]['ClStatus'] = item.ClStatus ? '已处理' : '未处理'
+          })
           this.datalist2 = rs.data.AlarmData
-          // 油石比曲线
-          // this.dataCurve2 = this.handleCurveData(rs.data, 'mBhDateTime', 'mBnYSB', '%', '油石比曲线图')
-          // // 级配曲线9
-          // this.dataCurve3 = this.handleCurveData2(rs.repice_data, '', '', '%', '级配曲线图')
         }
       }, (err) => { console.log(err) })
     },
@@ -383,7 +382,7 @@ export default {
         yAxis: {
           type: 'value',
           axisLabel: {
-            formatter: function (arr, sign) {
+            formatter: function (arr) {
               if (sign) {
                 return arr + sign
               } else {

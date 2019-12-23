@@ -35,7 +35,7 @@
       <Table border :columns="itemTitle" :data="itemlist" :loading="loading" :width="width">
       <template slot-scope="{ row, index }" slot="action">
         <Button type="success" size="small" style="margin-right: .05rem" @click="importExcel(index)">导入</Button>
-        <Button type="primary" size="small" style="margin-right: .05rem" @click="modify(index)">修改</Button>
+        <Button type="primary" size="small" style="margin-right: .05rem" @click="modify(index)">编辑</Button>
         <Button type="error" size="small" @click="remove(index)">删除</Button>
         <Modal v-model="delectmodal" width="360">
           <p slot="header" style="color:#f60;text-align:center">
@@ -52,7 +52,6 @@
         </Modal>
       </template>
     </Table>
-    <Switch v-model="loading"></Switch>
       <div style="margin: .10rem;overflow: hidden">
         <div style="float: right;">
             <Page :total="page.totaldata" :current.sync="page.current" :page-size="page.rows" @on-change="changePage"></Page>

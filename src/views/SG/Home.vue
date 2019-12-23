@@ -25,12 +25,12 @@ export default {
     return {
       items: [
         {
-          routePath: '/sg/SGtanpu',
+          routePath: '/sg/SGnianya',
           name: '碾压轨迹',
           isActive: true
         },
         {
-          routePath: '/sg/SGyashi',
+          routePath: '/sg/SGtanpu',
           name: '摊铺轨迹',
           isActive: false
         }

@@ -10,9 +10,9 @@
     <div class="list">
       <h3>材料列表</h3>
        <Button  class="addbtn" size="large" type="primary" @click="linktoPage(-1)">+ 添加</Button>
-      <Table  class="table" border :columns="listTitle" :data="datalist" size="small"  stripe>
+      <Table   :loading="loading" class="table" border :columns="listTitle" :data="datalist" size="small"  stripe>
         <template slot-scope="{ row, index }" slot="action">
-        <Button type="primary" size="small" style="margin-right: .05rem" @click="linktoPage(index)">修改</Button>
+        <Button type="primary" size="small" style="margin-right: .05rem" @click="linktoPage(index)">编辑</Button>
         <Button type="error" size="small" @click="remove(index)">删除</Button>
         <Modal v-model="delectmodal" width="360">
           <p slot="header" style="color:#f60;text-align:center">
@@ -106,7 +106,13 @@ export default {
         if (rs.code === 0) {
           let _data = rs.data
           _data.map((item, index, arr) => {
-            // if(item['mUserLevel'])
+            if (item.mClCW === 1) {
+              arr[index].mClCW = '上层面'
+            } else if (item.mClCW === 2) {
+              arr[index].mClCW = '中层面'
+            } else if (item.mClCW === 3) {
+              arr[index].mClCW = '下层面'
+            }
           })
           this.datalist = rs.data
         }
