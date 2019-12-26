@@ -4,27 +4,6 @@
 }
   .warp{
     position: relative;
-    .button{
-      .info{
-        // display: flex;
-        .tex{
-          height: .8rem;
-          line-height: .3rem;
-          // display: flex;
-          // width: 7rem;
-          justify-content: space-between;
-          p:first-of-type{
-            margin-left: .2rem;
-          }
-          .bian{
-            div{
-              display: inline-block;
-              width: 1.3rem;
-            }
-          }
-        }
-      }
-    }
     .out-canvas{
       position: relative;
       width: 100%;
@@ -41,7 +20,7 @@
     position: absolute;
     z-index: 9;
     right: .3rem;
-    top: .5rem;
+    top: .8rem;
   }
   .warp .colors ul{
     list-style: none;
@@ -49,13 +28,11 @@
     margin: 0;
   }
   .warp .colors li{
-    width: .7rem;
-    height: .3rem;
-
-    // color:#fff;
-    font-size: .1rem;
+    width: 1rem;
+    height: .5rem;
+    font-size: .15rem;
     text-align: center;
-    line-height: .25rem;
+    line-height: .5rem;
   }
 
 </style>
@@ -65,15 +42,10 @@
       <div class="info">
         <Button @click = "handleScale(1)">放大</Button>
         <Button @click = "handleScale(-1)">缩小</Button>
-        <!-- <div class="tex">
-          <div class="bian">
-            <div v-for="(item, index) in colorsPersent" :key="index">{{index + 1}}遍:{{item}}；</div>
-          </div>
-        </div> -->
       </div>
       <div class="colors">
       <ul>
-        <li v-for="(item, index) in colors" :style="'background: ' + item.col" :key = "index">{{item.index}}遍</li>
+        <li v-for="(item, index) in colors" :style="'background: ' + item.col" :key = "index">{{item.str}}</li>
       </ul>
       </div>
     </div>
@@ -84,11 +56,7 @@
           :width="canvasW"
           :height="canvasH"
           style="border:1px solid #ccc;"
-          @mousemove="getXY"
         ></canvas>
-        <div class="mousemove" :style=" {left: this.Xlocation + 'px', top: this.Ylocation + 15 + 'px' }">
-          <div class="botm">{{currentTimes}}遍</div>
-        </div>
     </div>
 
   </div>
@@ -101,7 +69,6 @@ export default {
       canvasW: 1200,
       canvasH: 1200,
       canvas: null,
-      ifFirst: true,
       colors: [],
       // 放大缩小的倍数
       size: 1,
@@ -120,7 +87,7 @@ export default {
       // testarr: [[{ 'x': '10.80', 'y': '100' }, { 'x': '10.80', 'y': '200' }, { 'x': '20.70', 'y': '223.00' }, { 'x': '20.70', 'y': '100' }],
       //   [{ 'x': '11.70', 'y': '223.00' }, { 'x': '11.70', 'y': '336.00' }, { 'x': '58.70', 'y': '213.80' }, { 'x': '58.70', 'y': '326.80' }]],
       testarr: mockdata,
-      // 25遍颜色rgb值
+      // 4中区间颜色rgb值
       colorArr: [
         [250, 228, 35],
         [213, 250, 35],
@@ -128,7 +95,6 @@ export default {
         [2, 166, 104]
       ],
       flag: true,
-      maxTimes: 25,
       // 25中颜色各有多少像素点 的百分数 数组
       colorsPersent: []
     }
@@ -140,14 +106,13 @@ export default {
         this.XYdata = newVal.data
         this.road_data = newVal.road_data
         // 遍历road_data数据，找到最大X和最大Y
-        let xArr = []
-        let yArr = []
+        let [xArr, yArr] = [[], []]
 
         this.road_data.map((item, index, arr) => {
           xArr.push(item[0]['x'], item[1]['x'])
           yArr.push(item[2]['y'], item[3]['y'])
         })
-
+        // canvas自适应最大坐标
         this.canvasW = Math.max(...xArr) + 100
         this.canvasH = Math.max(...yArr) + 80
         console.log(JSON.stringify(this.road_data[0]))
@@ -178,18 +143,7 @@ export default {
     // this.initCanvas()
 
     // 处理颜色条样式
-
-    for (let i = 0; i < this.maxTimes; i++) {
-      this.colors.push({
-        index: i + 1,
-
-        col: 'rgb(' + this.colorArr[i][0] + ',' + this.colorArr[i][1] + ',' + this.colorArr[i][2] + ')'
-      })
-    }
-
-    // canvans宽度自适应
-    // this.canvasW = this.$refs.move.offsetWidth - 50
-    // this.canvasH = this.$refs.move.offsetHeight - 200
+    this.handlerColorsBar()
   },
   methods: {
     initRoad () {
@@ -260,132 +214,48 @@ export default {
       // this.changeColor(this.canvas, ctx)
     },
     handleColors (temp) {
+      let arr = this.colorArr
+      let fn = (c) => {
+        let colorStr = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ')'
+        return colorStr
+      }
       if (temp < 130) {
         // 黄色
-        return 'rgba(250,228,35,1)'
+        return fn(arr[0])
       } else if (temp >= 130 && temp < 140) {
         // 浅绿色
-        return 'rgba(213,250,35,1)'
+        return fn(arr[1])
       } else if (temp >= 140 && temp < 150) {
         // 绿色
-        return 'rgba(33,252,38,1)'
+        return fn(arr[2])
       } else if (temp >= 150) {
         // 深绿色
-        return 'rgba(2,196,104,1)'
+        return fn(arr[3])
       }
     },
-    // 处理透明度的值
-    handleTimesAlphaData () {
-      // 碾压最大遍数
-      let maxTimes = this.maxTimes
-      // 从0-25遍 前一次叠加透明度的值（0-255）
-      var lastAlpha = 0
-      // 单层的透明度值（透明度的值为0-255）
-      let step = this.step
-      // 透明度数组
-      let aArr = []
-      // console.log(step / 255)
-      for (var i = 0; i < maxTimes; i++) {
-        lastAlpha = (1 - (1 - lastAlpha) * (1 - step / 255))
-        // lastAlpha = 255 - lastAlpha - step * lastAlpha / 255
-        lastAlpha = parseFloat(lastAlpha)
-        let newVal = parseFloat(lastAlpha * 255)
-        aArr.push(newVal)
-      }
-      return aArr
-    },
-    // 根据遍数自定义颜色
-    changeColor (canvas, ctx) {
-      // 处理25遍碾压的各种数值，0绝对透明，255不透明
-      let aArr = this.handleTimesAlphaData()
-      console.log(aArr)
-      // let aArr = [0, 51, 92, 125, 151, 172]
-      // 获得画布所有数据(25遍)
-      let colorArr = this.colorArr
-      // 得到所有点信息
-      let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      let colorsNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      for (let i = 0; i < imgData.data.length; i += 4) {
-        let alpha = imgData.data[i + 3]
-
-        for (let j = 0; j < aArr.length; j++) {
-          let mixinBegin = 2
-          let mixinEnd = 2
-          // 对不同边线的模糊值处理
-          // 处理第一个颜色
-          if (j === 0) {
-            mixinBegin = 16
-          }
-
-          // 处理其他所有有透明度值的点
-          if (alpha >= aArr[j] - mixinBegin && alpha <= aArr[j + 1] - mixinEnd) {
-            imgData.data[i] = colorArr[j][0]
-            imgData.data[i + 1] = colorArr[j][1]
-            imgData.data[i + 2] = colorArr[j][2]
-            imgData.data[i + 3] = 255
-            if (j !== 24) {
-              colorsNum[j]++
-            }
-          }
-          // 处理最后一个颜色
-          if (alpha >= 235 && alpha <= 255) {
-            imgData.data[i] = 108
-            imgData.data[i + 3] = 255
-            colorsNum[24]++
-          }
+    // 处理颜色条样式
+    handlerColorsBar () {
+      for (let i = 0; i < 4; i++) {
+        let str = ''
+        switch (i) {
+          case 0:
+            str = '小于130℃'
+            break
+          case 1:
+            str = '130℃~140℃'
+            break
+          case 2:
+            str = '140℃~150℃'
+            break
+          default:
+            str = '大于150℃'
+            break
         }
+        this.colors.push({
+          str: str,
+          col: 'rgb(' + this.colorArr[i][0] + ',' + this.colorArr[i][1] + ',' + this.colorArr[i][2] + ')'
+        })
       }
-      ctx.putImageData(imgData, 0, 0)
-      // console.log(imgData)
-      // 处理各个遍数的比例
-      if (this.ifFirst) {
-        this.persentBian(colorsNum)
-      }
-
-      // console.log(colorsNum)
-    },
-    // 第一次会算遍数的百分比，后就不在算
-    persentBian (_data) {
-      let sum = 0
-      for (let i = 0; i < _data.length; i++) {
-        sum += _data[i]
-      }
-      for (let i = 0; i < _data.length; i++) {
-        this.colorsPersent.push(parseFloat(((_data[i] / sum) * 100).toFixed(3)))
-      }
-      this.$emit('updata-barchart', this.colorsPersent)
-      // console.log(this.colorsPersent)
-      this.ifFirst = false
-    },
-    // 鼠标事件，得到坐标,得到像素颜色，判断遍数
-    getXY (e) {
-      let x = e.offsetX
-      let y = e.offsetY
-      // console.log('x:' + x + ';y:' + y)
-      this.Xlocation = x
-      this.Ylocation = y
-
-      this.getXYColor(x, y)
-    },
-    getXYColor (x, y) {
-      let colorData = this.ctx.getImageData(x, y, 1, 1)
-      // console.log(colorData)
-      let red = parseInt(colorData.data[0])
-      let green = parseInt(colorData.data[1])
-      let blue = parseInt(colorData.data[2])
-      // let alpha = parseInt(colorData.data[3])
-      // let rgba = 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha / 255 + ')'
-      // console.log(rgba)
-      // console.log(alpha)
-      // 对应颜色找到遍数   遍历colorArr
-      let currentTimes = 0
-      for (let i = 0; i < this.maxTimes; i++) {
-        if (red === this.colorArr[i][0] && green === this.colorArr[i][1] && blue === this.colorArr[i][2]) {
-          currentTimes = i + 1
-        }
-      }
-      this.currentTimes = currentTimes
-      // this.currentTimes = alpha
     },
     waitTime () {
       setTimeout(() => {

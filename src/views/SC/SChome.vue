@@ -34,6 +34,7 @@
         flex-wrap: wrap;
         justify-content: space-between;
         .curve{
+          margin-top: .3rem;
           width: 3.5rem;
           height: 2.5rem;
           // border:2px solid #333;

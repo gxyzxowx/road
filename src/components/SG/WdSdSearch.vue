@@ -47,7 +47,7 @@ export default {
   },
   props: ['devType'],
   mounted () {
-    console.log(this.devType)
+    // console.log(this.devType)
     // 碾压机211，摊铺机210
     if (this.devType === '211') {
       this.devTypeName = '选择碾压机'
@@ -60,24 +60,69 @@ export default {
       mUserID: this.comFun.getCookie('roadmUserID'),
       mItemID: this.$store.state.itemInfo.id
     }
-
-    this.comFun.post('/Item/getItemBid', obj, this).then((rs) => {
+    let getBd = new Promise((resolve, reject) => {
+      this.comFun.post('/Item/getItemBid', obj, this).then((rs) => {
       // console.log(JSON.stringify(rs))
-      if (rs.code === 0) {
-        this.show.mItemBidList = rs.data
-        this.show.mItemBidList.unshift({ mItemBDJC: '全部', mItemBid: '' })
-      }
-    }, (err) => { console.log(err) })
+        if (rs.code === 0) {
+          resolve(rs.data)
+        }
+      }, (err) => {
+        reject(err)
+      })
+    })
 
-    obj['mDevType'] = this.devType
-    this.comFun.post('/Dev/getDevList', obj, this).then((rs) => {
+    let getDev = new Promise((resolve, reject) => {
+      obj['mDevType'] = this.devType
+      this.comFun.post('/Dev/getDevList', obj, this).then((rs) => {
       // console.log(JSON.stringify(rs))
-      if (rs.code === 0) {
-        this.show.devList = rs.data
-        this.select.mDevID = rs.data[0]['mDevID']
-        this.$emit('mDevID', rs.data[0]['mDevID'])
+        if (rs.code === 0) {
+          resolve(rs.data)
+        }
+      }, (err) => {
+        reject(err)
+      })
+    })
+    Promise.all([getBd, getDev]).then((reslut) => {
+      let bd = reslut[0]
+      let dev = reslut[1]
+      this.show.mItemBidList = bd
+      this.select.mItemBid = bd[0]['mItemBid']
+      this.show.mItemBidList.unshift({ mItemBDJC: '全部', mItemBid: '' })
+
+      this.show.devList = dev
+      this.select.mDevID = dev[0]['mDevID']
+      let obj = {
+        // 选择的设备ID
+        mDevID: this.select.mDevID,
+        // 选择的标段
+        mItemBid: this.select.mItemBid,
+        start_time: this.select.start_time,
+        end_time: this.select.end_time
       }
-    }, (err) => { console.log(err) })
+      console.log(JSON.stringify(obj))
+      this.$emit('getData', obj)
+    })
+      .catch((err) => {
+        console.log(err)
+      })
+
+    // this.comFun.post('/Item/getItemBid', obj, this).then((rs) => {
+    //   // console.log(JSON.stringify(rs))
+    //   if (rs.code === 0) {
+    //     this.show.mItemBidList = rs.data
+    //     this.show.mItemBidList.unshift({ mItemBDJC: '全部', mItemBid: '' })
+    //   }
+    // }, (err) => { console.log(err) })
+
+    // obj['mDevType'] = this.devType
+    // this.comFun.post('/Dev/getDevList', obj, this).then((rs) => {
+    //   // console.log(JSON.stringify(rs))
+    //   if (rs.code === 0) {
+    //     this.show.devList = rs.data
+    //     this.select.mDevID = rs.data[0]['mDevID']
+    //     this.$emit('mDevID', rs.data[0]['mDevID'])
+    //   }
+    // }, (err) => { console.log(err) })
   },
   methods: {
     changeType0 (val) {

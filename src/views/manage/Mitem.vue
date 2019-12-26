@@ -1,6 +1,6 @@
 <style lang="less" scoped>
 .mitem {
-  margin: .15rem;
+  margin: .15rem .4rem;
   .title {
     display: flex;
     justify-content: space-between;
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="bottom">
-      <Table border :columns="itemTitle" :data="itemlist" :loading="loading" :width="width">
+      <Table border :columns="itemTitle" :data="itemlist" :loading="loading" size="small" :width="width"  max-height="590">
       <template slot-scope="{ row, index }" slot="action">
         <Button type="success" size="small" style="margin-right: .05rem" @click="importExcel(index)">导入</Button>
         <Button type="primary" size="small" style="margin-right: .05rem" @click="modify(index)">编辑</Button>
@@ -65,28 +65,9 @@
         <ImportExcel></ImportExcel>
     <div slot="footer"></div>
     </Modal>
-    <!-- 新建项目模态框 -->
-    <Modal v-model="showNewProject" width="900">
-        <p slot="header" style="color:#333;text-align:center">
-            <Icon type="md-add"></Icon>
-            <span>新建项目</span>
-        </p>
-        <NewProject v-if="showNewProject"></NewProject>
-        <div slot="footer"></div>
-    </Modal>
-    <!-- 修改项目模态框 -->
-       <Modal v-model="showModifyProject" width="900" >
-        <p slot="header" style="color:#333;text-align:center">
-            <Icon type="md-add"></Icon>
-            <span>修改项目</span>
-        </p>
-        <NewProject v-if="showModifyProject"></NewProject>
-        <div slot="footer"></div>
-    </Modal>
   </div>
 </template>
 <script>
-import NewProject from '@/components/NewProject.vue'
 import ImportExcel from '@/components/ImportExcel.vue'
 export default {
   data () {
@@ -319,7 +300,6 @@ export default {
     }
   },
   components: {
-    NewProject,
     ImportExcel
   }
 }

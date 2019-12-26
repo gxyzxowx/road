@@ -15,7 +15,7 @@
 
     <div class="content">
       <h4>综合查询</h4>
-      <Table  :loading="loading" height="300" border :columns="listTitle" :data="datalist" size="small" stripe></Table>
+      <Table  :loading="loading" height="490" border :columns="listTitle" :data="datalist" size="small" stripe></Table>
       <Switch v-model="loading"></Switch>
       <div style="margin: .10rem;overflow: hidden">
         <div style="float: right;">

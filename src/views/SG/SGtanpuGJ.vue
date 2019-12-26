@@ -29,6 +29,7 @@ export default {
     return {
       mUserID: '',
       mItemID: '',
+      mItemBid: '',
       movedata: null,
       emitobj: {}
     }
@@ -43,6 +44,7 @@ export default {
       let obj = {
         mUserID: this.mUserID,
         mItemID: this.mItemID,
+        mItemBid: this.mItemBid,
         // 碾压1，摊铺2
         devType: 2
       }

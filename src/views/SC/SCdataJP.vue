@@ -28,12 +28,12 @@
       <div class="total">
         <!-- 汇总信息 -->
         <h4>标准</h4>
-        <Table  border :columns="listTitle1" :data="datalist1" size="small"  :width="tableWidth2" stripe></Table>
+        <Table  border :columns="listTitle1" :data="datalist1" size="small" stripe></Table>
       </div>
       <div class="desc">
         <h4>详细数据</h4>
         <!-- 详细信息 -->
-        <Table  height="82" border :columns="listTitle2" :data="datalist2" size="small"  :width="tableWidth2" stripe></Table>
+        <Table  height="82" border :columns="listTitle2" :data="datalist2" size="small" stripe></Table>
       </div>
     </div>
 
@@ -49,7 +49,6 @@ export default {
     return {
       mUserID: '',
       mItemID: '',
-      tableWidth2: '1200',
       datacurve1: null,
       listTitle1: [
         {
@@ -265,8 +264,8 @@ export default {
           padding: [25, 0, 0, 0]
         },
         grid: {
-          left: '3%',
-          right: '4%',
+          left: '1%',
+          right: '1%',
           bottom: '3%',
           containLabel: true
         },

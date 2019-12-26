@@ -161,8 +161,7 @@ export default {
         this.XYdata = newVal.data
         this.road_data = newVal.road_data
         // 遍历road_data数据，找到最大X和最大Y
-        let xArr = []
-        let yArr = []
+        let [xArr, yArr] = [[], []]
 
         this.road_data.map((item, index, arr) => {
           xArr.push(item[0]['x'], item[1]['x'])
@@ -207,10 +206,6 @@ export default {
         col: 'rgb(' + this.colorArr[i][0] + ',' + this.colorArr[i][1] + ',' + this.colorArr[i][2] + ')'
       })
     }
-
-    // canvans宽度自适应
-    // this.canvasW = this.$refs.move.offsetWidth - 50
-    // this.canvasH = this.$refs.move.offsetHeight - 200
   },
   methods: {
     initRoad () {
@@ -220,30 +215,28 @@ export default {
       ctx.beginPath()
       ctx.strokeStyle = 'rgba(0,0,0,1)'
       ctx.lineWidth = 0.1
+      // 设置字体
+      ctx.font = '10px bold 黑体'
+      // 设置颜色
+      ctx.fillStyle = '#666'
       ctx.moveTo(road[0][3]['x'], road[0][3]['y'])
-      // ctx.lineTo(road[0][1]['x'], road[0][1]['y'])
+      // 画道路上边线
       for (var i = 0; i < road.length; i++) {
-        // ctx.fillStyle = 'rgba(228,162,251,1)'
-
-        // 真实数据
-
         ctx.lineTo(road[i][3]['x'], road[i][3]['y'])
         ctx.lineTo(road[i][1]['x'], road[i][1]['y'])
         // 为道路添加桩号
-        // 设置字体
-        ctx.font = '10px bold 黑体'
-        // 设置颜色
-        ctx.fillStyle = '#666'
         if (i % 400 === 0) {
           ctx.fillText(road[i][0]['mZHName'], road[i][0]['x'], road[i][0]['y'])
         }
       }
+      // 画道路下边线
       for (var j = road.length - 1; j > 0; j--) {
         ctx.lineTo(road[j][0]['x'], road[j][0]['y'])
         ctx.lineTo(road[j][2]['x'], road[j][2]['y'])
       }
-      ctx.lineTo(road[0][3]['x'], road[0][3]['y'])
-      // ctx.closePath()
+      // 闭合
+      // ctx.lineTo(road[0][3]['x'], road[0][3]['y'])
+      ctx.closePath()
       ctx.stroke()
       this.ctx = ctx
     },
@@ -253,17 +246,13 @@ export default {
       // 真实坐标数据data
       let obj = this.XYdata
       // obj = obj.concat(obj)
-      // obj = obj.concat(obj)
-      // obj = obj.concat(obj)
-      // console.log(JSON.stringify(obj, null, 2))
-
       let ctx = this.ctx
-      // ctx.globalAlpha = this.step / 255
+      ctx.strokeStyle = 'rgba(0,0,0,0)'
+      ctx.lineWidth = 0.1
+      ctx.fillStyle = 'rgba(0,0,0,' + this.step / 255 + ')'
+
       for (var i = 0; i < obj.length; i++) {
         ctx.beginPath()
-        ctx.strokeStyle = 'rgba(0,0,0,0)'
-        ctx.lineWidth = 0.1
-        ctx.fillStyle = 'rgba(0,0,0,' + this.step / 255 + ')'
 
         // 真实数据
         ctx.moveTo(obj[i][0]['x'], obj[i][0]['y'])
@@ -310,10 +299,16 @@ export default {
       let colorArr = this.colorArr
       // 得到所有点信息
       let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      let colorsNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      // let colorsNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      // 25种颜色每个颜色的个数
+      let colorsNum = []
+      for (let n = 25; n > 0; n--) {
+        colorsNum.push(0)
+      }
+      // 遍历每个坐标点的颜色rgba
       for (let i = 0; i < imgData.data.length; i += 4) {
         let alpha = imgData.data[i + 3]
-
+        // 遍历25种透明度数组
         for (let j = 0; j < aArr.length; j++) {
           let mixinBegin = 2
           let mixinEnd = 2
@@ -322,18 +317,24 @@ export default {
           if (j === 0) {
             mixinBegin = 16
           }
-
-          // 处理其他所有有透明度值的点
+          // 处理倒数第二个颜色
+          if (j === 23) {
+            mixinEnd = 0
+          }
+          // 处理其他所有有透明度值的点（不包括最后一个）
           if (alpha >= aArr[j] - mixinBegin && alpha <= aArr[j + 1] - mixinEnd) {
             imgData.data[i] = colorArr[j][0]
             imgData.data[i + 1] = colorArr[j][1]
             imgData.data[i + 2] = colorArr[j][2]
             imgData.data[i + 3] = 255
-            if (j !== 24) {
-              colorsNum[j]++
+            if (j === 24) {
+              // colorsNum[j]++
+              console.log('不可能有')
+              console.log(alpha)
             }
+            colorsNum[j]++
           }
-          // 处理最后一个颜色
+          // 处理最后一个颜色（25遍以上都显示25遍）
           if (alpha >= 235 && alpha <= 255) {
             imgData.data[i] = 108
             imgData.data[i + 3] = 255

@@ -2,7 +2,7 @@
 </style>
 <style scoped lang="less">
 .layout .header {
-  height: 1.9rem;
+  height: 2.05rem;
   background-image: url(~@/assets/img/top.png);
   background-repeat: no-repeat;
   background-position: top center;
@@ -51,7 +51,7 @@
     }
     // 中间3个按钮
     .btns {
-      margin-top: .5rem;
+      margin-top: .55rem;
       display: flex;
       justify-content: space-around;
       .btn {
@@ -203,11 +203,10 @@ export default {
   },
   mounted () {
     // 获得页面长宽
-    let H = document.body.scrollHeight
-    console.log(H)
+    // let H = document.body.scrollHeight
     let W = document.body.clientWidth
-    console.log(W)
-    this.bodyH = W * (9 / 16)
+    this.bodyH = W * (9 / 16) + 'px'
+    console.log(this.bodyH)
     // 得到当前用户名
     this.manager = this.comFun.getCookie('roadmUserName')
     // 获取用户拥有项目列表

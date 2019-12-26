@@ -23,7 +23,7 @@
       <div class="total">
         <!-- 汇总信息 -->
         <h3>标准信息</h3>
-        <Table  border :columns="listTitle1" :data="datalist1" size="small" :width="tableWidth2" stripe></Table>
+        <Table  border :columns="listTitle1" :data="datalist1" size="small" :width="tableWidth2" stripe :loading="loading"></Table>
       </div>
       <div class="curve">
         <h3>速度曲线图</h3>
@@ -40,6 +40,7 @@ import CurveChart from '@/components/CurveChart.vue'
 export default {
   data () {
     return {
+      loading: false,
       mUserID: '',
       mItemID: '',
       tableWidth2: '1200',

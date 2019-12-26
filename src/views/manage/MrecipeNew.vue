@@ -627,14 +627,15 @@ export default {
           this.dataobj = rs.data
           let _data = rs.data
           // 找出所有级配数据（72个）
-          let jpObj = {}
-          let item
-          let upObj = {}
-          let downObj = {}
-          let bd1Obj = {}
-          let bd2Obj = {}
-          let bd3Obj = {}
-          let mbzObj = {}
+          // let jpObj = {}
+          // let item
+          // let upObj = {}
+          // let downObj = {}
+          // let bd1Obj = {}
+          // let bd2Obj = {}
+          // let bd3Obj = {}
+          // let mbzObj = {}
+          let [jpObj, item, upObj, downObj, bd1Obj, bd2Obj, bd3Obj, mbzObj] = [{}, '', {}, {}, {}, {}, {}, {}]
           for (item in _data) {
             if (item.indexOf('mClJP') !== -1) {
               jpObj[item] = _data[item]

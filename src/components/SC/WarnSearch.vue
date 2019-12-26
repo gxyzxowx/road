@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-12 11:39:09
+ * @LastEditTime: 2019-12-26 15:40:57
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \road\src\components\SC\WarnSearch.vue
+ -->
 <style lang="less" scoped>
   .title .selects{
     .box {
@@ -51,8 +59,15 @@ export default {
       console.log(JSON.stringify(rs))
       if (rs.code === 0) {
         this.show.mItemBidList = rs.data
-
+        this.select.mItemBid = rs.data[0]['mItemBid']
         this.show.mItemBidList.unshift({ mItemBDJC: '全部', mItemBid: '' })
+        let obj = {
+        // 选择的标段
+          mItemBid: this.select.mItemBid,
+          start_time: this.select.start_time,
+          end_time: this.select.end_time
+        }
+        this.$emit('getData', obj)
       }
     }, (err) => { console.log(err) })
   },

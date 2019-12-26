@@ -10,7 +10,7 @@
     <div class="list">
       <h3>材料列表</h3>
        <Button  class="addbtn" size="large" type="primary" @click="linktoPage(-1)">+ 添加</Button>
-      <Table   :loading="loading" class="table" border :columns="listTitle" :data="datalist" size="small"  stripe>
+      <Table   :loading="loading" class="table" border :columns="listTitle" :data="datalist" size="small" stripe max-height="590">
         <template slot-scope="{ row, index }" slot="action">
         <Button type="primary" size="small" style="margin-right: .05rem" @click="linktoPage(index)">编辑</Button>
         <Button type="error" size="small" @click="remove(index)">删除</Button>

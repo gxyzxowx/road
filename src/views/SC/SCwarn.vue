@@ -28,7 +28,7 @@
   <div class="bottom">
             <!-- 预警列表 -->
 <h3 class="title">预警列表</h3>
-<Table :loading="loading" max-height="280" border :columns="listTitle" :data="datalist" size="small"  :width="tableWidth" stripe>
+<Table :loading="loading" max-height="300" border :columns="listTitle" :data="datalist" size="small"  :width="tableWidth" stripe>
   <template slot-scope="{ row, index }" slot="action">
     <Button type="primary" size="small" style="margin-right: .05rem" @click="handleWarn(index)">处理</Button>
   </template>

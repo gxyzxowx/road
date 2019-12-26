@@ -116,37 +116,37 @@
               </div>
             </div>
             <div class="info-cel cel" v-if="ifNianya">
-              <div class="info-cel-title">速度标准</div>
+              <div class="info-cel-title">速度标准（km/h）</div>
               <div class="info-cel-input">
                <input type="text"  v-model="dataobj.mDevSDBZ"/>
               </div>
             </div>
             <div class="info-cel cel" v-if="ifNianya">
-              <div class="info-cel-title">速度上限</div>
-              <div class="info-cel-input">
-               <input type="text"  v-model="dataobj.mDevSDSX"/>
-              </div>
-            </div>
-            <div class="info-cel cel" v-if="ifNianya">
-              <div class="info-cel-title">速度下限</div>
-              <div class="info-cel-input">
-               <input type="text"  v-model="dataobj.mDevSDXX"/>
-              </div>
-            </div>
-            <div class="info-cel cel" v-if="ifNianya">
-              <div class="info-cel-title">温度标准</div>
+              <div class="info-cel-title">温度标准（℃）</div>
               <div class="info-cel-input">
                <input type="text"  v-model="dataobj.mDevWDBZ"/>
               </div>
             </div>
             <div class="info-cel cel" v-if="ifNianya">
-              <div class="info-cel-title">温度上限</div>
+              <div class="info-cel-title">速度上限（km/h）</div>
+              <div class="info-cel-input">
+               <input type="text"  v-model="dataobj.mDevSDSX"/>
+              </div>
+            </div>
+            <div class="info-cel cel" v-if="ifNianya">
+              <div class="info-cel-title">温度上限（℃）</div>
               <div class="info-cel-input">
                <input type="text"  v-model="dataobj.mDevWDSX"/>
               </div>
             </div>
             <div class="info-cel cel" v-if="ifNianya">
-              <div class="info-cel-title">温度下限</div>
+              <div class="info-cel-title">速度下限（km/h）</div>
+              <div class="info-cel-input">
+               <input type="text"  v-model="dataobj.mDevSDXX"/>
+              </div>
+            </div>
+            <div class="info-cel cel" v-if="ifNianya">
+              <div class="info-cel-title">温度下限（℃）</div>
               <div class="info-cel-input">
                <input type="text"  v-model="dataobj.mDevWDXX"/>
               </div>
@@ -229,6 +229,10 @@ export default {
           this.dataobj = rs.data
           // 得到该项目所有标段
           this.getItemBid(rs.data.mItemID)
+          // 如果是碾压机或者摊铺机，打开7个选项
+          if (rs.data.mDevType === 211 || rs.data.mDevType === 210) {
+            this.ifNianya = true
+          }
         }
       }, (err) => { console.log(err) })
     },

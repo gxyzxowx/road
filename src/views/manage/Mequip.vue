@@ -9,7 +9,7 @@
     <div class="list">
       <h3>所有设备</h3>
        <Button  class="addbtn" size="large" type="primary" @click="linktoPage(-1)">+ 添加</Button>
-      <Table   :loading="loading" class="table" border :columns="listTitle" :data="datalist" size="small"  stripe>
+      <Table   :loading="loading" class="table" border :columns="listTitle" :data="datalist" size="small"  stripe max-height="590">
         <template slot-scope="{ row, index }" slot="action">
         <Button type="primary" size="small" style="margin-right: .05rem" @click="linktoPage(index)">编辑</Button>
         <Button type="error" size="small" @click="remove(index)">删除</Button>
@@ -48,43 +48,35 @@ export default {
       listTitle: [
         {
           title: '设备名称',
-          width: 160,
           key: 'mDevName'
         },
         {
           title: '类型',
-          width: 160,
           key: 'mDevType'
         },
         {
           title: '编号',
-          width: 160,
           key: 'mDevSn'
         },
         {
           title: '项目简称',
-          width: 160,
           key: 'mItemJC'
         },
         {
           title: '标段简称',
-          width: 160,
           key: 'mItemBDJC'
         },
         {
           title: '状态',
-          width: 160,
           key: 'mDevStatus'
         },
         {
           title: '物联卡号',
-          width: 160,
           key: 'mDevPhoneNo'
         },
         {
           title: '操作',
           slot: 'action',
-          width: 160,
           fixed: 'right',
           align: 'center'
         }
