@@ -16,6 +16,7 @@
         display: flex;
         flex-wrap: wrap;
         border: 1px solid #999;
+        // border-bottom: none;
         .info-cel {
           width: 50%;
           .info-cel-title {
@@ -66,7 +67,7 @@
             <div class="info-cel cel">
               <div class="info-cel-title">设备类型</div>
               <div class="info-cel-input">
-                <Select v-model="dataobj.mDevType" style="width:200px" size="small">
+                <Select v-model="dataobj.mDevType" style="width:200px" size="small" @on-change="changeDev">
                     <Option v-for="item in devTypeList" :value="item.value" :key="item.label">{{ item.label }}</Option>
                 </Select>
               </div>
@@ -107,12 +108,50 @@
                 <input type="text"  v-model="dataobj.mDevAZWZ"/>
               </div>
             </div>
-            <div class="info-cel cel">
+            <!-- 以下只有碾压和摊铺机有 -->
+            <div class="info-cel cel" v-if="ifNianya">
               <div class="info-cel-title">设备宽度</div>
               <div class="info-cel-input">
                <input type="text"  v-model="dataobj.mDevWidth"/>
               </div>
             </div>
+            <div class="info-cel cel" v-if="ifNianya">
+              <div class="info-cel-title">速度标准</div>
+              <div class="info-cel-input">
+               <input type="text"  v-model="dataobj.mDevSDBZ"/>
+              </div>
+            </div>
+            <div class="info-cel cel" v-if="ifNianya">
+              <div class="info-cel-title">速度上限</div>
+              <div class="info-cel-input">
+               <input type="text"  v-model="dataobj.mDevSDSX"/>
+              </div>
+            </div>
+            <div class="info-cel cel" v-if="ifNianya">
+              <div class="info-cel-title">速度下限</div>
+              <div class="info-cel-input">
+               <input type="text"  v-model="dataobj.mDevSDXX"/>
+              </div>
+            </div>
+            <div class="info-cel cel" v-if="ifNianya">
+              <div class="info-cel-title">温度标准</div>
+              <div class="info-cel-input">
+               <input type="text"  v-model="dataobj.mDevWDBZ"/>
+              </div>
+            </div>
+            <div class="info-cel cel" v-if="ifNianya">
+              <div class="info-cel-title">温度上限</div>
+              <div class="info-cel-input">
+               <input type="text"  v-model="dataobj.mDevWDSX"/>
+              </div>
+            </div>
+            <div class="info-cel cel" v-if="ifNianya">
+              <div class="info-cel-title">温度下限</div>
+              <div class="info-cel-input">
+               <input type="text"  v-model="dataobj.mDevWDXX"/>
+              </div>
+            </div>
+            <!-- 以上只有碾压和摊铺机有 -->
             <div class="info-cel cel">
               <div class="info-cel-title">设备描述</div>
               <div class="info-cel-input">
@@ -129,6 +168,8 @@
 export default {
   data () {
     return {
+      // 碾压和摊铺显示设备宽度，速度标准，上下限，温度标准，上下限。一共7项目
+      ifNianya: false,
       mItemID: this.$route.query.mItemID,
       mUserID: 0,
       mDevID: this.$route.query.id,
@@ -221,9 +262,10 @@ export default {
       let obj = this.dataobj
       obj['mItemID'] = this.mItemID
       obj['mUserID'] = this.mUserID
-      if (this.mDevID !== 0) {
+      if (this.mDevID !== -1) {
         obj['mDevID'] = this.mDevID
       }
+      console.log(obj)
       this.comFun.post('/Dev/createDev', obj, this).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
@@ -232,6 +274,15 @@ export default {
           this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
+    },
+    // 更换设备类型时
+    changeDev (type) {
+      // 拌和站209，碾压机211，摊铺机210
+      if (type === 209) {
+        this.ifNianya = false
+      } else {
+        this.ifNianya = true
+      }
     }
   }
 }

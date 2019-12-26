@@ -9,7 +9,7 @@
         // display: flex;
         .tex{
           height: .8rem;
-          line-height: .4rem;
+          line-height: .3rem;
           // display: flex;
           // width: 7rem;
           justify-content: space-between;
@@ -19,7 +19,7 @@
           .bian{
             div{
               display: inline-block;
-              width: 1rem;
+              width: 1.3rem;
             }
           }
         }
@@ -27,11 +27,12 @@
     }
     .out-canvas{
       position: relative;
-      width: 16rem;
-      height: 7.5rem;
-      // border:1px solid red;
+      width: 100%;
+      height: 100%;
+      border:5px solid #F0F4FE;
       overflow-x:scroll;
       .mousemove{
+        font-size: 16px;
         position: absolute;
       }
     }
@@ -39,17 +40,20 @@
   .warp .colors{
     position: absolute;
     z-index: 9;
-    right: .6rem;
-    top: .35rem;
+    right: .3rem;
+    top: .5rem;
   }
   .warp .colors ul{
     list-style: none;
+    border:1px solid #666;
     margin: 0;
   }
   .warp .colors li{
-    width: .5rem;
+    width: .7rem;
     height: .3rem;
-    border:1px solid #000;
+
+    // color:#fff;
+    font-size: .1rem;
     text-align: center;
     line-height: .25rem;
   }
@@ -61,13 +65,11 @@
       <div class="info">
         <Button @click = "handleScale(1)">放大</Button>
         <Button @click = "handleScale(-1)">缩小</Button>
-        <div class="tex">
-          <!-- <p slot="title">当前点击坐标遍数： {{currentTimes}}</p> -->
-          <!-- <p>当前坐标 X：{{Xlocation}}， Y:{{Ylocation}}</p> -->
+        <!-- <div class="tex">
           <div class="bian">
             <div v-for="(item, index) in colorsPersent" :key="index">{{index + 1}}遍:{{item}}；</div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="colors">
       <ul>
@@ -79,13 +81,12 @@
         <canvas
           class="canvas"
           id="myCanvas"
-          width="3500"
-          height="3500"
-          style="border:1px solid #999;"
+          :width="canvasW"
+          :height="canvasH"
+          style="border:1px solid #ccc;"
           @mousemove="getXY"
         ></canvas>
-        <div class="mousemove" :style=" {left: this.Xlocation + 'px', top: this.Ylocation + 'px' }">
-          <div class="top">x:{{Xlocation}},y:{{Ylocation}}</div>
+        <div class="mousemove" :style=" {left: this.Xlocation + 'px', top: this.Ylocation + 15 + 'px' }">
           <div class="botm">{{currentTimes}}遍</div>
         </div>
     </div>
@@ -98,8 +99,12 @@ export default {
   data () {
     return {
       canvasW: 1200,
-      canvasH: 1000,
+      canvasH: 1200,
+      canvas: null,
+      ifFirst: true,
       colors: [],
+      // 放大缩小的倍数
+      size: 1,
       currentTimes: 0,
       Xlocation: 0,
       Ylocation: 0,
@@ -117,31 +122,10 @@ export default {
       testarr: mockdata,
       // 25遍颜色rgb值
       colorArr: [
-        [196, 211, 244],
-        [164, 188, 238],
-        [131, 170, 243],
-        [96, 148, 242],
-        [63, 127, 241],
-        [27, 102, 237],
-        [8, 67, 173],
-        [169, 227, 194],
-        [76, 197, 130],
-        [19, 169, 89],
-        [2, 145, 2],
-        [3, 130, 3],
-        [3, 113, 3],
-        [255, 238, 197],
-        [255, 222, 142],
-        [252, 201, 79],
-        [252, 173, 79],
-        [239, 149, 43],
-        [239, 117, 43],
-        [218, 93, 18],
-        [202, 51, 17],
-        [193, 0, 0],
-        [180, 0, 0],
-        [130, 0, 0],
-        [108, 0, 0]
+        [250, 228, 35],
+        [213, 250, 35],
+        [64, 224, 102],
+        [2, 166, 104]
       ],
       flag: true,
       maxTimes: 25,
@@ -155,14 +139,33 @@ export default {
       handler (newVal, oldVal) {
         this.XYdata = newVal.data
         this.road_data = newVal.road_data
-        console.log(JSON.stringify(this.XYdata))
-        this.canvas = document.getElementById('myCanvas')
-        this.ctx = this.canvas.getContext('2d')
-        // 真实数据
-        this.initCanvas()
+        // 遍历road_data数据，找到最大X和最大Y
+        let xArr = []
+        let yArr = []
 
-        // 画道路
-        this.initRoad()
+        this.road_data.map((item, index, arr) => {
+          xArr.push(item[0]['x'], item[1]['x'])
+          yArr.push(item[2]['y'], item[3]['y'])
+        })
+
+        this.canvasW = Math.max(...xArr) + 100
+        this.canvasH = Math.max(...yArr) + 80
+        console.log(JSON.stringify(this.road_data[0]))
+        console.log(this.canvasW)
+        console.log(this.canvasH)
+        if (this.ctx) {
+          // 有ctx时是点搜索的时候，清理画布
+          this.ctx.clearRect(0, 0, 32766, 32766)
+        }
+        this.$nextTick(() => {
+          this.canvas = document.getElementById('myCanvas')
+          this.ctx = this.canvas.getContext('2d')
+          // 真实数据
+          this.initCanvas()
+
+          // 画道路
+          this.initRoad()
+        })
       }
     },
     deep: true
@@ -173,7 +176,6 @@ export default {
   mounted () {
     // 测试时打开
     // this.initCanvas()
-    // window.addEventListener('mousewheel', this.handleScroll, false)
 
     // 处理颜色条样式
 
@@ -186,8 +188,8 @@ export default {
     }
 
     // canvans宽度自适应
-    this.canvasW = this.$refs.move.offsetWidth - 50
-    this.canvasH = this.$refs.move.offsetHeight - 200
+    // this.canvasW = this.$refs.move.offsetWidth - 50
+    // this.canvasH = this.$refs.move.offsetHeight - 200
   },
   methods: {
     initRoad () {
@@ -211,7 +213,7 @@ export default {
         ctx.font = '10px bold 黑体'
         // 设置颜色
         ctx.fillStyle = '#666'
-        if (i % 200 === 0) {
+        if (i % 400 === 0) {
           ctx.fillText(road[i][0]['mZHName'], road[i][0]['x'], road[i][0]['y'])
         }
       }
@@ -229,6 +231,9 @@ export default {
       // let obj = this.testarr
       // 真实坐标数据data
       let obj = this.XYdata
+      // obj = obj.concat(obj)
+      // obj = obj.concat(obj)
+      // obj = obj.concat(obj)
       // console.log(JSON.stringify(obj, null, 2))
 
       let ctx = this.ctx
@@ -237,7 +242,7 @@ export default {
         ctx.beginPath()
         ctx.strokeStyle = 'rgba(0,0,0,0)'
         ctx.lineWidth = 0.1
-        ctx.fillStyle = 'rgba(0,0,0,' + this.step / 255 + ')'
+        ctx.fillStyle = this.handleColors(obj[i][0]['Temp'])
 
         // 真实数据
         ctx.moveTo(obj[i][0]['x'], obj[i][0]['y'])
@@ -252,7 +257,22 @@ export default {
       this.ctx = ctx
 
       // console.log(ctx)
-      this.changeColor(this.canvas, ctx)
+      // this.changeColor(this.canvas, ctx)
+    },
+    handleColors (temp) {
+      if (temp < 130) {
+        // 黄色
+        return 'rgba(250,228,35,1)'
+      } else if (temp >= 130 && temp < 140) {
+        // 浅绿色
+        return 'rgba(213,250,35,1)'
+      } else if (temp >= 140 && temp < 150) {
+        // 绿色
+        return 'rgba(33,252,38,1)'
+      } else if (temp >= 150) {
+        // 深绿色
+        return 'rgba(2,196,104,1)'
+      }
     },
     // 处理透明度的值
     handleTimesAlphaData () {
@@ -278,7 +298,7 @@ export default {
     changeColor (canvas, ctx) {
       // 处理25遍碾压的各种数值，0绝对透明，255不透明
       let aArr = this.handleTimesAlphaData()
-      // console.log(aArr)
+      console.log(aArr)
       // let aArr = [0, 51, 92, 125, 151, 172]
       // 获得画布所有数据(25遍)
       let colorArr = this.colorArr
@@ -296,36 +316,46 @@ export default {
           if (j === 0) {
             mixinBegin = 16
           }
-          // 处理最后一个颜色
-          if (alpha > 234 && alpha <= 255) {
-            imgData.data[i] = 108
-            imgData.data[i + 3] = 255
-          }
+
           // 处理其他所有有透明度值的点
           if (alpha >= aArr[j] - mixinBegin && alpha <= aArr[j + 1] - mixinEnd) {
             imgData.data[i] = colorArr[j][0]
             imgData.data[i + 1] = colorArr[j][1]
             imgData.data[i + 2] = colorArr[j][2]
             imgData.data[i + 3] = 255
-            colorsNum[j]++
+            if (j !== 24) {
+              colorsNum[j]++
+            }
+          }
+          // 处理最后一个颜色
+          if (alpha >= 235 && alpha <= 255) {
+            imgData.data[i] = 108
+            imgData.data[i + 3] = 255
+            colorsNum[24]++
           }
         }
       }
       ctx.putImageData(imgData, 0, 0)
       // console.log(imgData)
       // 处理各个遍数的比例
-      this.persentBian(colorsNum)
+      if (this.ifFirst) {
+        this.persentBian(colorsNum)
+      }
+
       // console.log(colorsNum)
     },
+    // 第一次会算遍数的百分比，后就不在算
     persentBian (_data) {
       let sum = 0
       for (let i = 0; i < _data.length; i++) {
         sum += _data[i]
       }
       for (let i = 0; i < _data.length; i++) {
-        this.colorsPersent.push(((_data[i] / sum) * 100).toFixed(1) + '%')
+        this.colorsPersent.push(parseFloat(((_data[i] / sum) * 100).toFixed(3)))
       }
+      this.$emit('updata-barchart', this.colorsPersent)
       // console.log(this.colorsPersent)
+      this.ifFirst = false
     },
     // 鼠标事件，得到坐标,得到像素颜色，判断遍数
     getXY (e) {
@@ -343,9 +373,9 @@ export default {
       let red = parseInt(colorData.data[0])
       let green = parseInt(colorData.data[1])
       let blue = parseInt(colorData.data[2])
-      let alpha = parseInt(colorData.data[3])
-      let rgba = 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha / 255 + ')'
-      console.log(rgba)
+      // let alpha = parseInt(colorData.data[3])
+      // let rgba = 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha / 255 + ')'
+      // console.log(rgba)
       // console.log(alpha)
       // 对应颜色找到遍数   遍历colorArr
       let currentTimes = 0
@@ -355,6 +385,7 @@ export default {
         }
       }
       this.currentTimes = currentTimes
+      // this.currentTimes = alpha
     },
     waitTime () {
       setTimeout(() => {
@@ -370,16 +401,32 @@ export default {
       this.waitTime()
       if (scale > 0) {
         console.log('放大')
-        this.ctx.scale(1.5, 1.5)
-        this.ctx.clearRect(0, 0, 32766, 32766)
-        this.initCanvas()
-        this.initRoad()
+        this.canvasW = this.canvasW * 1.2
+        this.canvasH = this.canvasH * 1.2
+        this.$nextTick(() => {
+          this.size = this.size * 1.2
+          this.ctx.scale(this.size, this.size)
+          this.ctx.clearRect(0, 0, 32766, 32766)
+          // 真实数据
+          this.initCanvas()
+
+          // 画道路
+          this.initRoad()
+        })
       } else {
         console.log('缩小')
-        this.ctx.scale(0.5, 0.5)
-        this.ctx.clearRect(0, 0, 32766, 32766)
-        this.initCanvas()
-        this.initRoad()
+        this.canvasW = this.canvasW * 0.8
+        this.canvasH = this.canvasH * 0.8
+        this.$nextTick(() => {
+          this.size = this.size * 0.8
+          this.ctx.scale(this.size, this.size)
+          this.ctx.clearRect(0, 0, 32766, 32766)
+          // 真实数据
+          this.initCanvas()
+
+          // 画道路
+          this.initRoad()
+        })
       }
     }
   }

@@ -134,7 +134,7 @@
 }
 </style>
 <template>
-  <div class="layout" style="height:100%">
+  <div class="layout" :style="{height:bodyH}">
     <Layout style="height:100%; background: #050926;">
       <div class="header">
         <div class="jgcompany"><span>招商局集团重庆交通科研设计院有限公司</span></div>
@@ -180,6 +180,7 @@
 export default {
   data () {
     return {
+      bodyH: '',
       choseItem: '',
       choseItemName: '',
       choseItemJGUint: '监管单位',
@@ -201,6 +202,12 @@ export default {
     }, 1000)
   },
   mounted () {
+    // 获得页面长宽
+    let H = document.body.scrollHeight
+    console.log(H)
+    let W = document.body.clientWidth
+    console.log(W)
+    this.bodyH = W * (9 / 16)
     // 得到当前用户名
     this.manager = this.comFun.getCookie('roadmUserName')
     // 获取用户拥有项目列表

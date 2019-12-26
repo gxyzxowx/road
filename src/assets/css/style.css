@@ -76,3 +76,44 @@
 .newrecipe input::-webkit-input-placeholder {
   color: #bbb !important;
 }
+.anchorBL {
+  display: none;
+}
+.scdata .ul,
+.sgnianya .ul,
+.sgtanpu .ul {
+  display: flex;
+  height: 0.6rem;
+  font-size: 0.24rem;
+  text-align: center;
+}
+.scdata .ul a,
+.sgnianya .ul a,
+.sgtanpu .ul a {
+  height: 100%;
+  color: #333;
+}
+.scdata .ul .li,
+.sgnianya .ul .li,
+.sgtanpu .ul .li {
+  width: 2.22rem;
+  height: 0.55rem;
+  line-height: 0.55rem;
+}
+.scdata .ul .router-link-active,
+.sgnianya .ul .router-link-active,
+.sgtanpu .ul .router-link-active {
+  background: #F0F4FE;
+}
+.scdata .ul .router-link-active span,
+.sgnianya .ul .router-link-active span,
+.sgtanpu .ul .router-link-active span {
+  border-bottom: 0.04rem solid #6996f3;
+  padding: 0.25rem;
+  color: #6996f3;
+}
+.search {
+  height: 1.05rem;
+  background: #f0f4fe;
+  padding: 0.25rem 0 0 0.4rem;
+}

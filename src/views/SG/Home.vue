@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-11 16:50:10
+ * @LastEditTime: 2019-12-25 10:44:27
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \road\src\views\SG\Home.vue
+ -->
 <!-- 施工总监管 -->
 <style scoped>
 
@@ -26,12 +34,12 @@ export default {
       items: [
         {
           routePath: '/sg/SGnianya',
-          name: '碾压轨迹',
+          name: '碾压管理',
           isActive: true
         },
         {
           routePath: '/sg/SGtanpu',
-          name: '摊铺轨迹',
+          name: '摊铺管理',
           isActive: false
         }
       ],

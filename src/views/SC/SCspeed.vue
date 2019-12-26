@@ -68,11 +68,13 @@ export default {
         this.emitobj = emitobj
         console.log('是emit过来的参数:' + JSON.stringify(emitobj))
       }
+      obj = { ...obj, ...emitobj }
+      console.log(obj)
       this.comFun.post('/Produce_J_G/rateStatic', obj, this).then((rs) => {
-        // console.log(JSON.stringify(rs))
+        console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 进度柱状图
-          this.dataBar1 = this.handleBarData(rs.data.ScRate, 'name', 'rep')
+          this.dataBar1 = this.handleBarData(rs.data.ScRate, 'name', 'sj_total')
           this.dataBar2 = this.handleBarData(rs.data.SNData, '', '')
         } else {
         }
@@ -124,7 +126,13 @@ export default {
         yAxis: [
           {
             type: 'value',
-            splitLine: { show: true, lineStyle: { color: ['#aaa'], type: 'dashed' } } // 网格线
+            splitLine: { show: true, lineStyle: { color: ['#aaa'], type: 'dashed' } }, // 网格线
+
+            axisLabel: {
+              formatter: function (data) {
+                return data + 'kg'
+              }
+            }
           }
         ],
         series: [

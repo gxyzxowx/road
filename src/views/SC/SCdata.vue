@@ -1,32 +1,4 @@
 <!-- 质量监管 -->
-<style lang="less" scoped>
-  .scdata{
-    .ul{
-      display: flex;
-      height: .6rem;
-      font-size: .24rem;
-      text-align: center;
-      a{
-        height: 100%;
-        color:#333;
-      }
-      .li{
-        width: 2.22rem;
-        height: .55rem;
-        line-height: .55rem;
-
-      }
-      .router-link-active{
-          background: #F0F4FE;
-          span{
-          border-bottom: 0.04rem solid rgba(105,150,243,1);
-          padding: .25rem;
-          color: rgba(105,150,243,1);
-        }
-        }
-    }
-  }
-</style>
 <template>
 
   <div class="scdata">

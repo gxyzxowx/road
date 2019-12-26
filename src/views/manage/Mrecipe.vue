@@ -115,6 +115,8 @@ export default {
             }
           })
           this.datalist = rs.data
+        } else {
+          this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
     },
@@ -156,6 +158,8 @@ export default {
             this.datalist.splice(this.selectIndex, 1)
             this.$Message.success('成功删除材料')
           }, 1000)
+        } else {
+          this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
     },
@@ -169,6 +173,8 @@ export default {
           this.itemlist = rs.data
           // 默认出来第一个
           this.choseItem(0)
+        } else {
+          this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
     }

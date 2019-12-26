@@ -239,10 +239,10 @@ export default {
         mUserID: this.comFun.getCookie('roadmUserID'),
         mItemID: this.itemId
       }
-      // console.log(obj)
+      console.log(obj)
       this.comFun.post('/Index/getHomePageData', obj, this).then(
         rs => {
-          // console.log(JSON.stringify(rs.data))
+          console.log(JSON.stringify(rs.data))
           if (rs.code === 0) {
           //  项目信息
             this.datas.ItemData = rs.data.ItemData
@@ -342,7 +342,12 @@ export default {
         xAxis: [
           {
             type: 'value',
-            splitLine: { show: true, lineStyle: { color: ['#333'] } } // 网格线
+            splitLine: { show: true, lineStyle: { color: ['#333'] } }, // 网格线
+            axisLabel: {
+              formatter: function (data) {
+                return data + '%'
+              }
+            }
           }
         ],
         yAxis: [

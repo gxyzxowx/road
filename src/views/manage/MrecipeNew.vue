@@ -88,13 +88,17 @@
     }
   }
   .bottom{
-    width: 15.5rem;
-    height: 2.8rem;
-    overflow-y: auto;
-    overflow-x: auto;
+    // width: 15.5rem;
+    // height: 2.8rem;
+    // overflow-y: auto;
+    // overflow-x: auto;
+    margin-top: .2rem;
     .content{
-      // border: 1px solid #999;
-
+      border: 1px solid #999;
+      width: 15.5rem;
+      height: 2.5rem;
+      overflow-y: auto;
+      overflow-x: auto;
       .content-title,.content-rep{
         display: flex;
         height: .4rem;
@@ -692,6 +696,7 @@ export default {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           this.$Message.success(rs.message)
+          this.mClID = rs.data.mClID
           // 操作成功刷新数据
           this.getData()
         } else {

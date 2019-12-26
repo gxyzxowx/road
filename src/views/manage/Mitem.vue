@@ -19,7 +19,7 @@
   <div class="mitem">
     <div class="title" ref="header">
       <div class="left">
-        <Button type="success" size="large" icon="md-add" @click="add()">新建项目</Button>
+        <Button type="primary" size="large" icon="md-add" @click="add()">新建项目</Button>
       </div>
       <div class="right">
         <Input
@@ -116,25 +116,20 @@ export default {
         {
           title: '项目简称',
           key: 'mItemJC',
-          width: 180,
+          width: 150,
           fixed: 'left'
         },
-        // {
-        //   title: '项目ID',
-        //   key: 'mItemID',
-        //   width: 80
-        // },
         {
           title: '项目名称',
           key: 'mItemMC',
-          width: 100
+          width: 200
         },
         {
-          title: '项目总长度',
+          title: '项目总长度(公里)',
           key: 'mItemTotalLength',
           width: 110
         }, {
-          title: '路面宽度',
+          title: '路面宽度(米)',
           key: 'mItemLMKD',
           width: 110
         },
@@ -146,7 +141,7 @@ export default {
         {
           title: '公路名称',
           key: 'mItemGLMC',
-          width: 100
+          width: 150
         },
         {
           title: '公路等级',
@@ -171,7 +166,7 @@ export default {
         {
           title: '工程概况',
           key: 'mItemGCGK',
-          width: 150
+          width: 200
         },
         {
           title: '操作',

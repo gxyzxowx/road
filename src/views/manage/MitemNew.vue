@@ -215,9 +215,9 @@ export default {
         { 'mItemID': 0,
           'mItemMC': '',
           'mItemJC': '',
-          'mItemTotalLength': 0,
+          'mItemTotalLength': '',
           'mItemLMKD': null,
-          'mItemZT': null,
+          'mItemZT': 1,
           'mItemGLMC': null,
           'mItemGLDJ': null,
           'mItemJSDW': null,
@@ -257,6 +257,10 @@ export default {
   methods: {
     // 导入EXCEL数据表打开
     importExcel () {
+      if (this.mItemID === -1) {
+        this.$Message.success('请先新建一个项目')
+        return
+      }
       this.$store.commit('selectItemID', this.mItemID)
       this.showExcelModel = true
     },
@@ -325,7 +329,7 @@ export default {
     saveItem () {
       let obj = this.itemobj
       obj['mUserID'] = this.mUserID
-      if (this.mItemID === 0) {
+      if (this.mItemID === -1) {
         // 新建项目
       } else {
         // 2修改项目需要添加mItemID
@@ -333,10 +337,11 @@ export default {
       }
       console.log(JSON.stringify(obj))
       this.comFun.post('/Item/userCreateItem', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           console.log('修改或者新增项目成功')
-          // 成功,提示后返回并刷新
           this.$Message.success(rs.message)
+          this.mItemID = rs.data.mItemID
           // this.$store.commit('setModalState', false)
         } else {
           //  失败

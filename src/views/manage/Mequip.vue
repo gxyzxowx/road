@@ -118,6 +118,8 @@ export default {
             arr[index]['mDevStatus'] = item['mDevStatus'] ? '工作中' : '非工作中'
           })
           this.datalist = _data
+        } else {
+          this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
     },
@@ -145,6 +147,8 @@ export default {
           this.itemlist = rs.data
           // 默认出来第一个
           this.choseItem(0)
+        } else {
+          this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
     },
@@ -172,6 +176,8 @@ export default {
             this.datalist.splice(this.selectIndex, 1)
             this.$Message.success('成功删除设备')
           }, 1000)
+        } else {
+          this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
     },

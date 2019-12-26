@@ -16,8 +16,8 @@ html,body{
   overflow-y: auto;
   margin: 0;
   padding: 0;
-  /* height: 100%; */
-  height: 10.7rem;
+  height: 100%;
+  /* height:9.732rem; */
   background: #050926;
 }
 #app{

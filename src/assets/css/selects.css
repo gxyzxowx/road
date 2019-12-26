@@ -3,7 +3,9 @@
 .scgrade,
 .scwarn,
 .scspeed,
-.scsearch {
+.scsearch,
+.sgtanpu,
+.sgnianya {
   background: #fff;
   height: 100%;
   width: 100%;
@@ -14,7 +16,9 @@
 .scgrade .title,
 .scwarn .title,
 .scspeed .title,
-.scsearch .title {
+.scsearch .title,
+.sgtanpu .title,
+.sgnianya .title {
   display: flex;
 }
 .scdata .title .selects,
@@ -22,7 +26,9 @@
 .scgrade .title .selects,
 .scwarn .title .selects,
 .scspeed .title .selects,
-.scsearch .title .selects {
+.scsearch .title .selects,
+.sgtanpu .title .selects,
+.sgnianya .title .selects {
   width: 9rem;
   display: flex;
   justify-content: flex-start;
@@ -33,7 +39,9 @@
 .scgrade .title .selects .box,
 .scwarn .title .selects .box,
 .scspeed .title .selects .box,
-.scsearch .title .selects .box {
+.scsearch .title .selects .box,
+.sgtanpu .title .selects .box,
+.sgnianya .title .selects .box {
   margin-right: 0.3rem;
 }
 .scdata .title .selects .ivu-select-single .ivu-select-selection,
@@ -41,7 +49,9 @@
 .scgrade .title .selects .ivu-select-single .ivu-select-selection,
 .scwarn .title .selects .ivu-select-single .ivu-select-selection,
 .scspeed .title .selects .ivu-select-single .ivu-select-selection,
-.scsearch .title .selects .ivu-select-single .ivu-select-selection {
+.scsearch .title .selects .ivu-select-single .ivu-select-selection,
+.sgtanpu .title .selects .ivu-select-single .ivu-select-selection,
+.sgnianya .title .selects .ivu-select-single .ivu-select-selection {
   height: 0.5rem;
   line-height: 0.5rem;
   background: #6996F3;
@@ -52,7 +62,9 @@
 .scgrade .title .selects .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
 .scwarn .title .selects .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
 .scspeed .title .selects .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
-.scsearch .title .selects .ivu-select-single .ivu-select-selection .ivu-select-placeholder {
+.scsearch .title .selects .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
+.sgtanpu .title .selects .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
+.sgnianya .title .selects .ivu-select-single .ivu-select-selection .ivu-select-placeholder {
   line-height: 0.5rem;
   height: 0.5rem;
   color: #fff;
@@ -63,7 +75,9 @@
 .scgrade .title .selects .ivu-select-single .ivu-select-selection .ivu-select-selected-value,
 .scwarn .title .selects .ivu-select-single .ivu-select-selection .ivu-select-selected-value,
 .scspeed .title .selects .ivu-select-single .ivu-select-selection .ivu-select-selected-value,
-.scsearch .title .selects .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+.scsearch .title .selects .ivu-select-single .ivu-select-selection .ivu-select-selected-value,
+.sgtanpu .title .selects .ivu-select-single .ivu-select-selection .ivu-select-selected-value,
+.sgnianya .title .selects .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
   height: 0.5rem;
   color: #fff;
   font-size: 0.24rem;
@@ -74,7 +88,9 @@
 .scgrade .title .selects .ivu-select-single .ivu-select-selection .ivu-select,
 .scwarn .title .selects .ivu-select-single .ivu-select-selection .ivu-select,
 .scspeed .title .selects .ivu-select-single .ivu-select-selection .ivu-select,
-.scsearch .title .selects .ivu-select-single .ivu-select-selection .ivu-select {
+.scsearch .title .selects .ivu-select-single .ivu-select-selection .ivu-select,
+.sgtanpu .title .selects .ivu-select-single .ivu-select-selection .ivu-select,
+.sgnianya .title .selects .ivu-select-single .ivu-select-selection .ivu-select {
   color: #fff;
   font-size: 0.24rem;
 }
@@ -83,7 +99,9 @@
 .scgrade .title .selects .ivu-select-single .ivu-select-selection .ivu-select-arrow,
 .scwarn .title .selects .ivu-select-single .ivu-select-selection .ivu-select-arrow,
 .scspeed .title .selects .ivu-select-single .ivu-select-selection .ivu-select-arrow,
-.scsearch .title .selects .ivu-select-single .ivu-select-selection .ivu-select-arrow {
+.scsearch .title .selects .ivu-select-single .ivu-select-selection .ivu-select-arrow,
+.sgtanpu .title .selects .ivu-select-single .ivu-select-selection .ivu-select-arrow,
+.sgnianya .title .selects .ivu-select-single .ivu-select-selection .ivu-select-arrow {
   font-size: 0.28rem;
   color: #fff;
 }
@@ -92,7 +110,9 @@
 .scgrade .title .selects .ivu-input,
 .scwarn .title .selects .ivu-input,
 .scspeed .title .selects .ivu-input,
-.scsearch .title .selects .ivu-input {
+.scsearch .title .selects .ivu-input,
+.sgtanpu .title .selects .ivu-input,
+.sgnianya .title .selects .ivu-input {
   background: #6996F3;
   color: #fff;
   height: 0.5rem;
@@ -104,7 +124,9 @@
 .scgrade .title .selects input::-webkit-input-placeholder,
 .scwarn .title .selects input::-webkit-input-placeholder,
 .scspeed .title .selects input::-webkit-input-placeholder,
-.scsearch .title .selects input::-webkit-input-placeholder {
+.scsearch .title .selects input::-webkit-input-placeholder,
+.sgtanpu .title .selects input::-webkit-input-placeholder,
+.sgnianya .title .selects input::-webkit-input-placeholder {
   color: #fff !important;
 }
 .scdata .title .selects .ivu-input-suffix,
@@ -112,7 +134,9 @@
 .scgrade .title .selects .ivu-input-suffix,
 .scwarn .title .selects .ivu-input-suffix,
 .scspeed .title .selects .ivu-input-suffix,
-.scsearch .title .selects .ivu-input-suffix {
+.scsearch .title .selects .ivu-input-suffix,
+.sgtanpu .title .selects .ivu-input-suffix,
+.sgnianya .title .selects .ivu-input-suffix {
   margin-right: 0.1rem;
 }
 .scdata .title .selects .ivu-input-suffix i,
@@ -120,7 +144,9 @@
 .scgrade .title .selects .ivu-input-suffix i,
 .scwarn .title .selects .ivu-input-suffix i,
 .scspeed .title .selects .ivu-input-suffix i,
-.scsearch .title .selects .ivu-input-suffix i {
+.scsearch .title .selects .ivu-input-suffix i,
+.sgtanpu .title .selects .ivu-input-suffix i,
+.sgnianya .title .selects .ivu-input-suffix i {
   font-size: 0.28rem;
   color: #fff;
   line-height: 0.5rem;
@@ -130,7 +156,9 @@
 .scgrade .title .btn,
 .scwarn .title .btn,
 .scspeed .title .btn,
-.scsearch .title .btn {
+.scsearch .title .btn,
+.sgtanpu .title .btn,
+.sgnianya .title .btn {
   width: 1.6rem;
   box-sizing: border-box;
   height: 0.55rem;
@@ -148,7 +176,9 @@
 .scgrade .title .btn img,
 .scwarn .title .btn img,
 .scspeed .title .btn img,
-.scsearch .title .btn img {
+.scsearch .title .btn img,
+.sgtanpu .title .btn img,
+.sgnianya .title .btn img {
   margin-top: 0.05rem;
   width: 0.4rem;
   height: 0.4rem;
@@ -158,7 +188,9 @@
 .scgrade .title .btn span,
 .scwarn .title .btn span,
 .scspeed .title .btn span,
-.scsearch .title .btn span {
+.scsearch .title .btn span,
+.sgtanpu .title .btn span,
+.sgnianya .title .btn span {
   font-size: 0.25rem;
   color: #fff;
   margin-top: 0.04rem;

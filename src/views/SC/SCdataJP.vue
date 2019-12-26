@@ -53,300 +53,69 @@ export default {
       datacurve1: null,
       listTitle1: [
         {
+          'title': '标准',
+          'align': 'center',
+          key: 'title'
+        },
+        {
           'title': '0.075',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP00075',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP00075_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP00075_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n1'
         },
         {
           title: '0.15',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP0015',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP0015_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP0015_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n2'
         },
         {
           title: '0.3',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP003',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP003_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP003_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n3'
         },
         {
           title: '0.6',
-          key: 'mItemBid',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP006',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP006_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP006_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n4'
         },
         {
           title: '1.18',
-          key: 'mAlarmLevel',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP0118',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP0118_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP0118_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n5'
         },
         {
           title: '2.36',
-          key: 'title',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP0236',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP0236_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP0236_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n6'
         },
         {
           title: '4.75',
-          key: 'mDateTime',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP0475',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP0475_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP0475_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n7'
         },
         {
           title: '9.5',
-          key: 'mItemBid',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP095',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP095_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP095_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n8'
         },
         {
           title: '19.0',
-          key: 'mItemBid',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP190',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP190_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP190_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n9'
         },
         {
           title: '26.5',
-          key: 'mAlarmLevel',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP265',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP265_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP265_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n10'
         },
         {
           title: '31.5',
-          key: 'mItemBid',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP315',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP315_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP315_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n11'
         },
         {
           title: '37.5',
           'align': 'center',
-          'children': [
-            {
-              'title': '目标值',
-              'key': 'mClJP375',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '上限',
-              'key': 'mClJP375_Up',
-              'align': 'center',
-              'width': 74
-            },
-            {
-              'title': '下限',
-              'key': 'mClJP375_Down',
-              'align': 'center',
-              'width': 74
-            }
-          ]
+          key: 'n12'
         }
       ],
       listTitle2: [
@@ -399,7 +168,11 @@ export default {
           key: 'mBhSKL375'
         }
       ],
-      datalist1: [],
+      datalist1: [
+        { 'title': '目标', 'n1': '...' },
+        { 'title': '上限' },
+        { 'title': '下限' }
+      ],
       datalist2: []
     }
   },
@@ -443,9 +216,31 @@ export default {
           this.datacurve1 = this.handleCurveData(arr, xdata, '级配曲线图')
 
           // 处理list1
-          let listArr1 = []
-          listArr1.push(rs.data.standard)
-          this.datalist1 = listArr1
+          // 目标值
+          let Mubiao = []
+          // 上限
+          let Up = []
+          // 下限
+          let Down = []
+          let standard = rs.data.standard
+          for (let item in standard) {
+            if (item.indexOf('_Up') !== -1) {
+              Up.push(standard[item])
+            } else if (item.indexOf('_Down') !== -1) {
+              Down.push(standard[item])
+            } else {
+              Mubiao.push((standard[item]))
+            }
+          }
+          Mubiao.map((item, index, arr) => {
+            this.datalist1[0]['n' + (index + 1)] = item
+          })
+          Up.map((item, index, arr) => {
+            this.datalist1[1]['n' + (index + 1)] = item
+          })
+          Down.map((item, index, arr) => {
+            this.datalist1[2]['n' + (index + 1)] = item
+          })
           // 处理list2
           this.datalist2 = rs.data.data_list
         } else {

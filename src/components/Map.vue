@@ -34,6 +34,7 @@
 .ec-extension-bmap{
   background:#050926 !important;
 }
+
 </style>
 <template>
   <div class="colmap" v-on="{ mouseenter: onmouse, mouseleave: offmouse }">

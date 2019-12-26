@@ -84,13 +84,50 @@ const routes = [{
       component: () => import('./views/SG/Home.vue'),
       children: [
         {
-          // （一级）碾压轨迹
+          // （一级）碾压管理
           path: '/sg/SGnianya',
-          component: () => import('./views/SG/SGnianya.vue')
+          component: () => import('./views/SG/SGnianya.vue'),
+          children: [{
+            // 碾压--温度
+            path: '/sg/SGnianya/wd',
+            component: () => import('./views/SG/SGnianyaWD.vue')
+          },
+          {
+            // 碾压--速度
+            path: '/sg/SGnianya/sd',
+            component: () => import('./views/SG/SGnianyaSD.vue')
+          },
+          {
+            // 碾压--轨迹
+            path: '/sg/SGnianya/gj',
+            component: () => import('./views/SG/SGnianyaGJ.vue')
+          }
+          ]
         }, {
-          // （一级）摊铺轨迹
+          // （一级）摊铺管理
           path: '/sg/SGtanpu',
-          component: () => import('./views/SG/SGtanpu.vue')
+          component: () => import('./views/SG/SGtanpu.vue'),
+          children: [{
+            // 摊铺--温度
+            path: '/sg/SGtanpu/wd',
+            component: () => import('./views/SG/SGtanpuWD.vue')
+          },
+          {
+            // 摊铺--速度
+            path: '/sg/SGtanpu/sd',
+            component: () => import('./views/SG/SGtanpuSD.vue')
+          },
+          {
+            // 摊铺--里程
+            path: '/sg/SGtanpu/lc',
+            component: () => import('./views/SG/SGtanpuLC.vue')
+          },
+          {
+            // 摊铺--轨迹
+            path: '/sg/SGtanpu/gj',
+            component: () => import('./views/SG/SGtanpuGJ.vue')
+          }
+          ]
         }
       ]
     },

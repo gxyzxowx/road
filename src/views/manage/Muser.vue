@@ -128,13 +128,18 @@ export default {
       }
       // 弹出用户列表datalist
       this.comFun.post('/User/getUserList', obj, this).then((rs) => {
-        // console.log(JSON.stringify(rs))
+        console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           let _data = rs.data
           _data.map((item, index, arr) => {
-            // if(item['mUserLevel'])
+            arr[index]['mUserLevel'] = item['mUserLevel'] ? '普通管理员' : '客户'
+            arr[index]['mUserDXTZ'] = item['mUserDXTZ'] ? '是' : '否'
+            arr[index]['mUserWXTZ'] = item['mUserWXTZ'] ? '是' : '否'
+            arr[index]['mUserYJDJ'] = item['mUserYJDJ'] + '级预警'
           })
           this.datalist = rs.data
+        } else {
+          this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
     },
@@ -165,6 +170,7 @@ export default {
         mUserID: this.mUserID,
         delUserID: _mUserID
       }
+      console.log(obj)
       this.comFun.post('/User/userDeleteAdmin', obj, this).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
@@ -188,6 +194,8 @@ export default {
           this.itemlist = rs.data
           // 默认出来第一个
           this.choseItem(0)
+        } else {
+          this.$Message.error(rs.message)
         }
       }, (err) => { console.log(err) })
     }

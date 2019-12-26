@@ -159,6 +159,7 @@ export default {
             arr[index].mAlarmType_jp = item.mAlarmType_jp ? '是' : '否'
             arr[index].mAlarmType_speed = item.mAlarmType_speed ? '是' : '否'
             arr[index].mAlarmCLStatus = item.mAlarmCLStatus ? '已处理' : '未处理'
+            arr[index].mAlarmLevel = item.mAlarmLevel + '级'
           })
           this.datalist = rs.data
           // 预警类型饼图

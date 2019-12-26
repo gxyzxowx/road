@@ -155,11 +155,11 @@ export default {
           title: '预警时间',
           key: 'mDateTime',
           ellipsis: true,
-          width: 90
+          width: 118
         },
         {
           title: '预警等级',
-          width: 90,
+          width: 85,
           key: 'mAlarmLevel'
         }, {
           title: '拌合楼名称',
@@ -169,7 +169,7 @@ export default {
           title: '预警内容',
           key: 'mAlarmDec',
           ellipsis: true,
-          width: 90
+          width: 180
         }, {
           title: '处理状态',
           key: 'ClStatus',
@@ -261,6 +261,7 @@ export default {
           // 处理预警列表数据
           rs.data.AlarmData.map((item, index, arr) => {
             arr[index]['ClStatus'] = item.ClStatus ? '已处理' : '未处理'
+            arr[index]['mAlarmLevel'] = item.mAlarmLevel + '级'
           })
           this.datalist2 = rs.data.AlarmData
         }

@@ -31,7 +31,7 @@
                         <span>密码：</span><Input type="password" v-model="password" placeholder="Enter something..." clearable style="width: 200px" />
                     </div>
                 </div>
-                <Button type="primary" long @click="login()">登陆</Button>
+                <Button  @click="login()" type="primary" long>登陆</Button>
             </Card>
         </Col>
     </Row>
@@ -68,15 +68,14 @@ export default {
   methods: {
     login () {
       //   通过axios发送请求到服务端，核对用户名和密码返回为true时，判断为登陆模式
-    //   测试
-    //   this.comFun.get('http://lianke.weirong100.com/index/index/getzaooplist').then((response) => {
-    //     console.log(response)
-    //   }, (err) => { console.log(err) })
+      //   测试
+      //   this.comFun.get('http://lianke.weirong100.com/index/index/getzaooplist').then((response) => {
+      //     console.log(response)
+      //   }, (err) => { console.log(err) })
       let obj = {
         username: this.username,
         password: this.password
       }
-
       this.comFun.post('/Login/doLogin', obj, this).then((rs) => {
         // console.log(rs)
         if (rs.code === 0) {
