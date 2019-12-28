@@ -149,7 +149,7 @@ export default {
                 }
               }
             },
-            barWidth: '60%',
+            barWidth: '40%',
             data: seriesdata
           }
         ]

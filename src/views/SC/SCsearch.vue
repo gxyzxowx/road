@@ -9,13 +9,13 @@
 </style>
 <template>
   <div class="scsearch">
-    <div class="search">
+    <div class="search" ref="search">
          <Search v-on:getData="getData"></Search>
     </div>
 
     <div class="content">
       <h4>综合查询</h4>
-      <Table  :loading="loading" height="490" border :columns="listTitle" :data="datalist" size="small" stripe></Table>
+      <Table  :loading="loading"  :max-height="tableHeight" border :columns="listTitle" :data="datalist" size="small" stripe></Table>
       <Switch v-model="loading"></Switch>
       <div style="margin: .10rem;overflow: hidden">
         <div style="float: right;">
@@ -35,6 +35,7 @@ export default {
       mUserID: 0,
       mItemID: 0,
       loading: true,
+      tableHeight: 490,
       listTitle: titledata,
       datalist: [],
       // 点击搜索产生的值暂存
@@ -57,7 +58,8 @@ export default {
   mounted () {
     this.mUserID = this.comFun.getCookie('roadmUserID')
     this.mItemID = this.$store.state.itemInfo.id
-    this.getData()
+    // this.getData()
+    this.tableHeight = this.$refs.search.offsetHeight * 4 + 60
   },
   methods: {
     getData (emitobj) {

@@ -272,7 +272,13 @@ export default {
     linkTo (path, index) {
       this.$router.push(path)
       // 变色
-      if (index === this.oldIndex) return
+      if (index === this.oldIndex) {
+        this.showView = false
+        this.$nextTick(() => {
+          this.showView = true
+        })
+        return
+      }
       this.actived[index] = true
       this.actived[this.oldIndex] = false
       this.oldIndex = index

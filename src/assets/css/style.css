@@ -117,3 +117,17 @@
   background: #f0f4fe;
   padding: 0.25rem 0 0 0.4rem;
 }
+.ivu-table th {
+  height: 0.3561rem;
+}
+.ivu-table td {
+  height: 0.44rem;
+}
+.scdatajp .ivu-table td,
+.scdataysb .ivu-table td,
+.scdatawd .ivu-table td,
+.scdatajp .ivu-table th,
+.scdataysb .ivu-table th,
+.scdatawd .ivu-table th {
+  height: 0.35rem;
+}

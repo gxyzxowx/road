@@ -82,28 +82,28 @@ export default {
       this.firstDevID = e
     },
     getData (emitobj) {
-      let obj = {
-        mUserID: this.mUserID,
-        mItemID: this.mItemID
-      }
-      // 有emitobj是子组件点击搜索的时候
-      if (emitobj) {
-        this.emitobj = emitobj
-        console.log('是emit过来的参数:' + JSON.stringify(emitobj))
-        obj = { ...obj, ...this.emitobj }
-      }
-      console.log(obj)
-      this.comFun.post('/Locus/getDevTempSpeedData', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs))
-        if (rs.code === 0) {
-          // 处理list1
-          let listArr1 = []
-          listArr1.push(rs.data.static_data)
-          this.datalist1 = listArr1
-        } else {
-          this.$Message.error(rs.message)
-        }
-      }, (err) => { console.log(err) })
+      // let obj = {
+      //   mUserID: this.mUserID,
+      //   mItemID: this.mItemID
+      // }
+      // // 有emitobj是子组件点击搜索的时候
+      // if (emitobj) {
+      //   this.emitobj = emitobj
+      //   console.log('是emit过来的参数:' + JSON.stringify(emitobj))
+      //   obj = { ...obj, ...this.emitobj }
+      // }
+      // console.log(obj)
+      // this.comFun.post('/Locus/getDevTempSpeedData', obj, this).then((rs) => {
+      //   console.log(JSON.stringify(rs))
+      //   if (rs.code === 0) {
+      //     // 处理list1
+      //     let listArr1 = []
+      //     listArr1.push(rs.data.static_data)
+      //     this.datalist1 = listArr1
+      //   } else {
+      //     this.$Message.error(rs.message)
+      //   }
+      // }, (err) => { console.log(err) })
     }
   },
   components: {

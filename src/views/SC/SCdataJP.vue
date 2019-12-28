@@ -9,15 +9,18 @@
   padding:.2rem .4rem;
 }
   .curve{
-    height: 2.88rem;
+    height: 2.65rem;
+  }
+  .desc{
+    margin-top: .05rem;
   }
 </style>
 <template>
 <!-- 质量监管--级配 -->
-  <div>
+  <div class="scdatajp">
     <div class="search">
       <!-- 条件 -->
-      <Search v-on:getData="getData"></Search>
+      <Search v-on:getData="getData" ref="search"></Search>
     </div>
     <div class="content">
       <div class="curve">
@@ -33,7 +36,7 @@
       <div class="desc">
         <h4>详细数据</h4>
         <!-- 详细信息 -->
-        <Table  height="82" border :columns="listTitle2" :data="datalist2" size="small" stripe></Table>
+        <Table  :max-height="table2Height" border :columns="listTitle2" :data="datalist2" size="small" stripe></Table>
       </div>
     </div>
 
@@ -47,6 +50,7 @@ import CurveChart from '@/components/CurveChart.vue'
 export default {
   data () {
     return {
+      table2Height: 100,
       mUserID: '',
       mItemID: '',
       datacurve1: null,
@@ -120,50 +124,62 @@ export default {
       listTitle2: [
         {
           title: '0.075',
+          'align': 'center',
           key: 'mBhSKL00075'
         },
         {
           title: '0.15',
+          'align': 'center',
           key: 'mBhSKL0015'
         },
         {
           title: '0.3',
+          'align': 'center',
           key: 'mBhSKL003'
         },
         {
           title: '0.6',
+          'align': 'center',
           key: 'mBhSKL006'
         },
         {
           title: '1.18',
+          'align': 'center',
           key: 'mBhSKL0118'
         },
         {
           title: '2.36',
+          'align': 'center',
           key: 'mBhSKL0236'
         },
         {
           title: '4.75',
+          'align': 'center',
           key: 'mBhSKL0475'
         },
         {
           title: '9.5',
+          'align': 'center',
           key: 'mBhSKL095'
         },
         {
           title: '19.0',
+          'align': 'center',
           key: 'mBhSKL190'
         },
         {
           title: '26.5',
+          'align': 'center',
           key: 'mBhSKL265'
         },
         {
           title: '31.5',
+          'align': 'center',
           key: 'mBhSKL315'
         },
         {
           title: '37.5',
+          'align': 'center',
           key: 'mBhSKL375'
         }
       ],
@@ -196,10 +212,11 @@ export default {
       }
       console.log(JSON.stringify(obj))
       this.comFun.post('/Produce_J_G/qualityStatic', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs))
+        // console.log(JSON.stringify(rs))
         if (rs.code === 0) {
-          // 处理温度曲线图
+          // 处理級配曲线图
           let data = rs.data.line_data
+          data.reverse()
           let xdata = []
           // 三条曲线arr
           let arr1 = []
@@ -275,7 +292,12 @@ export default {
           data: xdata
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          axisLabel: {
+            formatter: function (arr) {
+              return arr + '%'
+            }
+          }
         },
         series: [
           {

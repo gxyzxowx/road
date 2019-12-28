@@ -80,8 +80,8 @@ export default {
         // console.log(rs)
         if (rs.code === 0) {
           //   存入cookie
-          this.comFun.setCookie('roadmUserID', rs.data.mUserID, 1)
-          this.comFun.setCookie('roadmUserName', rs.data.mUserName, 1)
+          this.comFun.setCookie('roadmUserID', rs.data.mUserID, 30)
+          this.comFun.setCookie('roadmUserName', rs.data.mUserName, 30)
           this.$router.push('/')
           return false
         } else {

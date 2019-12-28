@@ -113,10 +113,24 @@
           border-bottom: 1px solid #999;
           border-top: 1px solid #999;
         }
+        .btns{
+          flex: 1;
+        }
+      }
+      .content-title {
+          div:nth-of-type(n+4){
+            width:.84rem;
+          }
+          div:last-of-type{
+            flex:1;
+          }
       }
       .content-rep{
         .content-rep-cel{
           background: #fff;
+          &:nth-of-type(n+3){
+            width:.84rem;
+          }
         }
       }
     }
@@ -393,7 +407,7 @@
             <input type="text" class="content-rep-cel" v-model="item.mKlName">
             <!-- 用量比 -->
             <input type="text" class="content-rep-cel" v-model="item.mKlYLB">
-            <!-- 37.5 -->
+            <!-- 37.5---0.075 -->
             <input type="text" class="content-rep-cel" v-model="item.mJP375">
             <input type="text" class="content-rep-cel" v-model="item.mJP315">
             <input type="text" class="content-rep-cel" v-model="item.mJP265">
@@ -694,7 +708,7 @@ export default {
       }
       console.log(JSON.stringify(obj))
       this.comFun.post('/Cl/createBhCl', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs))
+        // console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           this.$Message.success(rs.message)
           this.mClID = rs.data.mClID
@@ -712,13 +726,16 @@ export default {
     },
     // 保存某个矿料修改的信息
     saveKl (_index) {
+      console.log(JSON.stringify(this.repice_list))
       let obj = this.repice_list[_index]
       obj['mClID'] = this.mClID
       obj['mUserID'] = this.mUserID
       let mKlID = obj['mKlID']
       console.log(JSON.stringify(obj))
+
       if (this.repice_list_ids.indexOf(mKlID) === -1) {
         // 是新建的保存
+        console.log('新建矿料')
         this.comFun.post('/Cl/addRepice', obj, this).then((rs) => {
           console.log(JSON.stringify(rs))
           if (rs.code === 0) {
@@ -732,6 +749,7 @@ export default {
         }, (err) => { console.log(err) })
       } else {
         // 是编辑保存
+        console.log('修改矿料')
         this.comFun.post('/Cl/updateRepiceRecord', obj, this).then((rs) => {
           console.log(JSON.stringify(rs))
           if (rs.code === 0) {

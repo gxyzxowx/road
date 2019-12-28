@@ -248,7 +248,7 @@ export default {
           this.dataYSB(rs.data.ScYSBData)
 
           // 处理级配曲线
-          this.dataJP(rs.data.ScJpData)
+          this.dataJP(rs.data.ScJpData.reverse())
 
           // 处理关键筛孔率曲线
           this.dataSKL(rs.data.SKLData)

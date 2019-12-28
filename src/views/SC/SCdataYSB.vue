@@ -9,12 +9,15 @@
   padding:.2rem .4rem;
 }
   .curve{
-    height: 2.88rem;
+    height: 2.8rem;
+  }
+  .desc{
+    margin-top: 0.05rem;
   }
 </style>
 <template>
 <!-- 质量监管--油石比 -->
-  <div>
+  <div class="scdataysb">
     <div class="search">
      <!-- 条件 -->
       <Search v-on:getData="getData"></Search>
@@ -33,7 +36,7 @@
       <div class="desc">
         <h4>详细信息</h4>
         <!-- 详细信息 -->
-        <Table  height="115" border :columns="listTitle2" :data="datalist2" size="small" stripe></Table>
+        <Table  max-height="135" border :columns="listTitle2" :data="datalist2" size="small" stripe></Table>
       </div>
     </div>
 

@@ -20,7 +20,7 @@ const obj = {
   // 设置cookie，过期时间N天
   setCookie (cname, value, day) {
     var exp = new Date()
-    // 1小时过期
+    // 测试：1小时过期
     // exp.setTime(exp.getTime() + 60 * 60 * 1000)
     exp.setDate(exp.getDate() + day)
     document.cookie = cname + '=' + escape(value) + ';expires=' + exp.toGMTString() + ';path=/'

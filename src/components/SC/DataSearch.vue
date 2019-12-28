@@ -35,20 +35,20 @@ export default {
       select: {
         start_time: '',
         end_time: '',
-        mClCW: '',
+        mClCW: 1,
         mItemBid: ''
       },
       show: {
         mItemBidList: [],
         mClTypeValueList: [{
           value: 1,
-          label: '上层面'
+          label: '上面层'
         }, {
           value: 2,
-          label: '中层面'
+          label: '中面层'
         }, {
           value: 3,
-          label: '下层面'
+          label: '下面层'
         }]
       }
     }
@@ -62,10 +62,20 @@ export default {
     }
 
     this.comFun.post('/Item/getItemBid', obj, this).then((rs) => {
-      // console.log(JSON.stringify(rs))
+      console.log(JSON.stringify(rs))
       if (rs.code === 0) {
         this.show.mItemBidList = rs.data
+        this.select.mItemBid = rs.data[0]['mItemBid']
         this.show.mItemBidList.unshift({ mItemBDJC: '全部', mItemBid: '' })
+        let obj = {
+        // 选择的层位
+          mClCW: this.select.mClCW,
+          // 选择的标段
+          mItemBid: this.select.mItemBid,
+          start_time: this.select.start_time,
+          end_time: this.select.end_time
+        }
+        this.$emit('getData', obj)
       }
     }, (err) => { console.log(err) })
   },
