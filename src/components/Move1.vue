@@ -101,7 +101,6 @@ export default {
       canvasW: 1200,
       canvasH: 1200,
       canvas: null,
-      ifFirst: true,
       colors: [],
       // 放大缩小的倍数
       size: 1,
@@ -149,9 +148,7 @@ export default {
         [108, 0, 0]
       ],
       flag: true,
-      maxTimes: 25,
-      // 25中颜色各有多少像素点 的百分数 数组
-      colorsPersent: []
+      maxTimes: 25
     }
   },
   props: ['id', 'data'],
@@ -345,24 +342,22 @@ export default {
       ctx.putImageData(imgData, 0, 0)
       // console.log(imgData)
       // 处理各个遍数的比例
-      if (this.ifFirst) {
-        this.persentBian(colorsNum)
-      }
-
+      this.persentBian(colorsNum)
       // console.log(colorsNum)
     },
     // 第一次会算遍数的百分比，后就不在算
     persentBian (_data) {
+      // 25中颜色各有多少像素点 的百分数 数组
+      let colorsPersent = []
       let sum = 0
       for (let i = 0; i < _data.length; i++) {
         sum += _data[i]
       }
       for (let i = 0; i < _data.length; i++) {
-        this.colorsPersent.push(parseFloat(((_data[i] / sum) * 100).toFixed(3)))
+        colorsPersent.push(parseFloat(((_data[i] / sum) * 100).toFixed(3)))
       }
-      this.$emit('updata-barchart', this.colorsPersent)
+      this.$emit('updata-barchart', colorsPersent)
       // console.log(this.colorsPersent)
-      this.ifFirst = false
     },
     // 鼠标事件，得到坐标,得到像素颜色，判断遍数
     getXY (e) {

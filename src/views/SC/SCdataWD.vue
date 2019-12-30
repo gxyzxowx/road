@@ -123,7 +123,7 @@ export default {
       // 有emitobj是子组件点击搜索的时候
       if (emitobj) {
         this.emitobj = emitobj
-        console.log('是emit过来的参数:' + JSON.stringify(emitobj))
+        // console.log('是emit过来的参数:' + JSON.stringify(emitobj))
         obj = { ...obj, ...this.emitobj }
       }
       console.log(obj)
