@@ -186,7 +186,7 @@
               </div>
             </div>
             <div class="info-cel cel">
-              <div class="info-cel-title">预计产量</div>
+              <div class="info-cel-title">预计产量（KG）</div>
               <div class="info-cel-input">
                 <input type="text" v-model="dataobj.mClYJCL" />
               </div>

@@ -4,8 +4,12 @@ import axios from 'axios'
 
 // import VueAxios from 'vue-axios'
 
+// 开发环境
 const BASE_URL = '/api'
+
+// 生产环境
 // const BASE_URL = 'http://test.weirong100.com/index.php/api'
+// const BASE_URL = 'http://49.234.69.205/index.php/api'
 const obj = {
   // 用于取得cookie中的用户名
   getCookie (cname) {

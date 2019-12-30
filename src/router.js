@@ -55,6 +55,16 @@ const routes = [{
           // 质量 --- 级配
           path: '/sc/SCdata/jp',
           component: () => import('./views/SC/SCdataJP.vue')
+        },
+        {
+          // 质量 --- 关键筛孔
+          path: '/sc/SCdata/sk',
+          component: () => import('./views/SC/SCdataSK.vue')
+        },
+        {
+          // 质量 --- 拌和周期
+          path: '/sc/SCdata/zq',
+          component: () => import('./views/SC/SCdataZQ.vue')
         }
         ]
       }, {

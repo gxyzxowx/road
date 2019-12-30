@@ -15,9 +15,13 @@
   height:250px;
   margin: 150px auto;
   }
+  .login{
+    background: url('./assets/img/logo.jpg');
+    background-size: cover;
+  }
 </style>
 <template>
-    <div class="login">
+    <div class="login" :style="{height:bodyH}">
         <!-- <div class="mclas">login我是登录大页面</div> -->
     <Row>
         <Col>
@@ -62,8 +66,13 @@ export default {
       password: '',
       adminmsg: '',
       showmsg: false,
-      loading: false
+      loading: false,
+      bodyH: ''
     }
+  },
+  mounted () {
+    let W = document.body.clientWidth
+    this.bodyH = W * (9 / 16) + 'px'
   },
   methods: {
     login () {

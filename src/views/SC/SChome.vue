@@ -179,7 +179,7 @@ export default {
       datalist: [
         { 'title': '目标(kg)', 'n1': '...' },
         { 'title': '实际(kg)' },
-        { 'title': '误差(%)' }
+        { 'title': '误差(kg)' }
       ],
       datalist2: [
       ]
@@ -227,8 +227,8 @@ export default {
             if (item.indexOf('Actual') !== -1) {
               Actual.push(datalist[item])
             }
-            if (item.indexOf('Rep') !== -1) {
-              Rep.push((datalist[item] * 100).toFixed(2) + '%')
+            if (item.indexOf('Error') !== -1 && item.indexOf('Rep') === -1) {
+              Rep.push(datalist[item])
             }
           }
           Recipe.map((item, index, arr) => {
@@ -346,7 +346,7 @@ export default {
         arr3.push(item['mClBHPeriod_Down1'])
       })
       let arr = [arr1, arr2, arr3]
-      this.datacurve5 = this.handleCurveData(arr, xdata, '拌和周期曲线图')
+      this.datacurve5 = this.handleCurveData(arr, xdata, '拌和周期曲线图', '', '秒')
     },
     // 处理曲线数据
     handleCurveData (arr, xdata, title, type, sign) {

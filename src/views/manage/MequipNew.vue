@@ -110,7 +110,7 @@
             </div>
             <!-- 以下只有碾压和摊铺机有 -->
             <div class="info-cel cel" v-if="ifNianya">
-              <div class="info-cel-title">设备宽度</div>
+              <div class="info-cel-title">设备宽度（米）</div>
               <div class="info-cel-input">
                <input type="text"  v-model="dataobj.mDevWidth"/>
               </div>

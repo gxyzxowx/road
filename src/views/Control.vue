@@ -98,7 +98,7 @@
             <div class="name">项目状态：<span> {{datas.ItemData.mItemActive===1 ? '进行中' : '已完结'}}</span></div>
             <div class="name">建设单位：<span> {{datas.ItemData.mItemSGUint}}</span></div>
             <div class="name">咨询单位：<span> {{datas.ItemData.mItemJGUint}}</span></div>
-            <div class="name">最大标段数：<span> {{datas.ItemData.mItemBidSun}}</span></div>
+            <!-- <div class="name">最大标段数：<span> {{datas.ItemData.mItemBidSun}}</span></div> -->
             <div class="name">总的里程数（km）：<span> {{datas.ItemData.mItemTotalLength}}</span></div>
 
           </div>

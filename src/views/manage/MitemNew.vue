@@ -85,7 +85,7 @@
     <main>
       <!-- 项目表 -->
       <div class="top">
-        <h3>项目表</h3>
+        <h3>项目</h3>
         <div class="content">
           <!-- 项目表11项基本信息 -->
           <div class="info">
@@ -160,14 +160,14 @@
           </div>
 
         </div>
-        <Button type="success" size="small" style="float:left;" @click="importExcel()">导入excel表格</Button>
+        <Button type="success" size="small" style="float:left;" @click="importExcel()">导入项目坐标信息</Button>
       </div>
 
       <Button type="success" style="float:right;" @click="newBd()">添加标段</Button>
       <Button type="primary" style="float:right;" @click="saveItem()">保存{{text}}</Button>
 
       <div class="bottom">
-        <h3>标段表</h3>
+        <h3>标段</h3>
         <div class="content">
           <div class="content-title">
             <div v-for="item in bdArr" :key="item">{{item}}</div>
