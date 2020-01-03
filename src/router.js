@@ -14,6 +14,14 @@ const routes = [{
     hideInMenu: true
   },
   component: () => import('./Login.vue')
+}, {
+  path: '/test',
+  name: 'loading',
+  meta: {
+    title: '测试loading',
+    hideInMenu: true
+  },
+  component: () => import('./views/Test.vue')
 },
 // Main.vue(HeaderR + router-view)
 {

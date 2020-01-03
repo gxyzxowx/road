@@ -148,7 +148,7 @@
                 :value="item.mItemID"
                 :label="item.ItemDes"
               >
-                <span>项目名：{{item.ItemDes}}</span>
+                <span>项目名称：{{item.ItemDes}}</span>
                 <span style="float:right;color:#ccc">项目ID:{{item.mItemID}}</span>
               </Option>
             </Select>

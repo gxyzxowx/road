@@ -23,6 +23,9 @@
   padding: 0.26rem 0.2rem;
   justify-content: space-between;
   border-bottom: #cccccc solid 0.01rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   cursor: pointer;
 }
 .scmain .nav ul li span.icon,

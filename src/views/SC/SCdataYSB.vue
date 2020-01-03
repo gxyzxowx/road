@@ -111,7 +111,7 @@ export default {
   mounted () {
     this.mUserID = this.comFun.getCookie('roadmUserID')
     this.mItemID = this.$store.state.itemInfo.id
-    this.getData()
+    // this.getData()
   },
   methods: {
     getData (emitobj) {
@@ -128,7 +128,7 @@ export default {
         obj = { ...obj, ...this.emitobj }
       }
       console.log(JSON.stringify(obj))
-      this.comFun.post('/Produce_J_G/qualityStatic', obj, this).then((rs) => {
+      this.comFun.post('/Produce_J_G/qualityStatic', obj, this, true).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 处理温度曲线图
@@ -152,6 +152,9 @@ export default {
           listArr1.push(rs.data.static_data)
           this.datalist1 = listArr1
           // 处理list2
+          rs.data.data_list.map((item, index, arr) => {
+            arr[index]['alarm'] = item.alarm ? '否' : '是'
+          })
           this.datalist2 = rs.data.data_list
         } else {
         }

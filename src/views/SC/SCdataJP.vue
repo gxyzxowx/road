@@ -30,7 +30,7 @@
       </div>
       <div class="total">
         <!-- 汇总信息 -->
-        <h4>标准</h4>
+        <h4>级配范围</h4>
         <Table  border :columns="listTitle1" :data="datalist1" size="small" stripe></Table>
       </div>
       <div class="desc">
@@ -101,27 +101,49 @@ export default {
           key: 'n8'
         },
         {
-          title: '19.0',
+          title: '13.2',
           'align': 'center',
           key: 'n9'
         },
         {
-          title: '26.5',
+          title: '16.0',
           'align': 'center',
           key: 'n10'
         },
         {
-          title: '31.5',
+          title: '19.0',
           'align': 'center',
           key: 'n11'
         },
         {
-          title: '37.5',
+          title: '26.5',
           'align': 'center',
           key: 'n12'
+        },
+        {
+          title: '31.5',
+          'align': 'center',
+          key: 'n13'
+        },
+        {
+          title: '37.5',
+          'align': 'center',
+          key: 'n14'
         }
       ],
       listTitle2: [
+        {
+          title: '时间',
+          'align': 'center',
+          width: 150,
+          key: 'mBhDateTime'
+        },
+        {
+          title: '材料类型',
+          'align': 'center',
+          width: 90,
+          key: 'mClName'
+        },
         {
           title: '0.075',
           'align': 'center',
@@ -163,6 +185,16 @@ export default {
           key: 'mBhSKL095'
         },
         {
+          title: '13.2',
+          'align': 'center',
+          key: 'mBhSKL132'
+        },
+        {
+          title: '16.0',
+          'align': 'center',
+          key: 'mBhSKL160'
+        },
+        {
           title: '19.0',
           'align': 'center',
           key: 'mBhSKL190'
@@ -194,7 +226,7 @@ export default {
   mounted () {
     this.mUserID = this.comFun.getCookie('roadmUserID')
     this.mItemID = this.$store.state.itemInfo.id
-    this.getData()
+    // this.getData()
   },
   methods: {
     getData (emitobj) {
@@ -211,8 +243,8 @@ export default {
         obj = { ...obj, ...this.emitobj }
       }
       console.log(JSON.stringify(obj))
-      this.comFun.post('/Produce_J_G/qualityStatic', obj, this).then((rs) => {
-        // console.log(JSON.stringify(rs))
+      this.comFun.post('/Produce_J_G/qualityStatic', obj, this, true).then((rs) => {
+        console.log(JSON.stringify(rs.data))
         if (rs.code === 0) {
           // 处理級配曲线图
           let data = rs.data.line_data
@@ -239,6 +271,7 @@ export default {
           // 下限
           let Down = []
           let standard = rs.data.standard
+          standard = this.sortObj(standard)
           for (let item in standard) {
             if (item.indexOf('_Up') !== -1) {
               Up.push(standard[item])
@@ -262,6 +295,20 @@ export default {
         } else {
         }
       }, (err) => { console.log(err) })
+    },
+    // 倒叙对象
+    sortObj (obj) {
+      var arr = []
+      for (var i in obj) {
+        arr.push([obj[i], i])
+      };
+      arr.reverse()
+      var len = arr.length
+      obj = {}
+      for (let i = 0; i < len; i++) {
+        obj[arr[i][1]] = arr[i][0]
+      }
+      return obj
     },
     // 处理曲线图
     handleCurveData (arr, xdata, title) {

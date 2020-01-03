@@ -53,12 +53,7 @@ export default {
       listTitle1: [
         {
           title: '平均值℃',
-          key: 'Aver',
-          width: 90
-        },
-        {
-          title: '目标值℃',
-          key: 'Data'
+          key: 'Aver'
         },
         {
           title: '上限℃',
@@ -87,10 +82,6 @@ export default {
           key: 'data'
         },
         {
-          title: '目标值',
-          key: 'recipe_data'
-        },
-        {
           title: '上限',
           key: 'up'
         },
@@ -110,7 +101,7 @@ export default {
   mounted () {
     this.mUserID = this.comFun.getCookie('roadmUserID')
     this.mItemID = this.$store.state.itemInfo.id
-    this.getData()
+    // this.getData()
   },
   methods: {
     getData (emitobj) {

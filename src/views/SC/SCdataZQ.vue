@@ -56,10 +56,6 @@ export default {
           key: 'Aver'
         },
         {
-          title: '目标值（秒）',
-          key: 'Data'
-        },
-        {
           title: '上限（秒）',
           key: 'Up'
         },
@@ -82,10 +78,6 @@ export default {
           key: 'data'
         },
         {
-          title: '目标值',
-          key: 'recipe_data'
-        },
-        {
           title: '上限',
           key: 'up'
         },
@@ -101,7 +93,7 @@ export default {
   mounted () {
     this.mUserID = this.comFun.getCookie('roadmUserID')
     this.mItemID = this.$store.state.itemInfo.id
-    this.getData()
+    // this.getData()
   },
   methods: {
     getData (emitobj) {
@@ -118,7 +110,7 @@ export default {
         obj = { ...obj, ...this.emitobj }
       }
       console.log(obj)
-      this.comFun.post('/Produce_J_G/qualityStatic', obj, this).then((rs) => {
+      this.comFun.post('/Produce_J_G/qualityStatic', obj, this, true).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 处理温度曲线图

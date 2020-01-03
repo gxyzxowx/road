@@ -174,12 +174,13 @@ export default {
           x: "left",
           y: "top",
           splitList: [
-            { start: 1, end: 1, label: "工作中",color:  this.styles.onWorkC },
-            { start: 0, end: 0, label: "非工作中", color: this.styles.offWorkC }
+            { start: 1, end: 1, label: "生产中",color:  this.styles.onWorkC },
+            { start: 0, end: 0, label: "未生产", color: this.styles.offWorkC }
           ],
           textStyle:{
-            color: '#14C6CA'
-          }          
+            color: '#14C6CA',
+            fontSize: '16'
+          }
         },
         bmap: {
           // 加载 bmap 组件

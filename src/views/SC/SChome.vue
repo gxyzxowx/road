@@ -13,7 +13,10 @@
     .right{
       width: 11rem;
       padding-left: .2rem;
-      padding-top: .4rem;
+      padding-top: .2rem;
+      h3{
+        margin-bottom: .02rem;
+      }
       .list{
         .table{
           width:10.8rem;
@@ -51,6 +54,7 @@
   </div>
   <div class="right">
     <!-- 列表 -->
+    <h3>{{titleText}}</h3>
     <div class="list">
       <Table class="table" :loading="loading"  border :columns="listTitle" :data="datalist" size="small"  stripe></Table>
     </div>
@@ -86,6 +90,7 @@ import Map from '@/components/Map.vue'
 export default {
   data () {
     return {
+      titleText: '未生产',
       curve: { H: '', W: '' },
       mUserID: '',
       mItemID: '',
@@ -257,6 +262,11 @@ export default {
           this.dataPeroid(rs.data.PeroidData)
 
           // 处理地图
+          let DevData = rs.data.DevData
+          for (let i = 0; i < DevData.length; i++) {
+            if (DevData[i].mDevStatus === 1) { this.titleText = '生产中：近一个小时内数据' }
+            break
+          }
           this.datas.DevData = rs.data.DevData
 
           // 处理预警列表数据
@@ -352,7 +362,7 @@ export default {
     handleCurveData (arr, xdata, title, type, sign) {
       let legendData
       if (type) {
-        legendData = ['0475', '0236', '00075']
+        legendData = ['4.75', '2.36', '0.075']
       } else {
         legendData = ['上限', '实际值', '下限']
       }

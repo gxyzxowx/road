@@ -52,10 +52,6 @@ export default {
           key: 'TempAver'
         },
         {
-          title: '目标值℃',
-          key: 'mDevWDBZ'
-        },
-        {
           title: '上限℃',
           key: 'mDevWDSX'
         },

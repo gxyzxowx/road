@@ -8,10 +8,10 @@
   padding:.2rem .4rem;
 }
   .curve{
-    height: 4rem;
+    height: 3.5rem;
   }
   .desc{
-    margin-top: .1rem;
+    margin-top: .2rem;
   }
 </style>
 <template>
@@ -27,6 +27,11 @@
         <!-- 关键筛孔曲线 -->
         <CurveChart :id="'curve1'" :data="datacurve1" class = "chart"></CurveChart>
       </div>
+            <div class="desc">
+        <h4>详细信息</h4>
+        <!-- 详细信息 -->
+        <Table  max-height="125" border :columns="listTitle2" :data="datalist2" size="small" stripe></Table>
+      </div>
     </div>
 
   </div>
@@ -39,13 +44,40 @@ export default {
     return {
       mUserID: '',
       mItemID: '',
-      datacurve1: null
+      datacurve1: null,
+      listTitle2: [
+        {
+          title: '时间',
+          key: 'mBhDateTime'
+        },
+        {
+          title: '材料类型',
+          key: 'mClTypeName'
+        },
+        {
+          title: '0.075',
+          key: 'mBhSKL00075'
+        },
+        {
+          title: '2.36',
+          key: 'mBhSKL0236'
+        },
+        {
+          title: '4.75',
+          key: 'mBhSKL0475'
+        },
+        {
+          title: '合格',
+          key: 'alarm'
+        }
+      ],
+      datalist2: []
     }
   },
   mounted () {
     this.mUserID = this.comFun.getCookie('roadmUserID')
     this.mItemID = this.$store.state.itemInfo.id
-    this.getData()
+    // this.getData()
   },
   methods: {
     getData (emitobj) {
@@ -62,7 +94,7 @@ export default {
         obj = { ...obj, ...this.emitobj }
       }
       console.log(obj)
-      this.comFun.post('/Produce_J_G/qualityStatic', obj, this).then((rs) => {
+      this.comFun.post('/Produce_J_G/qualityStatic', obj, this, true).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 处理温度曲线图
@@ -80,13 +112,19 @@ export default {
           })
           let arr = [arr1, arr2, arr3]
           this.datacurve1 = this.handleCurveData(arr, xdata, '关键筛孔曲线图')
+
+          // 处理list2
+          rs.data.data_list.map((item, index, arr) => {
+            arr[index].alarm = item.alarm ? '是' : '否'
+          })
+          this.datalist2 = rs.data.data_list
         } else {
         }
       }, (err) => { console.log(err) })
     },
     // 处理曲线图
     handleCurveData (arr, xdata, title) {
-      let legendData = ['0475', '0236', '00075']
+      let legendData = ['4.75', '2.36', '0.075']
       let option = {
         title: {
           text: title,
@@ -102,8 +140,8 @@ export default {
           padding: [25, 0, 0, 0]
         },
         grid: {
-          left: '5%',
-          right: '5%',
+          left: '1%',
+          right: '1%',
           bottom: '3%',
           containLabel: true
         },

@@ -42,22 +42,21 @@
     z-index: 9;
     right: .3rem;
     top: -1.8rem;
-  }
-  .warp .colors ul{
-    list-style: none;
-    border:1px solid #666;
-    margin: 0;
-  }
-  .warp .colors li{
-    width: .7rem;
-    height: .25rem;
+    ul{
+        list-style: none;
+        border:1px solid #666;
+        margin: 0;
+        li{
+        width: .7rem;
+        height: .25rem;
 
-    // color:#fff;
-    font-size: .1rem;
-    text-align: center;
-    line-height: .25rem;
+        // color:#fff;
+        font-size: .1rem;
+        text-align: center;
+        line-height: .25rem;
+      }
+    }
   }
-
 </style>
 <template>
   <div class="warp" ref = "move">
@@ -65,11 +64,6 @@
       <div class="info">
         <Button @click = "handleScale(1)">放大</Button>
         <Button @click = "handleScale(-1)">缩小</Button>
-        <!-- <div class="tex">
-          <div class="bian">
-            <div v-for="(item, index) in colorsPersent" :key="index">{{index + 1}}遍:{{item}}；</div>
-          </div>
-        </div> -->
       </div>
       <div class="colors">
       <ul>
@@ -167,9 +161,9 @@ export default {
 
         this.canvasW = Math.max(...xArr) + 100
         this.canvasH = Math.max(...yArr) + 80
-        console.log(JSON.stringify(this.road_data[0]))
-        console.log(this.canvasW)
-        console.log(this.canvasH)
+        // console.log(JSON.stringify(this.road_data[0]))
+        // console.log(this.canvasW)
+        // console.log(this.canvasH)
         if (this.ctx) {
           // 有ctx时是点搜索的时候，清理画布
           this.ctx.clearRect(0, 0, 32766, 32766)
@@ -187,19 +181,11 @@ export default {
     },
     deep: true
   },
-  created () {
-    // console.log(123)
-  },
   mounted () {
-    // 测试时打开
-    // this.initCanvas()
-
     // 处理颜色条样式
-
     for (let i = 0; i < this.maxTimes; i++) {
       this.colors.push({
         index: i + 1,
-
         col: 'rgb(' + this.colorArr[i][0] + ',' + this.colorArr[i][1] + ',' + this.colorArr[i][2] + ')'
       })
     }
@@ -232,7 +218,7 @@ export default {
         ctx.lineTo(road[j][2]['x'], road[j][2]['y'])
       }
       // 闭合
-      // ctx.lineTo(road[0][3]['x'], road[0][3]['y'])
+      ctx.lineTo(road[0][3]['x'], road[0][3]['y'])
       ctx.closePath()
       ctx.stroke()
       this.ctx = ctx
@@ -296,7 +282,6 @@ export default {
       let colorArr = this.colorArr
       // 得到所有点信息
       let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      // let colorsNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       // 25种颜色每个颜色的个数
       let colorsNum = []
       for (let n = 25; n > 0; n--) {
@@ -345,7 +330,7 @@ export default {
       this.persentBian(colorsNum)
       // console.log(colorsNum)
     },
-    // 第一次会算遍数的百分比，后就不在算
+    // 第一次会算遍数的百分比
     persentBian (_data) {
       // 25中颜色各有多少像素点 的百分数 数组
       let colorsPersent = []
@@ -407,13 +392,7 @@ export default {
         this.canvasH = this.canvasH * 1.2
         this.$nextTick(() => {
           this.size = this.size * 1.2
-          this.ctx.scale(this.size, this.size)
-          this.ctx.clearRect(0, 0, 32766, 32766)
-          // 真实数据
-          this.initCanvas()
-
-          // 画道路
-          this.initRoad()
+          this.repaint()
         })
       } else {
         console.log('缩小')
@@ -421,15 +400,19 @@ export default {
         this.canvasH = this.canvasH * 0.8
         this.$nextTick(() => {
           this.size = this.size * 0.8
-          this.ctx.scale(this.size, this.size)
-          this.ctx.clearRect(0, 0, 32766, 32766)
-          // 真实数据
-          this.initCanvas()
-
-          // 画道路
-          this.initRoad()
+          this.repaint()
         })
       }
+    },
+    // 缩放和重绘
+    repaint () {
+      this.ctx.scale(this.size, this.size)
+      this.ctx.clearRect(0, 0, 32766, 32766)
+      // 真实数据
+      this.initCanvas()
+
+      // 画道路
+      this.initRoad()
     }
   }
 }

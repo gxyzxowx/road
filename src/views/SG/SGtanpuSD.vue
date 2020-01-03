@@ -52,10 +52,6 @@ export default {
           key: 'SpeedAver'
         },
         {
-          title: '目标值km/h',
-          key: 'mDevSDBZ'
-        },
-        {
           title: '上限km/h',
           key: 'mDevSDSX'
         },

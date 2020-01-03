@@ -39,21 +39,13 @@
             </Card>
         </Col>
     </Row>
-    <Row type="flex" justify="center" v-show="showmsg">
+    <Row type="flex" justify="center" v-if="showmsg">
       <Col span="12">
       <Alert type="warning" show-icon>
         后台提示信息：
         <span slot="desc">{{adminmsg}}</span>
     </Alert>
     </Col>
-    </Row>
-    <Row>
-      <Col class="demo-spin-col" v-if="loading">
-            <Spin fix>
-                <Icon type="ios-loading"  class="demo-spin-icon-load"></Icon>
-                <div>Loading</div>
-            </Spin>
-        </Col>
     </Row>
     </div>
 </template>
@@ -66,7 +58,6 @@ export default {
       password: '',
       adminmsg: '',
       showmsg: false,
-      loading: false,
       bodyH: ''
     }
   },
@@ -85,8 +76,10 @@ export default {
         username: this.username,
         password: this.password
       }
+      this.$load.show('加载中...')
       this.comFun.post('/Login/doLogin', obj, this).then((rs) => {
         // console.log(rs)
+        this.$load.hide()
         if (rs.code === 0) {
           //   存入cookie
           this.comFun.setCookie('roadmUserID', rs.data.mUserID, 30)
@@ -101,7 +94,10 @@ export default {
             this.showmsg = false
           }, 2500)
         }
-      }, (err) => { console.log(err) })
+      }, (err) => {
+        console.log(err)
+        this.$load.hide()
+      })
     }
   }
 
