@@ -215,7 +215,7 @@ export default {
       // console.log(JSON.stringify(obj))
       // 实时信息
       this.comFun.post('/Produce_J_G/realTimeInfo', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs))
+        console.log(JSON.stringify(rs.data.ScJpData))
         if (rs.code === 0) {
           // 处理头部列表数据
           let datalist = rs.data.NewestInfo

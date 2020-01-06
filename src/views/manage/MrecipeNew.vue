@@ -56,6 +56,9 @@
             border-right: 1px solid #999;
             background: #f0f4fe;
             text-align: center;
+            &:nth-of-type(1){
+            width: 1.4rem;
+          }
           }
         }
         .stand-content{
@@ -119,7 +122,7 @@
       }
       .content-title {
           div:nth-of-type(n+4){
-            width:.84rem;
+            width:.75rem;
           }
           div:last-of-type{
             flex:1;
@@ -129,7 +132,7 @@
         .content-rep-cel{
           background: #fff;
           &:nth-of-type(n+3){
-            width:.84rem;
+            width:.75rem;
           }
         }
       }
@@ -321,6 +324,7 @@
               </div>
             </div>
           </div>
+          <!-- 级配标准 -->
           <div class="stand">
             <div class="stand-title">
               <div class="stand-title-cel" v-for="item in jpArr" :key="item">{{item}}</div>
@@ -412,6 +416,8 @@
             <input type="text" class="content-rep-cel" v-model="item.mJP315">
             <input type="text" class="content-rep-cel" v-model="item.mJP265">
             <input type="text" class="content-rep-cel" v-model="item.mJP190">
+            <input type="text" class="content-rep-cel" v-model="item.mJP160">
+            <input type="text" class="content-rep-cel" v-model="item.mJP132">
             <input type="text" class="content-rep-cel" v-model="item.mJP095">
             <input type="text" class="content-rep-cel" v-model="item.mJP0475">
             <input type="text" class="content-rep-cel" v-model="item.mJP0236">
@@ -515,6 +521,18 @@ export default {
         'mClJP190_BD1': 0,
         'mClJP190_BD2': 0,
         'mClJP190_BD3': 0,
+        'mClJP160': 0,
+        'mClJP160_Up': 0,
+        'mClJP160_Down': 0,
+        'mClJP160_BD1': 0,
+        'mClJP160_BD2': 0,
+        'mClJP160_BD3': 0,
+        'mClJP132': 0,
+        'mClJP132_Up': 0,
+        'mClJP132_Down': 0,
+        'mClJP132_BD1': 0,
+        'mClJP132_BD2': 0,
+        'mClJP132_BD3': 0,
         'mClJP095': 0,
         'mClJP095_Up': 0,
         'mClJP095_Down': 0,
@@ -567,9 +585,9 @@ export default {
       },
       text: '新建',
       model1: '测试',
-      jpArr: ['级配标准', 37.5, 31.5, 26.5, 19.0, 9.5, 4.75, 2.36, 1.18, 0.6, 0.3, 0.15, 0.075],
-      pfArr: ['矿料ID', '矿料名称', '用量比', 37.5, 31.5, 26.5, 19.0, 9.5, 4.75, 2.36, 1.18, 0.6, 0.3, 0.15, 0.075, '操作'],
-      mClCWList: [{ value: 1, label: '上层面' }, { value: 2, label: '中层面' }, { value: 3, label: '下层面' }]
+      jpArr: ['级配标准', 37.5, 31.5, 26.5, 19.0, 16.0, 13.2, 9.5, 4.75, 2.36, 1.18, 0.6, 0.3, 0.15, 0.075],
+      pfArr: ['矿料ID', '矿料名称', '用量比', 37.5, 31.5, 26.5, 19.0, 16.0, 13.2, 9.5, 4.75, 2.36, 1.18, 0.6, 0.3, 0.15, 0.075, '操作'],
+      mClCWList: [{ value: 1, label: '上面层' }, { value: 2, label: '中面层' }, { value: 3, label: '下面层' }]
     }
   },
   mounted () {
@@ -765,10 +783,12 @@ export default {
     },
     // 删除某个矿料信息
     deleteKl (_index) {
+      console.log(this.repice_list)
       let obj = {
         mUserID: this.mUserID,
         mID: this.repice_list[_index]['mID']
       }
+      console.log(obj)
       this.comFun.post('/Cl/delRepice', obj, this).then((rs) => {
         console.log(JSON.stringify(rs))
         if (rs.code === 0) {

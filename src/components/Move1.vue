@@ -151,6 +151,9 @@ export default {
       handler (newVal, oldVal) {
         this.XYdata = newVal.data
         this.road_data = newVal.road_data
+        if (this.XYdata.length === 0 && this.road_data.length === 0) {
+          return
+        }
         // 遍历road_data数据，找到最大X和最大Y
         let [xArr, yArr] = [[], []]
 
@@ -346,6 +349,9 @@ export default {
     },
     // 鼠标事件，得到坐标,得到像素颜色，判断遍数
     getXY (e) {
+      if (this.XYdata.length === 0 && this.road_data.length === 0) {
+        return
+      }
       let x = e.offsetX
       let y = e.offsetY
       // console.log('x:' + x + ';y:' + y)

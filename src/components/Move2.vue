@@ -105,6 +105,9 @@ export default {
       handler (newVal, oldVal) {
         this.XYdata = newVal.data
         this.road_data = newVal.road_data
+        if (this.XYdata.length === 0 && this.road_data.length === 0) {
+          return
+        }
         // 遍历road_data数据，找到最大X和最大Y
         let [xArr, yArr] = [[], []]
 
