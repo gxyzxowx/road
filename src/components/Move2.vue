@@ -170,7 +170,7 @@ export default {
         ctx.font = '10px bold 黑体'
         // 设置颜色
         ctx.fillStyle = '#666'
-        if (i % 400 === 0) {
+        if (i % 200 === 0) {
           ctx.fillText(road[i][0]['mZHName'], road[i][0]['x'], road[i][0]['y'])
         }
       }

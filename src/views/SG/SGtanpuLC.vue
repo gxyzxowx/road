@@ -43,19 +43,19 @@ export default {
       listTitle1: [
         {
           title: '开始时间',
-          key: 'SpeedAver'
+          key: 'mTpStartTime'
         },
         {
           title: '结束时间',
-          key: 'mDevSDBZ'
+          key: 'mTpEndTime'
         },
         {
           title: '桩号范围',
-          key: 'mDevSDSX'
+          key: 'zhRand'
         },
         {
-          title: '里程',
-          key: 'mDevSDXX'
+          title: '里程（公里）',
+          key: 'Mileage'
         }
       ],
       datalist1: []
@@ -82,28 +82,31 @@ export default {
       this.firstDevID = e
     },
     getData (emitobj) {
-      // let obj = {
-      //   mUserID: this.mUserID,
-      //   mItemID: this.mItemID
-      // }
-      // // 有emitobj是子组件点击搜索的时候
-      // if (emitobj) {
-      //   this.emitobj = emitobj
-      //   console.log('是emit过来的参数:' + JSON.stringify(emitobj))
-      //   obj = { ...obj, ...this.emitobj }
-      // }
-      // console.log(obj)
-      // this.comFun.post('/Locus/getDevTempSpeedData', obj, this).then((rs) => {
-      //   console.log(JSON.stringify(rs))
-      //   if (rs.code === 0) {
-      //     // 处理list1
-      //     let listArr1 = []
-      //     listArr1.push(rs.data.static_data)
-      //     this.datalist1 = listArr1
-      //   } else {
-      //     this.$Message.error(rs.message)
-      //   }
-      // }, (err) => { console.log(err) })
+      let obj = {
+        mUserID: this.mUserID,
+        mItemID: this.mItemID
+      }
+      // 有emitobj是子组件点击搜索的时候
+      if (emitobj) {
+        this.emitobj = emitobj
+        console.log('是emit过来的参数:' + JSON.stringify(emitobj))
+        obj = { ...obj, ...this.emitobj }
+      }
+      console.log(obj)
+      this.comFun.post('/Produce_J_G/getTpMileageData', obj, this).then((rs) => {
+        console.log(JSON.stringify(rs))
+        if (rs.code === 0) {
+          // 处理list1
+          // listArr1.push(rs.data.static_data)
+
+          let zhRand = `${rs.data.mTpStartZhName} ~ ${rs.data.mTpEndZhName}`
+          rs.data['zhRand'] = zhRand
+          let datalist = [rs.data]
+          this.datalist1 = datalist
+        } else {
+          this.$Message.error(rs.message)
+        }
+      }, (err) => { console.log(err) })
     }
   },
   components: {

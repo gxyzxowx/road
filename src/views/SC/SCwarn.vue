@@ -163,11 +163,83 @@ export default {
           })
           this.datalist = rs.data
           // 预警类型饼图
-          this.dataPie1 = this.handlePieData(rs.result.AlarmData.data, 'type_name', 'rep', '预警类型分类统计')
+          this.dataPie1 = this.handleBarDataColumn(rs.result.AlarmData.data, 'type_name', 'rep', '预警类型分类统计')
           // 预警级别分类饼图
           // this.dataPie2 = this.handlePieData(rs.result.AlarmLevelData.data, 'level_name', 'rep', '预警级别分类统计')
         }
       }, (err) => { console.log(err) })
+    },
+    // 处理柱状图（竖版）
+    handleBarDataColumn (data, name, val, title) {
+      let xAxisdata = []
+      let seriesdata = []
+      for (var i = 0; i < data.length; i++) {
+        xAxisdata.push(data[i][name])
+        seriesdata.push(data[i][val])
+      }
+      let option = {
+        title: {
+          text: title,
+          textVerticalAlign: 'top'
+        },
+        color: ['#6996F3'],
+        textStyle: {
+          color: '#333'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+        grid: {
+          top: '18%',
+          left: '3%',
+          right: '4%',
+          bottom: '0%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: xAxisdata,
+            axisTick: {
+              alignWithLabel: true
+            }
+          }
+        ],
+        yAxis: [
+
+          {
+            type: 'value',
+            splitLine: { show: true, lineStyle: { color: ['#aaa'], type: 'dashed' } }, // 网格线
+            axisLabel: {
+              formatter: function (data) {
+                return data * 100 + '%'
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            name: '',
+            type: 'bar',
+            itemStyle: {
+              normal: {
+                // 这里是重点
+                color: function (params) {
+                // 注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                  var colorList = ['#14C6CA', '#6996F3', '#DA6C75', '#FEAB67', '#41A8F2', '#AB90DF']
+                  return colorList[params.dataIndex]
+                }
+              }
+            },
+            barWidth: '60%',
+            data: seriesdata
+          }
+        ]
+      }
+      return option
     },
     // 处理饼图数据
     handlePieData (data, name, rep, title) {

@@ -41,19 +41,19 @@
     position: absolute;
     z-index: 9;
     right: .3rem;
-    top: -1.8rem;
+    bottom: -.2rem;
     ul{
         list-style: none;
         border:1px solid #666;
         margin: 0;
         li{
         width: .7rem;
-        height: .25rem;
+        height: .16rem;
 
         // color:#fff;
-        font-size: .1rem;
+        font-size: .12rem;
         text-align: center;
-        line-height: .25rem;
+        line-height: .15rem;
       }
     }
   }
@@ -142,7 +142,9 @@ export default {
         [108, 0, 0]
       ],
       flag: true,
-      maxTimes: 25
+      maxTimes: 25,
+      // 是否重新绘制bar柱状图
+      ifDrawBar: false
     }
   },
   props: ['id', 'data'],
@@ -154,6 +156,7 @@ export default {
         if (this.XYdata.length === 0 && this.road_data.length === 0) {
           return
         }
+        this.ifDrawBar = true
         // 遍历road_data数据，找到最大X和最大Y
         let [xArr, yArr] = [[], []]
 
@@ -211,7 +214,7 @@ export default {
         ctx.lineTo(road[i][3]['x'], road[i][3]['y'])
         ctx.lineTo(road[i][1]['x'], road[i][1]['y'])
         // 为道路添加桩号
-        if (i % 400 === 0) {
+        if (i % 200 === 0) {
           ctx.fillText(road[i][0]['mZHName'], road[i][0]['x'], road[i][0]['y'])
         }
       }
@@ -330,6 +333,9 @@ export default {
       ctx.putImageData(imgData, 0, 0)
       // console.log(imgData)
       // 处理各个遍数的比例
+      if (!this.ifDrawBar) {
+        return
+      }
       this.persentBian(colorsNum)
       // console.log(colorsNum)
     },
@@ -346,6 +352,7 @@ export default {
       }
       this.$emit('updata-barchart', colorsPersent)
       // console.log(this.colorsPersent)
+      this.ifDrawBar = false
     },
     // 鼠标事件，得到坐标,得到像素颜色，判断遍数
     getXY (e) {

@@ -1,9 +1,12 @@
 <style lang="less" scoped>
   .title .selects{
-    width: 11rem;
+    width: 12.5rem;
     .box {
-      width: 2rem;
+      width: 2.5rem;
       // height: 1rem;
+      &:nth-of-type(n+4){
+        width: 1.8rem;
+      }
     }
   }
 </style>
@@ -14,11 +17,11 @@
       <Select v-model="select.mItemBid" class="box" placeholder="工程标段" @on-change="changeBid">
           <Option v-for="item in show.mItemBidList" :value="item.mItemBid" :key="item.mItemBid">{{ item.mItemBDJC }}</Option>
         </Select>
-        <Select v-model="select.mClType" class="box" placeholder="层位">
-          <Option v-for="item in show.cl_list" :value="item.mClType" :key="item.mClType">{{ item.mClName }}</Option>
-        </Select>
         <Select v-model="select.mDevID" class="box" placeholder="拌合站">
           <Option v-for="item in show.dev_list" :value="item.mDevID" :key="item.mDevID">{{ item.mDevName }}</Option>
+        </Select>
+        <Select v-model="select.mClType" class="box" placeholder="层位">
+          <Option v-for="item in show.cl_list" :value="item.mClType" :key="item.mClType">{{ item.mClName }}</Option>
         </Select>
         <DatePicker type="date" placeholder="开始时间" class="box" v-model="select.start_time" @on-change="changeType0"></DatePicker>
         <DatePicker type="date" placeholder="结束时间" class="box" v-model="select.end_time" @on-change="changeType1"></DatePicker>

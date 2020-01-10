@@ -19,7 +19,7 @@
   <div class="mitem">
     <div class="title" ref="header">
       <div class="left">
-        <Button type="primary" size="large" icon="md-add" @click="add()">新建项目</Button>
+        <Button type="primary" size="large" icon="md-add" v-if="ifManager" @click="add()">新建项目</Button>
       </div>
       <div class="right">
         <Input
@@ -34,9 +34,9 @@
     <div class="bottom">
       <Table border :columns="itemTitle" :data="itemlist" :loading="loading" size="small" :width="width"  max-height="590">
       <template slot-scope="{ row, index }" slot="action">
-        <Button type="success" size="small" style="margin-right: .05rem" @click="importExcel(index)">导入</Button>
-        <Button type="primary" size="small" style="margin-right: .05rem" @click="modify(index)">编辑</Button>
-        <Button type="error" size="small" @click="remove(index)">删除</Button>
+        <Button type="success" size="small" style="margin-right: .05rem"  v-if="ifManager" @click="importExcel(index)">导入</Button>
+        <Button type="primary" size="small" style="margin-right: .05rem"  v-if="ifManager" @click="modify(index)">编辑</Button>
+        <Button type="error" size="small"  v-if="ifManager" @click="remove(index)">删除</Button>
         <Modal v-model="delectmodal" width="360">
           <p slot="header" style="color:#f60;text-align:center">
             <Icon type="ios-information-circle"></Icon>
@@ -72,6 +72,7 @@ import ImportExcel from '@/components/ImportExcel.vue'
 export default {
   data () {
     return {
+      ifManager: true,
       width: '1200',
       loading: true,
       modal_loading: false,
@@ -191,6 +192,15 @@ export default {
     // 监听模态框的状态
     storeModalState: function () {
       return this.$store.state.modalState
+    }
+  },
+  created () {
+    let level = parseInt(window.localStorage.getItem('road_level'))
+    console.log('level::' + level)
+    // 如果是客户level为0，隐藏新建和编辑按钮
+    if (!level) {
+      this.ifManager = false
+      this.itemTitle.pop()
     }
   },
   mounted () {

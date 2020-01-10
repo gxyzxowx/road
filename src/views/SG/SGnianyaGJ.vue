@@ -95,7 +95,7 @@ export default {
         grid: {
           top: '5%',
           left: '1%',
-          right: '10%',
+          right: '5%',
           bottom: '3%',
           containLabel: true
         },

@@ -26,7 +26,7 @@
     <Row>
         <Col>
             <Card class="card">
-                <p slot="title">欢迎登陆道路管控系统</p>
+                <p slot="title">账号登录</p>
                 <div class="box">
                     <div class="item">
                         <span>用户名：</span><Input v-model="username" placeholder="Enter something..." clearable style="width: 200px" />
@@ -78,12 +78,15 @@ export default {
       }
       this.$load.show('加载中...')
       this.comFun.post('/Login/doLogin', obj, this).then((rs) => {
-        // console.log(rs)
+        // console.log(JSON.stringify(rs))
         this.$load.hide()
         if (rs.code === 0) {
           //   存入cookie
           this.comFun.setCookie('roadmUserID', rs.data.mUserID, 30)
           this.comFun.setCookie('roadmUserName', rs.data.mUserName, 30)
+          // 把权限存入localstorage
+          window.localStorage.setItem('road_level', rs.data.mUserLevel)
+
           this.$router.push('/')
           return false
         } else {

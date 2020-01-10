@@ -340,7 +340,7 @@ export default {
         arr3.push(item['mBhSKL00075'])
       })
       let arr = [arr1, arr2, arr3]
-      this.datacurve4 = this.handleCurveData(arr, xdata, '关键塞孔率曲线图', 1, '%')
+      this.datacurve4 = this.handleCurveData(arr, xdata, '关键筛孔通过率曲线图', 1, '%')
     },
     // 拌和周期曲线
     dataPeroid (data) {

@@ -113,7 +113,8 @@
         </div>
         <div class="content">
           <div class="title">预警按类型分类统计</div>
-          <PieChart :id="'pie1'" :data="dataPie1" class = "chart"></PieChart>
+          <!-- <PieChart :id="'pie1'" :data="dataPie1" class = "chart"></PieChart> -->
+          <BarChart :id="'pie1'" :data="dataPie1" class = "chart"></BarChart>
         </div>
 
       </div>
@@ -175,7 +176,7 @@
 </template>
 
 <script>
-import PieChart from '@/components/PieChart.vue'
+// import PieChart from '@/components/PieChart.vue'
 import BarChart from '@/components/BarChart.vue'
 import CurveChart from '@/components/CurveChart.vue'
 import Map from '@/components/Map.vue'
@@ -247,7 +248,7 @@ export default {
           //  项目信息
             this.datas.ItemData = rs.data.ItemData
             // 预警类型饼图
-            this.dataPie1 = this.handlePieData(rs.data.AlarmData.data, 'type_name', 'rep', '预警类型分类统计')
+            this.dataPie1 = this.handleBarDataColumn(rs.data.AlarmData.data, 'type_name', 'rep')
             // 进度柱状图
             this.dataBar1 = this.handleBarData(rs.data.ScRate, 'name', 'rep')
             // 每日生产总量统计曲线图
@@ -263,51 +264,69 @@ export default {
         }
       )
     },
-    // 处理饼图数据
-    handlePieData (data, name, rep, title) {
-      let legenddata = []
+    // 处理柱状图（竖版）
+    handleBarDataColumn (data, name, val) {
+      let xAxisdata = []
       let seriesdata = []
       for (var i = 0; i < data.length; i++) {
-        legenddata.push(data[i][name])
-        seriesdata.push({
-          value: data[i][rep],
-          name: data[i][name]
-        })
+        xAxisdata.push(data[i][name])
+        seriesdata.push(data[i][val])
       }
-      // 给饼图赋值
       let option = {
+        color: ['#6996F3'],
+        textStyle: {
+          color: '#9FC9F7'
+        },
         tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
+          trigger: 'axis',
+          axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          }
         },
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          textStyle: {
-            color: '#9FC9F7'
-          },
-          data: legenddata
+        grid: {
+          top: '3%',
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
         },
-        color: ['#14C6CA', '#6996F3', '#DA6C75', '#FEAB67', '#41A8F2', '#AB90DF'],
-        series: [
+        xAxis: [
           {
-            name: title,
-            type: 'pie',
-            label: {
-              formatter: '{b}: ({d}%)'
-            },
-            // 饼图大小
-            radius: ['24%', '50%'],
-            // 饼图位置左右/上下
-            center: ['52%', '65%'],
-            data: seriesdata,
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            type: 'category',
+            data: xAxisdata,
+            axisTick: {
+              alignWithLabel: true
+            }
+          }
+        ],
+        yAxis: [
+
+          {
+            type: 'value',
+            splitLine: { show: true, lineStyle: { color: ['#333'] } }, // 网格线
+            axisLabel: {
+              formatter: function (data) {
+                return data * 100 + '%'
               }
             }
+          }
+        ],
+        series: [
+          {
+            name: '',
+            type: 'bar',
+            itemStyle: {
+              normal: {
+                // 这里是重点
+                color: function (params) {
+                // 注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                  var colorList = ['#14C6CA', '#6996F3', '#DA6C75', '#FEAB67', '#41A8F2', '#AB90DF']
+                  return colorList[params.dataIndex]
+                }
+              }
+            },
+            barWidth: '60%',
+            data: seriesdata
           }
         ]
       }
@@ -420,7 +439,7 @@ export default {
 
   },
   components: {
-    PieChart,
+    // PieChart,
     BarChart,
     CurveChart,
     Map

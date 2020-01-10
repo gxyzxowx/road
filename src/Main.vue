@@ -287,6 +287,7 @@ export default {
       // 删除cookie数据并跳转到Login
       // console.log('exit')
       this.comFun.delectCookie('roadmUserID')
+      window.localStorage.removeItem('road_level')
       this.$router.push({ name: 'login' })
     },
     manage () {

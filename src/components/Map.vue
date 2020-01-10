@@ -61,7 +61,7 @@ export default {
       ifMouseOn: false,
       // const
       bmap: {},
-      // mDevGpsX纬度， mDevGpsY经度，mDevStatus0非工作中，mDevStatus1工作中
+      // mDevGpsX经度， mDevGpsY纬度，mDevStatus0非工作中，mDevStatus1工作中
       mapData: [
         // 拌和站209，碾压机211，摊铺机210
         {
@@ -124,7 +124,7 @@ export default {
         // 测试时可以去掉开始
         newVal.map((item, index, array) => {
           if (index == 0) {
-            this.centerXY = [item.mDevGpsY, item.mDevGpsX];
+            this.centerXY = [item.mDevGpsX, item.mDevGpsY];
           }
           // 状态
           if (item.mDevStatus === 1) {
@@ -216,7 +216,7 @@ export default {
           data: this.mapData.map(function(itemOpt) {
             return {
               name: itemOpt.mDevName,
-              value: [itemOpt.mDevGpsY, itemOpt.mDevGpsX, itemOpt.mDevName,itemOpt.colori],
+              value: [itemOpt.mDevGpsX, itemOpt.mDevGpsY, itemOpt.mDevName,itemOpt.colori],
               itemStyle: {
                 color: itemOpt.colori
               },
