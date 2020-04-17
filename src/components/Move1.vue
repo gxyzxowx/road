@@ -78,8 +78,7 @@
           :width="canvasW"
           :height="canvasH"
           style="border:1px solid #ccc;"
-          @mousemove="getXY"
-        ></canvas>
+          @mousemove="getXY"></canvas>
         <div class="mousemove" :style=" {left: this.Xlocation + 'px', top: this.Ylocation + 15 + 'px' }">
           <div class="botm">{{currentTimes}}遍</div>
         </div>
@@ -153,6 +152,7 @@ export default {
       handler (newVal, oldVal) {
         this.XYdata = newVal.data
         this.road_data = newVal.road_data
+        this.size = 1
         if (this.XYdata.length === 0 && this.road_data.length === 0) {
           return
         }
@@ -174,9 +174,11 @@ export default {
           // 有ctx时是点搜索的时候，清理画布
           this.ctx.clearRect(0, 0, 32766, 32766)
         }
+        // console.log(document.getElementById('myCanvas'))
         this.$nextTick(() => {
           this.canvas = document.getElementById('myCanvas')
           this.ctx = this.canvas.getContext('2d')
+
           // 真实数据
           this.initCanvas()
 
@@ -197,6 +199,9 @@ export default {
     }
   },
   methods: {
+    initData () {
+
+    },
     initRoad () {
       let ctx = this.ctx
       let road = this.road_data
@@ -231,6 +236,7 @@ export default {
     },
     initCanvas () {
       // 测试数据obj是一个数组
+      console.log(this.XYdata.length)
       // let obj = this.testarr
       // 真实坐标数据data
       let obj = this.XYdata
@@ -282,7 +288,7 @@ export default {
     changeColor (canvas, ctx) {
       // 处理25遍碾压的各种数值，0绝对透明，255不透明
       let aArr = this.handleTimesAlphaData()
-      console.log(aArr)
+      // console.log(aArr)
       // let aArr = [0, 51, 92, 125, 151, 172]
       // 获得画布所有数据(25遍)
       let colorArr = this.colorArr
@@ -405,7 +411,7 @@ export default {
         this.canvasH = this.canvasH * 1.2
         this.$nextTick(() => {
           this.size = this.size * 1.2
-          this.repaint()
+          this.repaint(this.size)
         })
       } else {
         console.log('缩小')
@@ -413,13 +419,13 @@ export default {
         this.canvasH = this.canvasH * 0.8
         this.$nextTick(() => {
           this.size = this.size * 0.8
-          this.repaint()
+          this.repaint(this.size)
         })
       }
     },
     // 缩放和重绘
-    repaint () {
-      this.ctx.scale(this.size, this.size)
+    repaint (scale) {
+      this.ctx.scale(scale, scale)
       this.ctx.clearRect(0, 0, 32766, 32766)
       // 真实数据
       this.initCanvas()

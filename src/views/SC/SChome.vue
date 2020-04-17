@@ -187,7 +187,8 @@ export default {
         { 'title': '误差(kg)' }
       ],
       datalist2: [
-      ]
+      ],
+      timer: null
     }
   },
   created () {
@@ -198,13 +199,18 @@ export default {
     // this.display()
     this.getData()
     // 1分钟刷新一次
-    setTimeout(() => {
+    this.timer = setInterval(() => {
       this.getData()
     }, 60000)
     this.$nextTick(() => { // 页面渲染完成后的回调
       this.curve.W = this.$refs.curve.offsetWidth
       this.curve.H = this.$refs.curve.offsetHeight
     })
+  },
+  beforeDestory () {
+    console.log('清除')
+    clearInterval(this.timer)
+    this.timer = null
   },
   methods: {
     getData () {
@@ -215,10 +221,11 @@ export default {
       // console.log(JSON.stringify(obj))
       // 实时信息
       this.comFun.post('/Produce_J_G/realTimeInfo', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs.data.ScJpData))
+        // console.log(JSON.stringify(rs.data.LastData))
         if (rs.code === 0) {
           // 处理头部列表数据
           let datalist = rs.data.NewestInfo
+
           // 目标值
           let Recipe = []
           // 实际值
@@ -245,6 +252,7 @@ export default {
           Rep.map((item, index, arr) => {
             this.datalist[2]['n' + (index + 1)] = item
           })
+
           // 处理头部列表数据结束
           // 处理温度曲线
           this.dataTemp(rs.data.TempData)
@@ -264,7 +272,17 @@ export default {
           // 处理地图
           let DevData = rs.data.DevData
           for (let i = 0; i < DevData.length; i++) {
-            if (DevData[i].mDevStatus === 1) { this.titleText = '生产中：近一个小时内数据' }
+            if (DevData[i].mDevStatus === 1) {
+              let LastData = rs.data.LastData
+              let cmname = '上'
+              if (LastData.mClCW === 2) {
+                cmname = '中'
+              } else if (LastData.mClCW === 3) {
+                cmname = '下'
+              }
+              let clname = LastData ? LastData.mClName : ''
+              this.titleText = `生产中：${cmname}层面（${clname}）近一个小时内数据`
+            }
             break
           }
           this.datas.DevData = rs.data.DevData

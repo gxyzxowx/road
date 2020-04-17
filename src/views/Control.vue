@@ -95,7 +95,7 @@
           <div class="body">
             <!-- 名称 -->
             <div class="name">项目名称：<span> {{itemName}}</span></div>
-            <div class="name">项目状态：<span> {{datas.ItemData.mItemActive===1 ? '进行中' : '已完结'}}</span></div>
+            <div class="name">项目状态：<span v-show="datas.ItemData.mItemActive!==undefined"> {{datas.ItemData.mItemActive===1 ? '进行中' : '已完结'}}</span></div>
             <div class="name">建设单位：<span> {{datas.ItemData.mItemSGUint}}</span></div>
             <div class="name">咨询单位：<span> {{datas.ItemData.mItemJGUint}}</span></div>
             <!-- <div class="name">最大标段数：<span> {{datas.ItemData.mItemBidSun}}</span></div> -->
@@ -155,7 +155,7 @@
           <div class="L"></div>
         </div>
         <div class="content">
-          <div class="title">每日生产总量统计（kg）</div>
+          <div class="title">每日生产总量统计（T）</div>
           <CurveChart :id="'curve1'" :data="dataCurve1" class = "chart"></CurveChart>
         </div>
       </div>
@@ -205,6 +205,7 @@ export default {
   mounted () {
     if (!this.ifdisplayItem) {
     // 得到项目详情
+      // console.log(123)
       this.displayItem()
       this.ifdisplayItem = true
     }
@@ -214,7 +215,11 @@ export default {
     }, 60000)
   },
   beforeDestroy () {
+    // console.log('control组件准备销毁了')
     clearInterval(this.timer)
+  },
+  destroyed () {
+    // console.log('control组件已经销毁了')
   },
   computed: {
     itemInfo () {
@@ -223,11 +228,11 @@ export default {
   },
   watch: {
     itemInfo: function (newVal, oldVal) {
-      console.log('watch到了,项目' + oldVal + '变成：项目' + newVal)
+      // console.log('watch到了,项目' + oldVal + '变成：项目' + newVal)
       // 切换项目时得到项目详情
       this.displayItem()
     },
-    immediate: true
+    immediate: false
   },
   methods: {
     // 得到项目数据
@@ -240,10 +245,10 @@ export default {
         mUserID: this.comFun.getCookie('roadmUserID'),
         mItemID: this.itemId
       }
-      console.log(obj)
+      // console.log(obj)
       this.comFun.post('/Index/getHomePageData', obj, this).then(
         rs => {
-          console.log(JSON.stringify(rs.data))
+          // console.log(JSON.stringify(rs.data.DevData))
           if (rs.code === 0) {
           //  项目信息
             this.datas.ItemData = rs.data.ItemData

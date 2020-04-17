@@ -143,7 +143,7 @@ export default {
           this.datalist1 = listArr1
           // 处理list2
           rs.data.data_list.map((item, index, arr) => {
-            arr[index].alarm = item.alarm ? '是' : '否'
+            arr[index].alarm = item.alarm ? '否' : '是'
           })
           this.datalist2 = rs.data.data_list
         } else {

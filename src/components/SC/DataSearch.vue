@@ -1,11 +1,11 @@
 <style lang="less" scoped>
   .title .selects{
-    width: 12.5rem;
+    width: 82%;
     .box {
       width: 2.5rem;
       // height: 1rem;
       &:nth-of-type(n+4){
-        width: 1.8rem;
+        width: 2rem;
       }
     }
   }

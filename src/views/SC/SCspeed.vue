@@ -130,7 +130,7 @@ export default {
 
             axisLabel: {
               formatter: function (data) {
-                return data + 'kg'
+                return data + 'T'
               }
             }
           }

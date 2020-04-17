@@ -68,7 +68,9 @@
             font-size:.36rem;
             font-weight:500;
             background:linear-gradient(0deg,rgba(229,245,255,1) 0%, rgba(147,194,245,1) 100%);
-            -webkit-background-clip:text;
+            -webkit-background-clip: text;
+            background-clip: text;
+            // color: transparent;
             -webkit-text-fill-color:transparent;
             vertical-align:middle;
           }

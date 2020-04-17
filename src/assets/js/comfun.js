@@ -1,3 +1,9 @@
+/*
+ * @Date         : 2019-12-11 16:50:10
+ * @LastEditors  : 曾迪
+ * @LastEditTime : 2020-04-17 11:14:02
+ * @FilePath     : \road\src\assets\js\comfun.js
+ */
 import QS from 'qs'
 import axios from 'axios'
 // import vm from './main.js'

@@ -72,17 +72,17 @@ export default {
         {
           title: '预警时间',
           key: 'mDateTime',
-          width: 169
+          width: 150
         },
         {
           title: '项目名称',
           key: 'mItemJC',
-          width: 70
+          width: 120
         },
         {
           title: '标段名称',
           key: 'mItemBDJC',
-          width: 70
+          width: 90
         },
         {
           title: '预警等级',
@@ -105,14 +105,13 @@ export default {
           width: 70
         },
         {
-          title: '详情',
-          key: 'mAlarmDec',
-          width: 750
-        },
-        {
           title: '状态',
           key: 'mAlarmCLStatus',
-          width: 70
+          width: 90
+        },
+        {
+          title: '详情',
+          key: 'mAlarmDec'
         },
         {
           title: '操作',

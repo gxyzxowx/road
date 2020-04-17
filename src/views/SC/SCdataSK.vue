@@ -114,8 +114,9 @@ export default {
           this.datacurve1 = this.handleCurveData(arr, xdata, '关键筛孔曲线图')
 
           // 处理list2
+          // 是否合格
           rs.data.data_list.map((item, index, arr) => {
-            arr[index].alarm = item.alarm ? '是' : '否'
+            arr[index].alarm = item.alarm ? '否' : '是'
           })
           this.datalist2 = rs.data.data_list
         } else {

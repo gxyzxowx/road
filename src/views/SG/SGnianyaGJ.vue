@@ -18,7 +18,7 @@
       <Search v-on:getData="getData"></Search>
     </div>
     <div class="content">
-      <BarChart :id="'bar1'" :data="dataBar1" class = "chart"></BarChart>
+      <BarChart :id="'bar1'" :data="dataBar1" class = "chart" v-if="showBar"></BarChart>
       <Move class="move" :id="'move1'" :data="movedata" @updata-barchart="getTimesChart"></Move>
     </div>
 
@@ -31,6 +31,7 @@ import Move from '@/components/Move1.vue'
 export default {
   data () {
     return {
+      showBar: false,
       mUserID: '',
       mItemID: '',
       emitobj: {},
@@ -45,6 +46,7 @@ export default {
   },
   methods: {
     getData (emitobj) {
+      this.showBar = true
       let obj = {
         mUserID: this.mUserID,
         mItemID: this.mItemID,
@@ -54,12 +56,12 @@ export default {
       // 有emitobj是子组件点击搜索的时候
       if (emitobj) {
         this.emitobj = emitobj
-        console.log('是emit过来的参数:' + JSON.stringify(emitobj))
+        // console.log('是emit过来的参数:' + JSON.stringify(emitobj))
         obj = { ...obj, ...this.emitobj }
       }
       console.log(obj)
       this.comFun.post('/Locus/nyData', obj, this).then((rs) => {
-        console.log(JSON.stringify(rs))
+        // console.log(JSON.stringify(rs))
         if (rs.code === 0) {
           // 包括碾压和道路坐标
           this.movedata = rs
@@ -69,6 +71,7 @@ export default {
     },
     // 从子组件得到数据，更新barchart
     getTimesChart (emit) {
+      this.showBar = true
       console.log(emit)
       // emit是柱状图数组
       let xdata = []
@@ -79,7 +82,7 @@ export default {
     },
     // 处理柱状图数据
     handleBarData (ydata, xdata) {
-      console.log(xdata, ydata)
+      // console.log(xdata, ydata)
       let xAxisdata = xdata
       let option = {
         color: ['#6996F3'],

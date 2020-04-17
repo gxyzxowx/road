@@ -1,3 +1,9 @@
+/*
+ * @Date         : 2019-12-11 16:50:10
+ * @LastEditors  : 曾迪
+ * @LastEditTime : 2020-04-14 10:56:47
+ * @FilePath     : \road\src\store.js
+ */
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -27,6 +33,7 @@ export default new Vuex.Store({
       state.modalState = value
     }
   },
+  // 所有的异步操作，和整合一个或多个mutations
   actions: {
 
   }
